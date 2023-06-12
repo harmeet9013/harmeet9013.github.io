@@ -1,0 +1,15 @@
+* {
+    background-color: black;
+    color: white;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+    font-size: 70px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    font-style: italic;
+    margin: auto;
+    text-align: center;
+    margin-top: 200px;
+}
