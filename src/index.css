@@ -297,6 +297,52 @@ body {
     cursor: pointer;
 }
 
+.contact-all-container {
+    padding: 150px 15% 150px 15%;
+    background-color: #0f0f0f;
+    text-align: center;
+}
+
+.contactme-text {
+    font-size: 70px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin: 0;
+    padding-bottom: 50px;
+}
+
+.contact-me-container {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 2%;
+}
+
+.contact-me-container p {
+    font-size: 20px;
+    letter-spacing: 2px;
+    text-align: right;
+    width: 45%;
+}
+
+.contact-me-grid-buttons {
+    display: grid;
+    grid-template-columns: 250px;
+    padding-left: 15%;
+}
+
+.contact-me-button {
+    min-width: 150px;
+    width: 100%;
+    padding: 18px 8px 18px 18px;
+    font-size: 20px;
+    font-weight: 700;
+    border-radius: 20px;
+    cursor: pointer;
+    border: none;
+    background-color: #002536;
+    color: white;
+}
+
 @media screen and (max-width: 975px) {
     .header-container {
         display: flex;

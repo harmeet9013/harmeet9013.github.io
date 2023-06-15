@@ -1,4 +1,5 @@
 import BackgroundIntro from "./components/BackgroundIntro";
+import Contact from "./components/Contact";
 import FrontPanel from "./components/Heading";
 import Hobbies from "./components/Hobbies";
 import MoreAboutMe from "./components/MoreAboutMe";
@@ -12,6 +13,7 @@ export default function App() {
             <MoreAboutMe />
             <Projects />
             <Hobbies />
+            <Contact />
         </div>
     );
 }
