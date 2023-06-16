@@ -1,13 +1,13 @@
 {
   "name": "landing-page",
   "private": false,
-  "version": "0.0.0",
+  "version": "1.5.0",
   "type": "module",
   "homepage": "https://harmeet9013.github.io",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"

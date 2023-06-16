@@ -1,18 +1,19 @@
 import simonBackground from "./assets/projects-pics/simon.png";
 import keeperBackground from "./assets/projects-pics/keeper.png";
 import weatherBackground from "./assets/projects-pics/weather.png";
+import "./css/projects.css";
 
 export default function Projects() {
     const myProjects = {
         simon: {
             label: "SIMON GAME",
-            desc: "Infamous Simon Game. Built in ReactJS.",
+            desc: "The infamous Simon Game. Built from the ground up in ReactJS.",
             link: "/simon-game",
             bg: simonBackground,
         },
         keeper: {
             label: "KEEPER",
-            desc: "Simple and elegant note keeping. Built in ReactJS.",
+            desc: "A simple and elegant note keeping web app. Built in ReactJS.",
             link: "/keeper",
             bg: keeperBackground,
         },

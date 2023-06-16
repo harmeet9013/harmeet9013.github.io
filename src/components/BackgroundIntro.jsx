@@ -1,4 +1,5 @@
 import avatar from "./assets/avatar.jpg";
+import "./css/intro.css";
 
 export default function BackgroundIntro() {
     return (

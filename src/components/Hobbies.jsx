@@ -1,5 +1,5 @@
-import { Button } from "@mui/material";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import "./css/hobbies.css";
 
 export default function Hobbies() {
     const mySideProjects = {
@@ -46,7 +46,7 @@ export default function Hobbies() {
     };
 
     return (
-        <div className="hobbies-panel-container">
+        <div className="hobbies-panel-container" id="hobbies">
             <h1>
                 My Hobbies...
                 <br />

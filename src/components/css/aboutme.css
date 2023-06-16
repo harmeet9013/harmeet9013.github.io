@@ -1,0 +1,47 @@
+.about-me-container {
+    padding: 200px;
+    background-color: rgb(32, 31, 31);
+}
+
+.about-me-text {
+    width: 70%;
+    max-width: 700px;
+    color: white;
+    text-align: center;
+    margin: auto;
+}
+
+.about-me-text h1 {
+    font-size: 70px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin: 0;
+}
+
+.about-me-text p {
+    font-size: 20px;
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+@media screen and (max-width: 1000px) {
+    .about-me-container {
+        padding: 100px 10px;
+        text-align: center;
+    }
+
+    .about-me-text {
+        width: 90%;
+        text-align: center;
+    }
+
+    .about-me-text h1 {
+        font-size: 50px;
+        margin-bottom: 20px;
+    }
+
+    .about-me-text p {
+        font-size: 16px;
+        text-align: center;
+    }
+}

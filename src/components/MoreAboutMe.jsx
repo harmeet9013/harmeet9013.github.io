@@ -1,3 +1,5 @@
+import "./css/aboutme.css";
+
 export default function MoreAboutMe() {
     return (
         <div id="aboutMe" className="about-me-container">

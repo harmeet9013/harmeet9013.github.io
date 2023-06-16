@@ -1,0 +1,74 @@
+.background-container {
+    position: relative;
+    overflow: hidden;
+    height: 1000px;
+    margin: 0;
+    padding: 0;
+    margin-top: -300px;
+}
+
+.background-image {
+    background-image: url("../assets/bg.jpg");
+    height: 1300px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    transform: scale(1.01);
+    z-index: -1;
+    overflow: hidden;
+}
+
+.frontpanel {
+    text-align: center;
+    width: 950px;
+    margin: auto;
+    margin-top: -900px;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    position: relative;
+    text-align: center;
+}
+
+.frontpanel p {
+    letter-spacing: 2px;
+}
+
+.front-avatar {
+    height: 400px;
+    width: 400px;
+    border-radius: 50%;
+    border: 10px solid rgb(198, 198, 198);
+}
+
+.name-text {
+    border: none;
+    font-size: 50px;
+    margin: 0;
+    letter-spacing: 3px;
+}
+
+@media screen and (max-width: 1000px) {
+    .background-container {
+        padding: 0;
+        margin: 0;
+        margin-top: -450px;
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .frontpanel {
+        display: block;
+        width: 85%;
+    }
+
+    .front-avatar {
+        height: 170px;
+        width: 170px;
+        margin-top: 80px;
+    }
+
+    .name-text {
+        font-size: 34px;
+    }
+}

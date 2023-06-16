@@ -32,7 +32,6 @@ export default function DownloadResume({ showPrompt, setShowPrompt }) {
         >
             <DialogTitle
                 id="title"
-                className="dialog"
                 sx={{ textAlign: "center", fontSize: "30px" }}
             >
                 Downloading Resume...

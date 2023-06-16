@@ -1,0 +1,95 @@
+.hobbies-panel-container {
+    padding: 150px 15% 150px 15%;
+    gap: 5%;
+    background-color: rgb(32, 31, 31);
+    display: grid;
+    text-align: center;
+    grid-template-columns: auto auto;
+    justify-content: left;
+    justify-items: start;
+}
+
+.hobbies-panel-container h1 {
+    width: 100%;
+    font-size: 70px;
+    padding-top: 10%;
+}
+
+.sideproject-all-container {
+    display: grid;
+    grid-template-columns: auto;
+    max-width: 100%;
+    justify-content: center;
+    justify-items: center;
+    padding-left: 0px;
+    text-align: left;
+}
+
+.sideproject-container {
+    border: 1px solid white;
+    margin: 20px;
+    padding: 20px 40px 20px 40px;
+    max-width: 60%;
+    border-radius: 30px;
+    transition: all 200ms ease;
+}
+
+.sideproject-container:hover {
+    box-shadow: 0 0 10px black;
+}
+
+.sideproject-title {
+    font-size: 40px;
+    margin: 10px 0px 20px;
+    letter-spacing: 2px;
+    font-style: italic;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.sideproject-desc {
+    font-size: 16px;
+    letter-spacing: 1px;
+    margin: 0 0 20px;
+    text-align: justify;
+}
+
+.sideproject-button {
+    border-radius: 10px;
+    padding: 16px 8px 16px 16px;
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    background-color: rgb(59, 20, 23);
+    border: none;
+    cursor: pointer;
+    transition: all 200ms ease-out;
+}
+
+.sideproject-button:hover {
+    box-shadow: 0 0 5px white;
+}
+
+@media screen and (max-width: 1000px) {
+    .hobbies-panel-container {
+        padding: 50px 10px;
+        grid-template-columns: auto;
+        gap: 0;
+    }
+
+    .hobbies-panel-container h1 {
+        font-size: 50px;
+    }
+
+    .sideproject-container:hover {
+        box-shadow: 0 0 0;
+    }
+
+    .sideproject-button:hover {
+        box-shadow: 0 0 0;
+    }
+
+    .sideproject-container {
+        padding: 20px 20px 20px 20px;
+        max-width: 80%;
+    }
+}

@@ -1,45 +1,139 @@
 import { useState } from "react";
-import MenuIcon from "@mui/icons-material/Menu";
-import IconButton from "@mui/material/IconButton";
 import DownloadResume from "./DownloadResume";
+import "./css/heading.css";
+import { SwipeableDrawer, Divider } from "@mui/material";
+import {
+    Home,
+    Download,
+    ContactMail,
+    Favorite,
+    Article,
+    Menu,
+    Close,
+} from "@mui/icons-material";
 
 export default function Heading() {
     const [showPrompt, setShowPrompt] = useState(false);
-    const [menuOpen, setMenuOpen] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     const handleClickOpen = () => {
         setShowPrompt(true);
+        setIsMobileMenuOpen(false);
     };
 
-    const handleMenu = () => {
-        setMenuOpen(!menuOpen);
+    const handleMenuOpen = () => {
+        setIsMobileMenuOpen(true);
     };
+
+    const handleMenuClose = () => {
+        setIsMobileMenuOpen(false);
+    };
+
+    const handleActionClick = (action) => {
+        if (action === "blog") {
+            window.open("https://harmeet9013/github.io/blogger", "_blank");
+        } else if (action === "projects") {
+            window.location.href = "#projects";
+        } else if (action === "resume") {
+            handleClickOpen();
+        } else if (action === "contact") {
+            window.location.href = "#contact";
+        } else if (action === "hobbies") {
+            window.location.href = "#hobbies";
+        }
+        handleMenuClose();
+    };
+
+    const actions = [
+        {
+            icon: <Article sx={{ marginY: "-6px" }} />,
+            name: "Blog",
+            action: "blog",
+        },
+        {
+            icon: <Home sx={{ marginY: "-6px" }} />,
+            name: "Projects",
+            action: "projects",
+        },
+        {
+            icon: <Download sx={{ marginY: "-6px" }} />,
+            name: "Download Resume",
+            action: "resume",
+        },
+        {
+            icon: <ContactMail sx={{ marginY: "-6px" }} />,
+            name: "Contact",
+            action: "contact",
+        },
+        {
+            icon: <Favorite sx={{ marginY: "-6px" }} />,
+            name: "Hobbies",
+            action: "hobbies",
+        },
+    ];
 
     return (
         <div id="home">
             <div className="header-container">
                 <h1 className="header-welcome">welcome</h1>
+                <Menu className="menu-button" onClick={handleMenuOpen} />
+                <SwipeableDrawer
+                    anchor="right"
+                    open={isMobileMenuOpen}
+                    onClose={handleMenuClose}
+                    onOpen={handleMenuOpen}
+                    className="mobile-menu-container"
+                >
+                    <div className="mobile-menu">
+                        <Close
+                            className="close-icon-button"
+                            onClick={handleMenuClose}
+                        />
+                        {actions.map((action) => (
+                            <div
+                                key={action.name}
+                                className="mobile-menu-buttons"
+                            >
+                                <a
+                                    onClick={() =>
+                                        handleActionClick(action.action)
+                                    }
+                                >
+                                    {action.icon} {action.name}
+                                </a>
+                                <Divider />
+                            </div>
+                        ))}
+                    </div>
+                </SwipeableDrawer>
                 <ul className="header-navbar" id="header-navbar">
-                    <a href="#Home">Home</a>
                     <a href="https://harmeet9013/github.io/blogger">Blog</a>
-
                     <a href="#projects">Projects</a>
-
                     <a onClick={handleClickOpen}>Download Resume</a>
                     <DownloadResume
                         showPrompt={showPrompt}
                         setShowPrompt={setShowPrompt}
                     />
-
                     <a href="#contact">Contact</a>
-
                     <a href="#hobbies">Hobbies</a>
-
-                    <IconButton className="menu-icon" onClick={handleMenu}>
-                        <MenuIcon />
-                    </IconButton>
                 </ul>
             </div>
         </div>
     );
+}
+
+{
+    /* <CloseIcon
+                            className="close-icon-button"
+                            onClick={toggleMobileMenu(false)}
+                        />
+                        <a href="https://harmeet9013/github.io/blogger">Blog</a>
+                        <a href="#projects">Projects</a>
+                        <a onClick={handleClickOpen}>Download Resume</a>
+                        <DownloadResume
+                            showPrompt={showPrompt}
+                            setShowPrompt={setShowPrompt}
+                        />
+                        <a href="#contact">Contact</a>
+                        <a href="#hobbies">Hobbies</a> */
 }

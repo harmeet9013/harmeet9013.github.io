@@ -1,4 +1,5 @@
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import "./css/contact.css";
 
 export default function Contact() {
     const links = {
@@ -27,7 +28,7 @@ export default function Contact() {
     };
 
     return (
-        <div className="contact-all-container">
+        <div className="contact-all-container" id="contact">
             <p className="contactme-text">Contact Me...</p>
             <div className="contact-me-container">
                 <p>
