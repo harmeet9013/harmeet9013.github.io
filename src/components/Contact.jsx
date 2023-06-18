@@ -4,7 +4,10 @@ import "./css/contact.css";
 export default function Contact() {
     const links = {
         1: { label: "GitHub", link: "https://github.com/harmeet9013" },
-        2: { label: "LinkedIn", link: "https://linkedin.com/s/harmeet9013" },
+        2: {
+            label: "LinkedIn",
+            link: "https://linkedin.com/in/harmeet9013/",
+        },
         3: { label: "Instagram", link: "https://instagram.com/elipsantaro" },
     };
 
@@ -12,7 +15,7 @@ export default function Contact() {
         return Object.keys(links).map((key) => {
             const object = links[key];
             return (
-                <a href={object.link} target="_blank">
+                <a key={object.label} href={object.link} target="_blank">
                     <button className="contact-me-button">
                         Visit {object.label}{" "}
                         <OpenInNewIcon

@@ -11,7 +11,7 @@ export default function Hobbies() {
         Algorithms: {
             label: "Algorithms UI Designer",
             desc: "Participated in a group project that involved me creating the UI for the android app. The app is public on Play Store.",
-            link: "https://youtube.com/vancelmusic",
+            link: "https://bit.ly/3NyEpg7",
         },
         DetoxAssist: {
             label: "DetoxAssist UI Designer",
