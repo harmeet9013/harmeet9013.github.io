@@ -1,4 +1,4 @@
-import avatar from "./assets/avatar.jpg";
+import avatar from "./assets/projects-pics/avatar.jpg";
 import "./css/intro.css";
 
 export default function BackgroundIntro() {
@@ -7,17 +7,19 @@ export default function BackgroundIntro() {
             <div className="background-image" />
             <div className="frontpanel">
                 <img src={avatar} alt="avatar-img" className="front-avatar" />
-                <div>
-                    <div>
-                        <p>HELLO</p>
-                        <p className="name-text">
-                            I'm <strong>Harmeet Singh</strong>
-                        </p>
-                    </div>
+                <div className="container-text-button">
+                    <p>HELLO</p>
+                    <p className="name-text">
+                        I'm <strong>Harmeet Singh</strong>
+                    </p>
+
                     <p>
                         A hardworking web designer proficient in ReactJS,
                         Node.js, Express.js, HTML5 and CSS.
                     </p>
+                    <a href="#contact" className="general-button">
+                        Contact Me!
+                    </a>
                 </div>
             </div>
         </div>

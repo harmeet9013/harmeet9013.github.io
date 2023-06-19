@@ -47,11 +47,11 @@ export default function Hobbies() {
 
     return (
         <div className="hobbies-panel-container" id="hobbies">
-            <h1>
-                My Hobbies...
+            <p className="hobbies-heading-text">
+                <strong>My Hobbies...</strong>
                 <br />
                 <i>yes i have them</i>
-            </h1>
+            </p>
             <div className="sideproject-all-container">
                 {renderSideProjects()}
             </div>

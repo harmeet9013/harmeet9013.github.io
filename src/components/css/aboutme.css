@@ -12,10 +12,13 @@
 }
 
 .about-me-text h1 {
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
     font-size: 70px;
     font-weight: 700;
     letter-spacing: 3px;
     margin: 0;
+    margin-bottom: 20px;
 }
 
 .about-me-text p {

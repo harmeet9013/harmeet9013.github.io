@@ -1,7 +1,7 @@
 import { useState } from "react";
 import DownloadResume from "./DownloadResume";
 import "./css/heading.css";
-import { SwipeableDrawer, Divider, Dialog } from "@mui/material";
+import { SwipeableDrawer, Dialog } from "@mui/material";
 import {
     Home,
     Download,
@@ -10,6 +10,7 @@ import {
     Article,
     Menu,
     GitHub,
+    Close,
 } from "@mui/icons-material";
 
 export default function Heading() {
@@ -109,10 +110,13 @@ export default function Heading() {
                                 >
                                     {action.icon} {action.name}
                                 </a>
-                                <Divider />
                             </div>
                         ))}
                     </div>
+                    <Close
+                        className="close-icon-button"
+                        onClick={handleMenuClose}
+                    />
                 </SwipeableDrawer>
 
                 {/* This is for desktop screens */}
