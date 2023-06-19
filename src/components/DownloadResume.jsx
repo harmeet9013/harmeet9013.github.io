@@ -8,12 +8,12 @@ import {
 
 export default function DownloadResume({ showPrompt, setShowPrompt }) {
     const handleClose = (event) => {
-        if (event.target.id === "cancel" || event.target.id === "dialog") {
-            setShowPrompt(false);
-        } else {
+        if (event.target.id === "download") {
             setTimeout(() => {
                 setShowPrompt(false);
             }, 1000);
+        } else {
+            setShowPrompt(false);
         }
     };
     return (
@@ -36,21 +36,24 @@ export default function DownloadResume({ showPrompt, setShowPrompt }) {
             >
                 Downloading Resume...
             </DialogTitle>
-            <DialogContent className="dialog">
-                Click on the Download button below to start downloading resume.
+            <DialogContent
+                className="dialog"
+                sx={{ textAlign: "left", fontSize: "16px" }}
+            >
+                The download button will take you to Google Drive.
                 <br />
-                Cancel if you do not want to download and get rid of this
-                window.
+                Click on cancel to close this window.
             </DialogContent>
             <DialogActions className="dialog">
                 <a className="dialog-button" id="cancel" onClick={handleClose}>
                     Cancel
                 </a>
                 <a
+                    id="download"
                     className="dialog-button"
                     onClick={handleClose}
-                    href="./components/assets/resume.pdf"
-                    download="HarmeetSingh_Resume.pdf"
+                    href="https://bit.ly/hs_resume_website"
+                    target="_blank"
                 >
                     Download
                 </a>

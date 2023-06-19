@@ -1,7 +1,7 @@
 import { useState } from "react";
 import DownloadResume from "./DownloadResume";
 import "./css/heading.css";
-import { SwipeableDrawer, Divider } from "@mui/material";
+import { SwipeableDrawer, Divider, Dialog } from "@mui/material";
 import {
     Home,
     Download,
@@ -9,7 +9,6 @@ import {
     Favorite,
     Article,
     Menu,
-    Close,
     GitHub,
 } from "@mui/icons-material";
 
@@ -67,6 +66,11 @@ export default function Heading() {
             action: "hobbies",
         },
         {
+            icon: <Download sx={{ marginY: "-6px" }} />,
+            name: "Download Resume",
+            action: "resume",
+        },
+        {
             icon: <ContactMail sx={{ marginY: "-6px" }} />,
             name: "Contact",
             action: "contact",
@@ -82,6 +86,8 @@ export default function Heading() {
         <div id="home">
             <div className="header-container">
                 <p className="header-welcome">welcome</p>
+
+                {/* This is for mobile screens */}
                 <Menu className="menu-button" onClick={handleMenuOpen} />
                 <SwipeableDrawer
                     anchor="right"
@@ -91,10 +97,6 @@ export default function Heading() {
                     className="mobile-menu-container"
                 >
                     <div className="mobile-menu">
-                        <Close
-                            className="close-icon-button"
-                            onClick={handleMenuClose}
-                        />
                         {actions.map((action) => (
                             <div
                                 key={action.name}
@@ -112,31 +114,25 @@ export default function Heading() {
                         ))}
                     </div>
                 </SwipeableDrawer>
-                <ul className="header-navbar" id="header-navbar">
-                    <a href="https://harmeet9013/github.io/blogger">Blog</a>
-                    <a href="#projects">Projects</a>
-                    {/* <a onClick={handleClickOpen}>Download Resume</a> */}
-                    {/* <DownloadResume
-                        showPrompt={showPrompt}
-                        setShowPrompt={setShowPrompt}
-                    /> */}
 
-                    <a href="#hobbies">Hobbies</a>
-                    <a href="#contact">Contact</a>
-                    <a
-                        href="https://github.com/harmeet9013/harmeet9013.github.io"
-                        target="_blank"
-                    >
-                        Source Code
-                    </a>
+                {/* This is for desktop screens */}
+                <ul className="header-navbar" id="header-navbar">
+                    {actions.map((action) => (
+                        <a
+                            key={action.name}
+                            onClick={() => handleActionClick(action.action)}
+                        >
+                            {action.icon} {action.name}
+                        </a>
+                    ))}
+                    <Dialog open={showPrompt}>
+                        <DownloadResume
+                            showPrompt={showPrompt}
+                            setShowPrompt={setShowPrompt}
+                        />
+                    </Dialog>
                 </ul>
             </div>
         </div>
     );
 }
-
-// {
-//     icon: <Download sx={{ marginY: "-6px" }} />,
-//     name: "Download Resume",
-//     action: "resume",
-// },

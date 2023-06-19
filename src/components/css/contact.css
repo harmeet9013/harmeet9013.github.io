@@ -34,15 +34,23 @@
 
 .contact-me-button {
     min-width: 150px;
-    width: 100%;
+    width: 90%;
     padding: 18px 8px 18px 18px;
     font-size: 20px;
     font-weight: 700;
     border-radius: 20px;
     cursor: pointer;
-    border: none;
-    background-color: #002536;
+    border: 2px solid #646464;
+    background-color: rgba(0, 0, 0, 0);
     color: white;
+    transition: all 100ms ease;
+}
+
+.contact-me-button:hover {
+    transform: scale(1.1);
+    color: white;
+    background-color: #222725;
+    border: 2px solid #222725;
 }
 
 @media screen and (max-width: 1000px) {
@@ -71,9 +79,5 @@
     .contact-me-grid-buttons {
         gap: 20px;
         padding-left: 0;
-    }
-
-    .contact-me-button {
-        padding: 25px 8px 25px 18px;
     }
 }

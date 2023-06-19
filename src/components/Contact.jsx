@@ -1,14 +1,23 @@
-import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import { GitHub, LinkedIn, Instagram } from "@mui/icons-material";
 import "./css/contact.css";
 
 export default function Contact() {
     const links = {
-        1: { label: "GitHub", link: "https://github.com/harmeet9013" },
+        1: {
+            label: "GitHub",
+            link: "https://github.com/harmeet9013",
+            icon: <GitHub sx={{ marginY: "-4px", marginX: "4px" }} />,
+        },
         2: {
             label: "LinkedIn",
             link: "https://linkedin.com/in/harmeet9013/",
+            icon: <LinkedIn sx={{ marginY: "-4px", marginX: "4px" }} />,
         },
-        3: { label: "Instagram", link: "https://instagram.com/elipsantaro" },
+        3: {
+            label: "Instagram",
+            link: "https://instagram.com/elipsantaro",
+            icon: <Instagram sx={{ marginY: "-4px", marginX: "4px" }} />,
+        },
     };
 
     const renderLinks = () => {
@@ -17,13 +26,7 @@ export default function Contact() {
             return (
                 <a key={object.label} href={object.link} target="_blank">
                     <button className="contact-me-button">
-                        Visit {object.label}{" "}
-                        <OpenInNewIcon
-                            sx={{
-                                marginY: "-7px",
-                                marginX: "7px",
-                            }}
-                        />
+                        {object.label} {object.icon}
                     </button>
                 </a>
             );
