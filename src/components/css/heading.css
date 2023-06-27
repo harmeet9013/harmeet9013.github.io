@@ -89,14 +89,22 @@
 }
 
 .dialog {
-    background-color: rgba(20, 20, 20, 1);
     font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
         sans-serif;
-    color: white;
     margin: 10px;
     font-size: 16px;
+    font-weight: 600;
     gap: 10px;
 }
+.dialog.dark {
+    background-color: rgba(20, 20, 20, 1);
+    color: white;
+}
+.dialog.light {
+    background-color: #f8f6f4;
+    color: black;
+}
+
 .dialog-button {
     margin-top: -10px;
     padding: 10px 20px;
@@ -105,15 +113,27 @@
     letter-spacing: 2px;
     border-radius: 50px;
     cursor: pointer;
-    color: white;
+    font-weight: 600;
     transition: all 100ms ease;
     text-decoration: none;
 }
+.dialog-button.dark {
+    color: white;
+}
+.dialog-button.light {
+    color: black;
+}
 .dialog-button:hover {
-    background-color: white;
-    border: 2px solid white;
     color: black;
     transform: scale(1.05);
+}
+.dialog-button.dark:hover {
+    background-color: white;
+    border: 2px solid white;
+}
+.dialog-button.light:hover {
+    background-color: #d2e9e9;
+    border: 2px solid black;
 }
 
 @media screen and (max-width: 1100px) {
@@ -130,16 +150,16 @@
         z-index: 3;
         transition: all 200ms ease;
     }
+
     .header-welcome {
         font-size: 30px;
         letter-spacing: 2px;
-    }
-    .navbar-button {
-        display: none;
-    }
-    .header-welcome {
         text-align: center;
         margin-left: 50px;
+    }
+
+    .navbar-button {
+        display: none;
     }
 
     .navbar-button-mobile {
@@ -150,6 +170,7 @@
             sans-serif;
         margin-left: 9cap;
     }
+
     .menu-button {
         display: inherit;
         top: 35%;
@@ -164,17 +185,16 @@
     .menu-button.light {
         color: black;
     }
+
     .mobile-menu {
         display: grid;
         margin: 20px 0;
         width: 100%;
     }
-
     .mobile-menu-buttons {
         margin-top: 40px;
         width: 100%;
     }
-
     .mobile-menu-buttons a {
         font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
             sans-serif;
