@@ -1,7 +1,8 @@
 import { GitHub, LinkedIn, Instagram } from "@mui/icons-material";
 import "./css/contact.css";
+import { useState } from "react";
 
-export default function Contact() {
+export default function Contact({ darkMode, setDarkMode }) {
     const links = {
         1: {
             label: "GitHub",
@@ -25,7 +26,11 @@ export default function Contact() {
             const object = links[key];
             return (
                 <a key={object.label} href={object.link} target="_blank">
-                    <button className="contact-me-button">
+                    <button
+                        className={`contact-me-button ${
+                            darkMode ? "dark" : "light"
+                        }`}
+                    >
                         {object.label} {object.icon}
                     </button>
                 </a>
@@ -34,7 +39,10 @@ export default function Contact() {
     };
 
     return (
-        <div className="contact-all-container" id="contact">
+        <div
+            className={`contact-all-container ${darkMode ? "dark" : "light"}`}
+            id="contact"
+        >
             <p className="contactme-text">Contact Me...</p>
             <div className="contact-me-container">
                 <p>

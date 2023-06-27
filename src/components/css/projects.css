@@ -1,9 +1,17 @@
 .projects-main-container {
-    background-color: #0f0f0f;
     margin: auto;
     display: block;
     text-align: center;
     padding-top: 80px;
+    transition: all 200ms ease;
+}
+.projects-main-container.dark {
+    background-color: #0f0f0f;
+    color: #ffffff;
+}
+.projects-main-container.light {
+    background-color: #f1f1f1;
+    color: black;
 }
 
 .myprojects-text {
@@ -14,12 +22,12 @@
 }
 
 .small-desc-projects {
-    font-size: 16px;
-    letter-spacing: 3px;
+    font-size: 20px;
+    letter-spacing: 2px;
+    font-weight: 600;
 }
 
 .projects-container {
-    color: #ffffff;
     margin: auto;
     display: grid;
     grid-template-columns: 30% 30%;
@@ -28,11 +36,11 @@
     justify-content: center;
     max-width: 100%;
     gap: 20% 20%;
-    padding: 150px 15% 150px 15%;
+    padding: 130px 15% 180px 15%;
 }
 
 .project-container {
-    border: 1px solid #ccc;
+    border: 5px solid #ccc;
     padding: 40px;
     margin-left: -40px;
     border-radius: 30px;
@@ -43,10 +51,15 @@
     background-position: center;
     z-index: 0;
 }
-
+.project-container.dark {
+    border: 5px solid #ccc;
+}
+.project-container.light {
+    border: 5px solid black;
+}
 .project-container:hover {
     transform: scale(1.05);
-    border: 1px solid rgb(255, 103, 103);
+    border: 5px solid rgb(255, 103, 103);
     box-shadow: 0 0 10px rgba(147, 11, 11, 0.5);
     opacity: 1;
 }

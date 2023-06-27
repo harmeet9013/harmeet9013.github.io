@@ -1,7 +1,7 @@
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import "./css/hobbies.css";
 
-export default function Hobbies() {
+export default function Hobbies({ darkMode, setDarkMode }) {
     const mySideProjects = {
         VancelMusic: {
             label: "Vancel Music",
@@ -24,7 +24,12 @@ export default function Hobbies() {
         return Object.keys(mySideProjects).map((key) => {
             const project = mySideProjects[key];
             return (
-                <div className="sideproject-container" key={key}>
+                <div
+                    className={`sideproject-container ${
+                        darkMode ? "dark" : "light"
+                    }`}
+                    key={key}
+                >
                     <p className="sideproject-title">
                         <strong>{project.label}</strong>
                     </p>
@@ -46,7 +51,10 @@ export default function Hobbies() {
     };
 
     return (
-        <div className="hobbies-panel-container" id="hobbies">
+        <div
+            className={`hobbies-panel-container ${darkMode ? "dark" : "light"}`}
+            id="hobbies"
+        >
             <p className="hobbies-heading-text">
                 <strong>My Hobbies...</strong>
                 <br />

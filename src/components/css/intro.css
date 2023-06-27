@@ -4,11 +4,9 @@
     height: 1000px;
     margin: 0;
     padding: 0;
-    margin-top: -300px;
 }
 
 .background-image {
-    background-image: url("../assets/projects-pics/bg.jpg");
     height: 1300px;
     background-position: center;
     background-repeat: no-repeat;
@@ -17,29 +15,43 @@
     transform: scale(1.01);
     z-index: -1;
     overflow: hidden;
+    transition: all 200ms ease;
+}
+.background-image.dark {
+    background-image: url("../assets/projects-pics/bg-dark.jpg");
+}
+.background-image.light {
+    background-image: url("../assets/projects-pics/bg-light.jpg");
 }
 
 .frontpanel {
+    display: grid;
+    grid-template-columns: auto auto;
     text-align: center;
-    width: 950px;
+    width: 980px;
     margin: auto;
     margin-top: -900px;
-    display: flex;
-    align-items: center;
     gap: 50px;
-    position: relative;
     text-align: center;
 }
 
-.frontpanel p {
+.general-text {
+    font-size: 20px;
+    font-weight: 600;
     letter-spacing: 2px;
+}
+.general-text.dark {
+    color: #f8f6f4;
+}
+.general-text.light {
+    color: black;
 }
 
 .front-avatar {
     height: 400px;
     width: 400px;
     border-radius: 50%;
-    border: 10px solid rgb(198, 198, 198);
+    border: 10px solid rgb(211, 210, 210);
 }
 
 .name-text {
@@ -51,9 +63,17 @@
     letter-spacing: 3px;
 }
 
+.name-text.dark {
+    color: #f8f6f4;
+}
+.name-text.light {
+    color: black;
+}
+
 .container-text-button {
     display: grid;
     grid-template-columns: auto;
+    align-content: center;
     justify-items: center;
     align-items: center;
 }
@@ -67,16 +87,23 @@
     width: 30%;
     margin-top: 20px;
     color: black;
-    background-color: rgb(255, 255, 255);
-    border: 2px solid white;
-    padding: 12px 20px;
+    border: none;
+    padding: 16px 20px;
     border-radius: 50px;
     cursor: pointer;
     transition: all 100ms ease;
 }
+.general-button.dark {
+    background-color: rgb(255, 255, 255);
+    color: black;
+}
+.general-button.light {
+    background-color: rgb(201, 201, 201);
+    color: black;
+}
 
 .general-button:hover {
-    border: 2px solid rgb(0, 44, 61);
+    border: none;
     background-color: rgb(0, 44, 61);
     color: white;
     transform: scale(1.1);

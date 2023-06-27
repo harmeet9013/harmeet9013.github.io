@@ -11,9 +11,11 @@ import {
     Menu,
     GitHub,
     Close,
+    DarkMode,
+    LightMode,
 } from "@mui/icons-material";
 
-export default function Heading() {
+export default function Heading({ darkMode, setDarkMode }) {
     const [showPrompt, setShowPrompt] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -85,11 +87,15 @@ export default function Heading() {
 
     return (
         <div id="home">
-            <div className="header-container">
-                <p className="header-welcome">welcome</p>
+            <div className={`header-container ${darkMode ? "dark" : "light"}`}>
+                <a
+                    href="#home"
+                    className={`header-welcome ${darkMode ? "dark" : "light"}`}
+                >
+                    welcome
+                </a>
 
                 {/* This is for mobile screens */}
-                <Menu className="menu-button" onClick={handleMenuOpen} />
                 <SwipeableDrawer
                     anchor="right"
                     open={isMobileMenuOpen}
@@ -118,17 +124,35 @@ export default function Heading() {
                         onClick={handleMenuClose}
                     />
                 </SwipeableDrawer>
-
+                <Menu className="menu-button" onClick={handleMenuOpen} />
                 {/* This is for desktop screens */}
-                <ul className="header-navbar" id="header-navbar">
+                <ul className={`header-navbar `} id="header-navbar">
                     {actions.map((action) => (
                         <a
                             key={action.name}
                             onClick={() => handleActionClick(action.action)}
+                            className={`navbar-button ${
+                                darkMode ? "dark" : "light"
+                            }`}
                         >
                             {action.icon} {action.name}
                         </a>
                     ))}
+                    <a
+                        onClick={() => {
+                            setDarkMode(!darkMode);
+                        }}
+                        className={`navbar-button ${
+                            darkMode ? "dark" : "light"
+                        }`}
+                    >
+                        {darkMode ? (
+                            <DarkMode sx={{ marginY: "-6px" }} />
+                        ) : (
+                            <LightMode sx={{ marginY: "-6px" }} />
+                        )}
+                        {darkMode ? " Dark Mode" : " Light Mode"}
+                    </a>
                     <Dialog open={showPrompt}>
                         <DownloadResume
                             showPrompt={showPrompt}

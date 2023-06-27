@@ -1,8 +1,11 @@
 import "./css/aboutme.css";
 
-export default function MoreAboutMe() {
+export default function MoreAboutMe({ darkMode, setDarkMode }) {
     return (
-        <div id="aboutMe" className="about-me-container">
+        <div
+            id="aboutMe"
+            className={`about-me-container ${darkMode ? "dark" : "light"}`}
+        >
             <div className="about-me-text">
                 <h1>About Me...</h1>
                 <p>
