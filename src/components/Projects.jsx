@@ -3,7 +3,7 @@ import keeperBackground from "./assets/projects-pics/keeper.png";
 import weatherBackground from "./assets/projects-pics/weather.png";
 import "./css/projects.css";
 
-export default function Projects({ darkMode, setDarkMode }) {
+export default function Projects({ darkMode }) {
     const myProjects = {
         simon: {
             label: "SIMON GAME",
@@ -60,7 +60,7 @@ export default function Projects({ darkMode, setDarkMode }) {
             className={`projects-main-container ${darkMode ? "dark" : "light"}`}
             id="projects"
         >
-            <h1 className="myprojects-text">My Projects...</h1>
+            <h1 className="myprojects-text">My Projects</h1>
             <p className="small-desc-projects">
                 These are the projects that are{" "}
                 <strong>built from the ground up by me.</strong>

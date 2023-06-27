@@ -186,7 +186,6 @@ export default function Heading({ darkMode, setDarkMode }) {
                             showPrompt={showPrompt}
                             setShowPrompt={setShowPrompt}
                             darkMode={darkMode}
-                            setDarkMode={setDarkMode}
                         />
                     </Dialog>
                 </ul>

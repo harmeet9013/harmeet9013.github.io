@@ -12,11 +12,11 @@ export default function App() {
     return (
         <div>
             <Heading darkMode={darkMode} setDarkMode={setDarkMode} />
-            <BackgroundIntro darkMode={darkMode} setDarkMode={setDarkMode} />
-            <MoreAboutMe darkMode={darkMode} setDarkMode={setDarkMode} />
-            <Projects darkMode={darkMode} setDarkMode={setDarkMode} />
-            <Hobbies darkMode={darkMode} setDarkMode={setDarkMode} />
-            <Contact darkMode={darkMode} setDarkMode={setDarkMode} />
+            <BackgroundIntro darkMode={darkMode} />
+            <MoreAboutMe darkMode={darkMode} />
+            <Projects darkMode={darkMode} />
+            <Hobbies darkMode={darkMode} />
+            <Contact darkMode={darkMode} />
         </div>
     );
 }

@@ -10,7 +10,6 @@ export default function DownloadResume({
     showPrompt,
     setShowPrompt,
     darkMode,
-    setDarkMode,
 }) {
     const handleClose = (event) => {
         if (event.target.id === "download") {
@@ -45,7 +44,7 @@ export default function DownloadResume({
                     color: `${darkMode ? "white" : "black"}`,
                 }}
             >
-                Downloading Resume...
+                Downloading Resume
             </DialogTitle>
             <DialogContent
                 className={`dialog ${darkMode ? "dark" : "light"}`}

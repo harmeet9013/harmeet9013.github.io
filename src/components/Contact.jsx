@@ -2,7 +2,7 @@ import { GitHub, LinkedIn, Instagram } from "@mui/icons-material";
 import "./css/contact.css";
 import { useState } from "react";
 
-export default function Contact({ darkMode, setDarkMode }) {
+export default function Contact({ darkMode }) {
     const links = {
         1: {
             label: "GitHub",
@@ -43,7 +43,7 @@ export default function Contact({ darkMode, setDarkMode }) {
             className={`contact-all-container ${darkMode ? "dark" : "light"}`}
             id="contact"
         >
-            <p className="contactme-text">Contact Me...</p>
+            <p className="contactme-text">Contact Me</p>
             <div className="contact-me-container">
                 <p>
                     Clicking on any buttons from the following will take you to

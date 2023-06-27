@@ -1,7 +1,7 @@
 import avatar from "./assets/projects-pics/avatar.jpg";
 import "./css/intro.css";
 
-export default function BackgroundIntro({ darkMode, setDarkMode }) {
+export default function BackgroundIntro({ darkMode }) {
     return (
         <div className={`background-container ${darkMode ? "dark" : "light"}`}>
             <div
@@ -30,8 +30,8 @@ export default function BackgroundIntro({ darkMode, setDarkMode }) {
                             darkMode ? "dark" : "light"
                         }`}
                     >
-                        A hardworking web designer proficient in ReactJS,
-                        Node.js, Express.js, HTML5 and CSS.
+                        A web designer proficient in ReactJS, Node.js,
+                        Express.js, HTML5 and CSS.
                     </p>
                     <a
                         href="#contact"
