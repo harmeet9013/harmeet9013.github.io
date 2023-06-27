@@ -89,7 +89,7 @@
     z-index: 2;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1100px) {
     .projects-main-container {
         padding: 50px 20px;
     }
@@ -115,6 +115,6 @@
     .project-container:hover {
         box-shadow: 0 0 0;
         transform: scale(1);
-        border: 1px solid;
+        border: 5px solid;
     }
 }

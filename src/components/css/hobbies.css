@@ -93,7 +93,7 @@
     background-color: rgb(75, 14, 14);
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1100px) {
     .hobbies-panel-container {
         padding: 50px 10px;
         grid-template-columns: auto;

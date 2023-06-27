@@ -3,7 +3,7 @@ import "./css/intro.css";
 
 export default function BackgroundIntro({ darkMode, setDarkMode }) {
     return (
-        <div className="background-container">
+        <div className={`background-container ${darkMode ? "dark" : "light"}`}>
             <div
                 className={`background-image ${darkMode ? "dark" : "light"}`}
             />

@@ -70,7 +70,7 @@ export default function Heading({ darkMode, setDarkMode }) {
         },
         {
             icon: <Download sx={{ marginY: "-6px" }} />,
-            name: "Download Resume",
+            name: "Resume",
             action: "resume",
         },
         {
@@ -80,7 +80,7 @@ export default function Heading({ darkMode, setDarkMode }) {
         },
         {
             icon: <GitHub sx={{ marginY: "-6px" }} />,
-            name: "Source Code",
+            name: "Source",
             action: "source",
         },
     ];
@@ -96,6 +96,34 @@ export default function Heading({ darkMode, setDarkMode }) {
                 </a>
 
                 {/* This is for mobile screens */}
+                <div
+                    style={{
+                        display: "grid",
+                        gridTemplateColumns: "auto auto",
+                        gap: "0px",
+                    }}
+                >
+                    <a
+                        onClick={() => {
+                            setDarkMode(!darkMode);
+                        }}
+                        className={`navbar-button-mobile ${
+                            darkMode ? "dark" : "light"
+                        }`}
+                    >
+                        {darkMode ? (
+                            <DarkMode sx={{ marginY: "-7px" }} />
+                        ) : (
+                            <LightMode sx={{ marginY: "-7px" }} />
+                        )}
+                    </a>
+
+                    <Menu
+                        className={`menu-button ${darkMode ? "dark" : "light"}`}
+                        onClick={handleMenuOpen}
+                    />
+                </div>
+
                 <SwipeableDrawer
                     anchor="right"
                     open={isMobileMenuOpen}
@@ -124,7 +152,7 @@ export default function Heading({ darkMode, setDarkMode }) {
                         onClick={handleMenuClose}
                     />
                 </SwipeableDrawer>
-                <Menu className="menu-button" onClick={handleMenuOpen} />
+
                 {/* This is for desktop screens */}
                 <ul className={`header-navbar `} id="header-navbar">
                     {actions.map((action) => (
