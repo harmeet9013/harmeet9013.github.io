@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import DownloadResume from "./DownloadResume";
 import "./css/heading.css";
 import { SwipeableDrawer, Dialog } from "@mui/material";
@@ -33,22 +34,20 @@ export default function Heading({ darkMode, setDarkMode }) {
     };
 
     const handleActionClick = (action) => {
-        if (action === "blog") {
-            window.open("https://harmeet9013.github.io/blogger", "_blank");
-        } else if (action === "projects") {
-            window.location.href = "#projects";
-        } else if (action === "resume") {
-            handleClickOpen();
-        } else if (action === "contact") {
-            window.location.href = "#contact";
-        } else if (action === "hobbies") {
-            window.location.href = "#hobbies";
-        } else if (action === "source") {
-            window.open(
-                "https://github.com/harmeet9013/harmeet9013.github.io",
-                "_blank"
-            );
-        }
+        const actionsMap = {
+            blog: () =>
+                window.open("https://harmeet9013.github.io/blogger", "_blank"),
+            projects: () => (window.location.href = "#projects"),
+            resume: () => handleClickOpen(),
+            contact: () => (window.location.href = "#contact"),
+            hobbies: () => (window.location.href = "#hobbies"),
+            source: () =>
+                window.open(
+                    "https://github.com/harmeet9013/harmeet9013.github.io",
+                    "_blank"
+                ),
+        };
+        actionsMap[action]();
         handleMenuClose();
     };
 
