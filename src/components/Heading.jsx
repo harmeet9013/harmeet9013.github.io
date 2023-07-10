@@ -99,7 +99,9 @@ export default function Heading({ darkMode, setDarkMode }) {
                     style={{
                         display: "grid",
                         gridTemplateColumns: "auto auto",
-                        gap: "0px",
+                        alignItems: "center",
+                        margin: "0px",
+                        gap: "30px",
                     }}
                 >
                     <a
@@ -116,11 +118,14 @@ export default function Heading({ darkMode, setDarkMode }) {
                             <LightMode sx={{ marginY: "-7px" }} />
                         )}
                     </a>
-
-                    <Menu
-                        className={`menu-button ${darkMode ? "dark" : "light"}`}
-                        onClick={handleMenuOpen}
-                    />
+                    <a>
+                        <Menu
+                            className={`menu-button ${
+                                darkMode ? "dark" : "light"
+                            }`}
+                            onClick={handleMenuOpen}
+                        />
+                    </a>
                 </div>
 
                 <SwipeableDrawer

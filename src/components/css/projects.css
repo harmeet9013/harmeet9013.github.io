@@ -1,6 +1,9 @@
 .projects-main-container {
-    margin: auto;
-    display: block;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     padding-top: 80px;
     transition: all 200ms ease;
@@ -36,7 +39,7 @@
     justify-content: center;
     max-width: 100%;
     gap: 20% 20%;
-    padding: 130px 15% 180px 15%;
+    padding: 130px 15% 50px 15%;
 }
 
 .project-container {
@@ -106,6 +109,7 @@
         grid-template-columns: auto;
         gap: 10px;
         margin-top: -80px;
+        margin-bottom: 50px;
     }
 
     .project-container {

@@ -1,7 +1,9 @@
 import simonBackground from "./assets/projects-pics/simon.png";
 import keeperBackground from "./assets/projects-pics/keeper.png";
 import weatherBackground from "./assets/projects-pics/weather.png";
+import blogs from "./assets/projects-pics/blogs.png";
 import "./css/projects.css";
+import { Card, CardContent, CardMedia } from "@mui/material";
 
 export default function Projects({ darkMode }) {
     const myProjects = {
@@ -71,6 +73,29 @@ export default function Projects({ darkMode }) {
                 Click on any project to visit it.
             </p>
             <div className="projects-container">{renderProjects()}</div>
+            <p className="myprojects-text">
+                <strong>Upcoming...</strong>
+            </p>
+            <Card sx={{ transform: "scale(0.9)" }}>
+                <CardMedia
+                    sx={{ height: "600px" }}
+                    image={blogs}
+                    title="Blogs Project"
+                />
+                <CardContent>
+                    <p className="small-desc-projects">
+                        Full Stack blog website complete with database
+                        management, back-end and front-end. <br />
+                        Built using ReactJS, NodeJS, ExpressJS, MongoDB.
+                    </p>
+                </CardContent>
+            </Card>
+
+            {/* <img
+                src={blogs}
+                alt="Blogs Project"
+                className="upcoming-project-image"
+            /> */}
         </div>
     );
 }
