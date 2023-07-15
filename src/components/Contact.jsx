@@ -1,6 +1,5 @@
 import { GitHub, LinkedIn, Instagram } from "@mui/icons-material";
 import "./css/contact.css";
-import { useState } from "react";
 
 export default function Contact({ darkMode }) {
     const links = {

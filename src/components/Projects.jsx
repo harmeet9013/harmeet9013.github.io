@@ -3,9 +3,10 @@ import keeperBackground from "./assets/projects-pics/keeper.png";
 import weatherBackground from "./assets/projects-pics/weather.png";
 import blogs from "./assets/projects-pics/blogs.png";
 import "./css/projects.css";
-import { Card, CardContent, CardMedia } from "@mui/material";
+import { useState } from "react";
 
 export default function Projects({ darkMode }) {
+    const [imageError, setImageError] = useState(false);
     const myProjects = {
         simon: {
             label: "SIMON GAME",
@@ -76,26 +77,29 @@ export default function Projects({ darkMode }) {
             <p className="myprojects-text">
                 <strong>Upcoming...</strong>
             </p>
-            <Card sx={{ transform: "scale(0.9)" }}>
-                <CardMedia
-                    sx={{ height: "600px" }}
-                    image={blogs}
-                    title="Blogs Project"
-                />
-                <CardContent>
-                    <p className="small-desc-projects">
-                        Full Stack blog website complete with database
-                        management, back-end and front-end. <br />
-                        Built using ReactJS, NodeJS, ExpressJS, MongoDB.
-                    </p>
-                </CardContent>
-            </Card>
+            <div className={`card-container ${darkMode ? "dark" : "light"}`}>
+                {imageError ? (
+                    <h1>There was problem loading this image.</h1>
+                ) : (
+                    <img
+                        className="card-image"
+                        src={blogs}
+                        onError={() => {
+                            setTimeout(() => {
+                                setImageError(true);
+                            }, 500);
+                        }}
+                        alt="blogs-upcoming"
+                        loading="lazy"
+                    />
+                )}
 
-            {/* <img
-                src={blogs}
-                alt="Blogs Project"
-                className="upcoming-project-image"
-            /> */}
+                <p className="small-desc-projects">
+                    Full Stack blog website complete with database management,
+                    back-end and front-end. <br />
+                    Built using ReactJS, NodeJS, ExpressJS, MongoDB.
+                </p>
+            </div>
         </div>
     );
 }
