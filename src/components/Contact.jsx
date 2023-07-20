@@ -1,7 +1,30 @@
 import { GitHub, LinkedIn, Instagram } from "@mui/icons-material";
-import "./css/contact.css";
+import {
+    Paper,
+    Stack,
+    Typography,
+    Button,
+    styled,
+    useMediaQuery,
+    Divider,
+} from "@mui/material";
 
-export default function Contact({ darkMode }) {
+export default function Contact() {
+    const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
+
+    const CustomButton = styled(Button)(({ theme }) => ({
+        transition: "all 500ms ease",
+        backgroundColor: theme.palette.action.selected,
+        color: theme.palette.text.primary,
+        fontSize: "16px",
+        borderRadius: "15px",
+        padding: "15px 20px",
+        width: "100%",
+        "&:hover": {
+            backgroundColor: theme.palette.action.hover,
+        },
+    }));
+
     const links = {
         1: {
             label: "GitHub",
@@ -24,32 +47,62 @@ export default function Contact({ darkMode }) {
         return Object.keys(links).map((key) => {
             const object = links[key];
             return (
-                <a key={object.label} href={object.link} target="_blank">
-                    <button
-                        className={`contact-me-button ${
-                            darkMode ? "dark" : "light"
-                        }`}
+                <Paper
+                    elevation={2}
+                    sx={{
+                        borderRadius: "15px",
+                        width: "100%",
+                        transition: "all 500ms ease",
+                    }}
+                >
+                    <CustomButton
+                        key={object.label}
+                        href={object.link}
+                        target="_blank"
+                        endIcon={object.icon}
                     >
-                        {object.label} {object.icon}
-                    </button>
-                </a>
+                        {object.label}
+                    </CustomButton>
+                </Paper>
             );
         });
     };
 
     return (
-        <div
-            className={`contact-all-container ${darkMode ? "dark" : "light"}`}
+        <Paper
+            elevation={1}
             id="contact"
+            sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "50px",
+                textAlign: "center",
+                justifyContent: "center",
+                alignItems: "center",
+                transition: "all 500ms ease",
+                padding: isMobile ? "10%" : "5% 25% 1% 25%",
+                width: "100%",
+                cursor: "default",
+            }}
         >
-            <p className="contactme-text">Contact Me</p>
-            <div className="contact-me-container">
-                <p>
-                    Clicking on any buttons from the following will take you to
-                    their respective pages.
-                </p>
-                <div className="contact-me-grid-buttons">{renderLinks()}</div>
-            </div>
-        </div>
+            <Typography variant={isMobile ? "h3" : "h2"}>
+                <strong>Contact Me</strong>
+            </Typography>
+            <Divider variant="middle" flexItem />
+            <Stack
+                direction={isMobile ? "column" : "row"}
+                spacing={isMobile ? 4 : 8}
+            >
+                <Typography variant={isMobile ? "body1" : "h5"}>
+                    Clicking on any buttons from the following
+                    <br />
+                    will take you to their respective pages.
+                </Typography>
+                <Stack direction="column" spacing={4}>
+                    {renderLinks()}
+                </Stack>
+            </Stack>
+            <Typography variant="overline">Created with love.</Typography>
+        </Paper>
     );
 }

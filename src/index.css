@@ -3,6 +3,7 @@ body {
     color: #fbf5f3;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
+    transition: "all 200ms ease";
 }
 
 @media screen and (max-width: 1100px) {

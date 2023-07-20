@@ -1,22 +1,48 @@
-import OpenInNewIcon from "@mui/icons-material/OpenInNew";
-import "./css/hobbies.css";
+import { OpenInNew, MusicNote, Android } from "@mui/icons-material";
+import {
+    Button,
+    Divider,
+    Paper,
+    Stack,
+    Typography,
+    styled,
+    useMediaQuery,
+} from "@mui/material";
 
-export default function Hobbies({ darkMode }) {
+export default function Hobbies() {
+    const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
+
+    const CustomButton = styled(Button)(({ theme }) => ({
+        transition: "all 500ms ease",
+        backgroundColor: theme.palette.action.selected,
+        color: theme.palette.text.primary,
+        fontSize: "16px",
+        borderRadius: "15px",
+        padding: "15px 20px",
+        width: "100%",
+        "&:hover": {
+            backgroundColor: theme.palette.action.hover,
+        },
+    }));
+
     const mySideProjects = {
         VancelMusic: {
             label: "Vancel Music",
             desc: "I am a huge nerd for EDM music. As much as I love listening to it, I love making music as a hobby. That's why I started VancelMusic in 2019 which showcases some of my own creations.",
             link: "https://youtube.com/vancelmusic",
+            icon: <MusicNote />,
         },
         Algorithms: {
             label: "Algorithms UI Designer",
             desc: "Participated in a group project that involved me creating the UI for the android app. The app is public on Play Store.",
             link: "https://bit.ly/3NyEpg7",
+            icon: <Android />,
         },
         DetoxAssist: {
             label: "DetoxAssist UI Designer",
             desc: "Participated, again with the same, to create UI for another app which tracks your daily, 7 days and monthly along with average phone unlocks. App is under review.",
             link: "/",
+            icon: <Android />,
         },
     };
 
@@ -24,43 +50,73 @@ export default function Hobbies({ darkMode }) {
         return Object.keys(mySideProjects).map((key) => {
             const project = mySideProjects[key];
             return (
-                <div
-                    className={`sideproject-container ${
-                        darkMode ? "dark" : "light"
-                    }`}
+                <Paper
+                    elevation={4}
                     key={key}
+                    sx={{
+                        transition: "all 500ms ease",
+                        borderRadius: "15px",
+                        padding: isMobile ? "20px" : "50px",
+                        textAlign: isMobile ? "center" : "left",
+                        width: isMobile ? "100%" : "80vh",
+                    }}
                 >
-                    <p className="sideproject-title">
-                        <strong>{project.label}</strong>
-                    </p>
-                    <p className="sideproject-desc">{project.desc}</p>
-                    <a href={project.link} target="_blank">
-                        <button className="sideproject-button">
-                            Visit {key}
-                            <OpenInNewIcon
-                                sx={{
-                                    marginY: "-7px",
-                                    marginX: "7px",
-                                }}
-                            />
-                        </button>
-                    </a>
-                </div>
+                    <Stack direction="column" spacing={2}>
+                        <Typography variant={isMobile ? "h5" : "h3"}>
+                            <strong>{project.label}</strong>
+                        </Typography>
+                        <Divider variant="middle" flexItem />
+                        <Typography
+                            variant={isMobile ? "body1" : "h6"}
+                            sx={{ textAlign: "justify" }}
+                        >
+                            {project.desc}
+                        </Typography>
+                        <Paper
+                            elevation={2}
+                            sx={{
+                                borderRadius: "15px",
+                                width: isMobile ? "100%" : "40%",
+                                transition: "all 200ms ease",
+                            }}
+                        >
+                            <CustomButton
+                                href={project.link}
+                                target="_blank"
+                                startIcon={project.icon}
+                                endIcon={<OpenInNew />}
+                            >
+                                {key}
+                            </CustomButton>
+                        </Paper>
+                    </Stack>
+                </Paper>
             );
         });
     };
 
     return (
-        <div
-            className={`hobbies-panel-container ${darkMode ? "dark" : "light"}`}
+        <Stack
+            direction={isMobile ? "column" : "row"}
+            spacing={isMobile ? 4 : 8}
             id="hobbies"
+            sx={{
+                textAlign: "center",
+                transition: "all 500ms ease",
+                padding: isMobile ? "10%" : "5% 20% 5% 20%",
+                width: "100%",
+                cursor: "default",
+            }}
         >
-            <p className="hobbies-heading-text">
+            <Typography
+                variant={isMobile ? "h3" : "h2"}
+                sx={{ paddingTop: isMobile ? "0px" : "40px" }}
+            >
                 <strong>My Hobbies</strong>
-            </p>
-            <div className="sideproject-all-container">
+            </Typography>
+            <Stack direction="column" spacing={isMobile ? 4 : 8}>
                 {renderSideProjects()}
-            </div>
-        </div>
+            </Stack>
+        </Stack>
     );
 }

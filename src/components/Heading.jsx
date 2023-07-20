@@ -1,8 +1,15 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Fragment, useState, useEffect } from "react";
 import DownloadResume from "./DownloadResume";
-import "./css/heading.css";
-import { SwipeableDrawer, Dialog } from "@mui/material";
+import {
+    SwipeableDrawer,
+    Dialog,
+    Button,
+    styled,
+    Stack,
+    Divider,
+    useMediaQuery,
+    Paper,
+} from "@mui/material";
 import {
     Home,
     Download,
@@ -11,46 +18,19 @@ import {
     Article,
     Menu,
     GitHub,
-    Close,
     DarkMode,
     LightMode,
 } from "@mui/icons-material";
 
 export default function Heading({ darkMode, setDarkMode }) {
+    // state hooks
     const [showPrompt, setShowPrompt] = useState(false);
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
+    const [isTop, setIsTop] = useState(true);
+    const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
 
-    const handleClickOpen = () => {
-        setShowPrompt(true);
-        setIsMobileMenuOpen(false);
-    };
-
-    const handleMenuOpen = () => {
-        setIsMobileMenuOpen(true);
-    };
-
-    const handleMenuClose = () => {
-        setIsMobileMenuOpen(false);
-    };
-
-    const handleActionClick = (action) => {
-        const actionsMap = {
-            blog: () =>
-                window.open("https://harmeet9013.github.io/blogger", "_blank"),
-            projects: () => (window.location.href = "#projects"),
-            resume: () => handleClickOpen(),
-            contact: () => (window.location.href = "#contact"),
-            hobbies: () => (window.location.href = "#hobbies"),
-            source: () =>
-                window.open(
-                    "https://github.com/harmeet9013/harmeet9013.github.io",
-                    "_blank"
-                ),
-        };
-        actionsMap[action]();
-        handleMenuClose();
-    };
-
+    // this constant holds the various navbar actions for user
+    // unified in a single array of objects for small code
     const actions = [
         {
             icon: <Article sx={{ marginY: "-6px" }} />,
@@ -68,132 +48,252 @@ export default function Heading({ darkMode, setDarkMode }) {
             action: "hobbies",
         },
         {
-            icon: <Download sx={{ marginY: "-6px" }} />,
-            name: "Resume",
-            action: "resume",
-        },
-        {
             icon: <ContactMail sx={{ marginY: "-6px" }} />,
             name: "Contact",
             action: "contact",
         },
-        {
-            icon: <GitHub sx={{ marginY: "-6px" }} />,
-            name: "Source",
-            action: "source",
-        },
     ];
 
+    // customized navbar button of MUI
+    const NavbarButton = styled(Button)(({ theme }) => ({
+        fontWeight: "600",
+        backgroundColor: "rgba(0, 0, 0, 0)",
+        color: theme.palette.text.primary,
+        borderRadius: "25px",
+        padding: "15px 20px",
+        transition: "all 150ms ease",
+        letterSpacing: "2px",
+        "&:hover": {
+            backgroundColor: theme.palette.action.hover,
+        },
+    }));
+
+    // this function handles the click event
+    const handleActionClick = (action) => {
+        const actionsMap = {
+            blog: () =>
+                window.open("https://harmeet9013.github.io/blogger", "_blank"),
+            projects: () => (window.location.href = "#projects"),
+            resume: () => {
+                setShowPrompt(true);
+                setIsMobileMenuOpen(false);
+            },
+            contact: () => (window.location.href = "#contact"),
+            hobbies: () => (window.location.href = "#hobbies"),
+        };
+        actionsMap[action]();
+        setMenuOpen(false);
+    };
+
+    // this useEffect handles the scrollevent
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsTop(window.scrollY < 400);
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+
+    // rendering of the component
     return (
-        <div id="home">
-            <div className={`header-container ${darkMode ? "dark" : "light"}`}>
-                <a
-                    href="#home"
-                    className={`header-welcome ${darkMode ? "dark" : "light"}`}
-                >
-                    welcome
-                </a>
+        <Paper
+            elevation={isTop ? 0 : 3}
+            sx={{
+                bgcolor: isTop
+                    ? "transparent"
+                    : (theme) => theme.palette.background.default,
+                display: "flex",
+                flexDirection: "row",
+                width: "100%",
+                flexWrap: "wrap",
+                padding: "0px 0px",
+                borderRadius: "0px",
+                position: "fixed",
+                overflow: "hidden",
+                gap: "0px",
+                justifyContent: "space-around",
+                alignItems: "center",
+                zIndex: 5,
+                transition: "all 200ms ease",
+            }}
+        >
+            {/* Header name */}
+            <NavbarButton
+                href="#home"
+                sx={{
+                    fontSize: isMobile ? "25px" : "40px",
+                    letterSpacing: isMobile ? "2px" : "8px",
+                    "&:hover": {
+                        backgroundColor: "rgba(0,0,0,0)",
+                    },
+                }}
+            >
+                <i>portfolio</i>
+            </NavbarButton>
 
-                {/* This is for mobile screens */}
-                <div
-                    style={{
-                        display: "grid",
-                        gridTemplateColumns: "auto auto",
-                        alignItems: "center",
-                        margin: "0px",
-                        gap: "30px",
-                    }}
-                >
-                    <a
-                        onClick={() => {
-                            setDarkMode(!darkMode);
-                        }}
-                        className={`navbar-button-mobile ${
-                            darkMode ? "dark" : "light"
-                        }`}
-                    >
-                        {darkMode ? (
-                            <DarkMode sx={{ marginY: "-7px" }} />
-                        ) : (
-                            <LightMode sx={{ marginY: "-7px" }} />
-                        )}
-                    </a>
-                    <a>
-                        <Menu
-                            className={`menu-button ${
-                                darkMode ? "dark" : "light"
-                            }`}
-                            onClick={handleMenuOpen}
-                        />
-                    </a>
-                </div>
-
-                <SwipeableDrawer
-                    anchor="right"
-                    open={isMobileMenuOpen}
-                    onClose={handleMenuClose}
-                    onOpen={handleMenuOpen}
-                    className="mobile-menu-container"
-                >
-                    <div className="mobile-menu">
-                        {actions.map((action) => (
-                            <div
-                                key={action.name}
-                                className="mobile-menu-buttons"
-                            >
-                                <a
-                                    onClick={() =>
-                                        handleActionClick(action.action)
-                                    }
-                                >
-                                    {action.icon} {action.name}
-                                </a>
-                            </div>
-                        ))}
-                    </div>
-                    <Close
-                        className="close-icon-button"
-                        onClick={handleMenuClose}
-                    />
-                </SwipeableDrawer>
-
-                {/* This is for desktop screens */}
-                <ul className={`header-navbar `} id="header-navbar">
-                    {actions.map((action) => (
-                        <a
-                            key={action.name}
-                            onClick={() => handleActionClick(action.action)}
-                            className={`navbar-button ${
-                                darkMode ? "dark" : "light"
-                            }`}
+            {isMobile ? (
+                // this is rendered for smaller screens
+                <Fragment>
+                    {/* color mode and menu button */}
+                    <Stack direction="row" spacing={0}>
+                        <NavbarButton
+                            onClick={() => {
+                                setDarkMode(!darkMode);
+                            }}
+                            sx={{ transform: "scale(1.2)" }}
                         >
-                            {action.icon} {action.name}
-                        </a>
-                    ))}
-                    <a
-                        onClick={() => {
-                            setDarkMode(!darkMode);
+                            {darkMode ? (
+                                <DarkMode sx={{ marginY: "-7px" }} />
+                            ) : (
+                                <LightMode sx={{ marginY: "-7px" }} />
+                            )}
+                        </NavbarButton>
+                        <NavbarButton
+                            onClick={() => {
+                                setMenuOpen(true);
+                            }}
+                            sx={{ transform: "scale(1.2)" }}
+                        >
+                            <Menu />
+                        </NavbarButton>
+                    </Stack>
+
+                    {/* Drawer component */}
+                    <SwipeableDrawer
+                        anchor="right"
+                        open={menuOpen}
+                        onOpen={() => {
+                            setMenuOpen(true);
                         }}
-                        className={`navbar-button ${
-                            darkMode ? "dark" : "light"
-                        }`}
+                        onClose={() => {
+                            setMenuOpen(false);
+                        }}
                     >
-                        {darkMode ? (
-                            <DarkMode sx={{ marginY: "-6px" }} />
-                        ) : (
-                            <LightMode sx={{ marginY: "-6px" }} />
-                        )}
-                        {darkMode ? " Dark Mode" : " Light Mode"}
-                    </a>
-                    <Dialog open={showPrompt}>
-                        <DownloadResume
-                            showPrompt={showPrompt}
-                            setShowPrompt={setShowPrompt}
-                            darkMode={darkMode}
-                        />
-                    </Dialog>
-                </ul>
-            </div>
-        </div>
+                        <Stack
+                            direction="column"
+                            spacing={0}
+                            sx={{
+                                mt: "25vh",
+                            }}
+                        >
+                            {actions.map((action) => (
+                                <Fragment key={action.name}>
+                                    <NavbarButton
+                                        onClick={() =>
+                                            handleActionClick(action.action)
+                                        }
+                                        startIcon={action.icon}
+                                        size="large"
+                                        sx={{
+                                            margin: "5px 10px",
+                                            borderRadius: "10px",
+                                            width: "20vh",
+                                            justifyContent: "flex-end",
+                                        }}
+                                    >
+                                        {action.name}
+                                    </NavbarButton>
+                                    <Divider variant="middle" flexItem />
+                                </Fragment>
+                            ))}
+                            {/* Resume download button */}
+                            <NavbarButton
+                                onClick={() => {
+                                    setShowPrompt(true);
+                                    setMenuOpen(false);
+                                }}
+                                size="large"
+                                sx={{
+                                    margin: "5px 10px",
+                                    borderRadius: "10px",
+                                    width: "20vh",
+                                    justifyContent: "flex-end",
+                                }}
+                                startIcon={
+                                    <Download sx={{ marginY: "-6px" }} />
+                                }
+                            >
+                                Resume
+                            </NavbarButton>
+                        </Stack>
+                    </SwipeableDrawer>
+                </Fragment>
+            ) : (
+                // for desktop
+                <Stack direction="row" spacing={1}>
+                    <Stack direction="row" spacing={2}>
+                        {actions.map((action) => (
+                            <NavbarButton
+                                key={action.name}
+                                onClick={() => handleActionClick(action.action)}
+                                startIcon={action.icon}
+                                size="large"
+                            >
+                                {action.name}
+                            </NavbarButton>
+                        ))}
+                    </Stack>
+
+                    <Divider
+                        variant="middle"
+                        orientation="vertical"
+                        flexItem
+                        sx={{ bgcolor: (theme) => theme.palette.divider }}
+                    />
+
+                    {/* mini buttons (dark mode, github etc) */}
+                    <Stack direction="row" spacing={1}>
+                        {/* download resume button */}
+                        <NavbarButton
+                            onClick={() => {
+                                setShowPrompt(true);
+                            }}
+                            size="large"
+                        >
+                            <Download sx={{ marginY: "-6px" }} />
+                        </NavbarButton>
+
+                        {/* source code button */}
+                        <NavbarButton
+                            onClick={() =>
+                                window.open(
+                                    "https://github.com/harmeet9013/harmeet9013.github.io",
+                                    "_blank"
+                                )
+                            }
+                            size="large"
+                        >
+                            <GitHub sx={{ marginY: "-6px" }} />
+                        </NavbarButton>
+
+                        {/* color mode button */}
+
+                        <NavbarButton
+                            onClick={() => {
+                                setDarkMode(!darkMode);
+                            }}
+                            size="large"
+                        >
+                            {darkMode ? (
+                                <DarkMode sx={{ marginY: "-6px" }} />
+                            ) : (
+                                <LightMode sx={{ marginY: "-6px" }} />
+                            )}
+                        </NavbarButton>
+                    </Stack>
+                </Stack>
+            )}
+
+            {/* dialog component */}
+            <Dialog open={showPrompt}>
+                <DownloadResume
+                    showPrompt={showPrompt}
+                    setShowPrompt={setShowPrompt}
+                />
+            </Dialog>
+        </Paper>
     );
 }
