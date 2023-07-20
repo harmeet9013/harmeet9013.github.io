@@ -28,6 +28,3 @@ export default function App() {
         </ThemeProvider>
     );
 }
-
-export const gillSans =
-    '"Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif';
