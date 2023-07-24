@@ -29,17 +29,29 @@ export default function Contact() {
         1: {
             label: "GitHub",
             link: "https://github.com/harmeet9013",
-            icon: <GitHub sx={{ marginY: "-4px", marginX: "4px" }} />,
+            icon: (
+                <GitHub color="icon" sx={{ marginY: "-4px", marginX: "4px" }} />
+            ),
         },
         2: {
             label: "LinkedIn",
             link: "https://linkedin.com/in/harmeet9013/",
-            icon: <LinkedIn sx={{ marginY: "-4px", marginX: "4px" }} />,
+            icon: (
+                <LinkedIn
+                    color="icon"
+                    sx={{ marginY: "-4px", marginX: "4px" }}
+                />
+            ),
         },
         3: {
             label: "Instagram",
             link: "https://instagram.com/elipsantaro",
-            icon: <Instagram sx={{ marginY: "-4px", marginX: "4px" }} />,
+            icon: (
+                <Instagram
+                    color="icon"
+                    sx={{ marginY: "-4px", marginX: "4px" }}
+                />
+            ),
         },
     };
 
@@ -47,23 +59,20 @@ export default function Contact() {
         return Object.keys(links).map((key) => {
             const object = links[key];
             return (
-                <Paper
-                    elevation={2}
+                <CustomButton
+                    key={object.label}
+                    href={object.link}
+                    target="_blank"
+                    endIcon={object.icon}
                     sx={{
-                        borderRadius: "15px",
-                        width: "100%",
-                        transition: "all 500ms ease",
+                        transition: "all 0.1s ease",
+                        "&:hover": {
+                            transform: "scale(1.04)",
+                        },
                     }}
                 >
-                    <CustomButton
-                        key={object.label}
-                        href={object.link}
-                        target="_blank"
-                        endIcon={object.icon}
-                    >
-                        {object.label}
-                    </CustomButton>
-                </Paper>
+                    {object.label}
+                </CustomButton>
             );
         });
     };
@@ -85,7 +94,12 @@ export default function Contact() {
                 cursor: "default",
             }}
         >
-            <Typography variant={isMobile ? "h3" : "h2"}>
+            <Typography
+                variant={isMobile ? "h3" : "h2"}
+                sx={{
+                    color: (theme) => theme.palette.accent.primary,
+                }}
+            >
                 <strong>Contact Me</strong>
             </Typography>
             <Divider variant="middle" flexItem />
@@ -102,7 +116,9 @@ export default function Contact() {
                     {renderLinks()}
                 </Stack>
             </Stack>
-            <Typography variant="overline">Created with love.</Typography>
+            <Typography variant="overline">
+                Created with love. &#128158;
+            </Typography>
         </Paper>
     );
 }

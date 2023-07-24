@@ -15,7 +15,12 @@ export default function MoreAboutMe() {
                 cursor: "default",
             }}
         >
-            <Typography variant={isMobile ? "h3" : "h2"}>
+            <Typography
+                variant={isMobile ? "h3" : "h2"}
+                sx={{
+                    color: (theme) => theme.palette.accent.primary,
+                }}
+            >
                 <strong>About Me</strong>
             </Typography>
             <Divider variant="middle" flexItem />

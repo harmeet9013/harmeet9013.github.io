@@ -9,6 +9,7 @@ import {
     styled,
     Divider,
     useMediaQuery,
+    Paper,
 } from "@mui/material";
 
 export default function DownloadResume({ showPrompt, setShowPrompt }) {
@@ -44,7 +45,8 @@ export default function DownloadResume({ showPrompt, setShowPrompt }) {
             open={showPrompt}
             onClose={handleClose}
             PaperProps={{
-                component: Box,
+                component: Paper,
+                elevation: 0,
                 sx: {
                     borderRadius: "15px",
                     padding: isMobile ? "10px" : "20px",
@@ -76,7 +78,7 @@ export default function DownloadResume({ showPrompt, setShowPrompt }) {
                 <DialogButton
                     id="cancel"
                     onClick={handleClose}
-                    startIcon={<Cancel />}
+                    startIcon={<Cancel color="icon" />}
                 >
                     Cancel
                 </DialogButton>
@@ -85,7 +87,7 @@ export default function DownloadResume({ showPrompt, setShowPrompt }) {
                     onClick={handleClose}
                     href="https://bit.ly/hs_resume_website"
                     target="_blank"
-                    startIcon={<Download />}
+                    startIcon={<Download color="icon" />}
                 >
                     Download
                 </DialogButton>

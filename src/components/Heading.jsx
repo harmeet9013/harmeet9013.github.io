@@ -1,7 +1,6 @@
 import { Fragment, useState, useEffect } from "react";
 import DownloadResume from "./DownloadResume";
 import {
-    SwipeableDrawer,
     Dialog,
     Button,
     styled,
@@ -9,6 +8,7 @@ import {
     Divider,
     useMediaQuery,
     Paper,
+    Drawer,
 } from "@mui/material";
 import {
     Home,
@@ -33,22 +33,22 @@ export default function Heading({ darkMode, setDarkMode }) {
     // unified in a single array of objects for small code
     const actions = [
         {
-            icon: <Article sx={{ marginY: "-6px" }} />,
+            icon: <Article color="icon" sx={{ marginY: "-6px" }} />,
             name: "Blog",
             action: "blog",
         },
         {
-            icon: <Home sx={{ marginY: "-6px" }} />,
+            icon: <Home color="icon" sx={{ marginY: "-6px" }} />,
             name: "Projects",
             action: "projects",
         },
         {
-            icon: <Favorite sx={{ marginY: "-6px" }} />,
+            icon: <Favorite color="icon" sx={{ marginY: "-6px" }} />,
             name: "Hobbies",
             action: "hobbies",
         },
         {
-            icon: <ContactMail sx={{ marginY: "-6px" }} />,
+            icon: <ContactMail color="icon" sx={{ marginY: "-6px" }} />,
             name: "Contact",
             action: "contact",
         },
@@ -146,9 +146,15 @@ export default function Heading({ darkMode, setDarkMode }) {
                             sx={{ transform: "scale(1.2)" }}
                         >
                             {darkMode ? (
-                                <DarkMode sx={{ marginY: "-7px" }} />
+                                <DarkMode
+                                    color="icon"
+                                    sx={{ marginY: "-7px" }}
+                                />
                             ) : (
-                                <LightMode sx={{ marginY: "-7px" }} />
+                                <LightMode
+                                    color="icon"
+                                    sx={{ marginY: "-7px" }}
+                                />
                             )}
                         </NavbarButton>
                         <NavbarButton
@@ -157,12 +163,12 @@ export default function Heading({ darkMode, setDarkMode }) {
                             }}
                             sx={{ transform: "scale(1.2)" }}
                         >
-                            <Menu />
+                            <Menu color="icon" />
                         </NavbarButton>
                     </Stack>
 
                     {/* Drawer component */}
-                    <SwipeableDrawer
+                    <Drawer
                         anchor="right"
                         open={menuOpen}
                         onOpen={() => {
@@ -213,13 +219,16 @@ export default function Heading({ darkMode, setDarkMode }) {
                                     justifyContent: "flex-end",
                                 }}
                                 startIcon={
-                                    <Download sx={{ marginY: "-6px" }} />
+                                    <Download
+                                        color="icon"
+                                        sx={{ marginY: "-6px" }}
+                                    />
                                 }
                             >
                                 Resume
                             </NavbarButton>
                         </Stack>
-                    </SwipeableDrawer>
+                    </Drawer>
                 </Fragment>
             ) : (
                 // for desktop
@@ -253,7 +262,7 @@ export default function Heading({ darkMode, setDarkMode }) {
                             }}
                             size="large"
                         >
-                            <Download sx={{ marginY: "-6px" }} />
+                            <Download color="icon" sx={{ marginY: "-6px" }} />
                         </NavbarButton>
 
                         {/* source code button */}
@@ -266,7 +275,7 @@ export default function Heading({ darkMode, setDarkMode }) {
                             }
                             size="large"
                         >
-                            <GitHub sx={{ marginY: "-6px" }} />
+                            <GitHub color="icon" sx={{ marginY: "-6px" }} />
                         </NavbarButton>
 
                         {/* color mode button */}
@@ -278,9 +287,15 @@ export default function Heading({ darkMode, setDarkMode }) {
                             size="large"
                         >
                             {darkMode ? (
-                                <DarkMode sx={{ marginY: "-6px" }} />
+                                <DarkMode
+                                    color="icon"
+                                    sx={{ marginY: "-6px" }}
+                                />
                             ) : (
-                                <LightMode sx={{ marginY: "-6px" }} />
+                                <LightMode
+                                    color="icon"
+                                    sx={{ marginY: "-6px" }}
+                                />
                             )}
                         </NavbarButton>
                     </Stack>

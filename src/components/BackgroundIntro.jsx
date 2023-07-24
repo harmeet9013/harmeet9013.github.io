@@ -11,6 +11,7 @@ import avatar from "./assets/projects-pics/avatar.jpg";
 import bgLight from "./assets/projects-pics/bg-light.jpg";
 import bgDark from "./assets/projects-pics/bg-dark.jpg";
 import { Fragment } from "react";
+import { ContactPage } from "@mui/icons-material";
 
 export default function BackgroundIntro({ darkMode }) {
     const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
@@ -56,7 +57,7 @@ export default function BackgroundIntro({ darkMode }) {
                         backgroundPosition: "center",
                         opacity: isMobile ? "0.2" : "0.7",
                         zIndex: "-1",
-                        transition: "all 200ms ease",
+                        transition: "all 0.2s ease",
                     }}
                 />
                 <Avatar
@@ -66,9 +67,8 @@ export default function BackgroundIntro({ darkMode }) {
                         width: isMobile ? "30vh" : "400px",
                         height: isMobile ? "30vh" : "400px",
                         transition: "all 500ms ease",
-
                         border: (theme) =>
-                            `10px solid ${theme.palette.text.primary}`,
+                            `10px solid ${theme.palette.accent.secondary}`,
                     }}
                 />
                 <Stack
@@ -81,7 +81,12 @@ export default function BackgroundIntro({ darkMode }) {
                     }}
                 >
                     <Typography variant="h6">hello there </Typography>
-                    <Typography variant={isMobile ? "h4" : "h2"}>
+                    <Typography
+                        variant={isMobile ? "h4" : "h2"}
+                        sx={{
+                            color: (theme) => theme.palette.accent.secondary,
+                        }}
+                    >
                         I'm <strong>Harmeet Singh</strong>
                     </Typography>
                     <Typography variant={isMobile ? "body1" : "h6"}>
@@ -90,7 +95,15 @@ export default function BackgroundIntro({ darkMode }) {
                         <br />
                         Just like this one!
                     </Typography>
-                    <CustomButton href="#contact">Contact Me!</CustomButton>
+                    <CustomButton
+                        sx={{
+                            color: (theme) => theme.palette.accent.primary,
+                        }}
+                        href="#contact"
+                        startIcon={<ContactPage />}
+                    >
+                        Contact Me!
+                    </CustomButton>
                 </Stack>
             </Stack>
         </Fragment>

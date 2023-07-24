@@ -1,16 +1,17 @@
-import simonBackground from "./assets/projects-pics/simon.png";
-import keeperBackground from "./assets/projects-pics/keeper.png";
-import weatherBackground from "./assets/projects-pics/weather.png";
-import blogs from "./assets/projects-pics/blogs.png";
 import { useState } from "react";
 import {
     Box,
+    Button,
     Divider,
     Paper,
     Stack,
     Typography,
     useMediaQuery,
 } from "@mui/material";
+import simonBackground from "./assets/projects-pics/simon.png";
+import keeperBackground from "./assets/projects-pics/keeper.png";
+import weatherBackground from "./assets/projects-pics/weather.png";
+import blogs from "./assets/projects-pics/blogs.png";
 
 export default function Projects() {
     const [imageError, setImageError] = useState(false);
@@ -86,17 +87,28 @@ export default function Projects() {
                             />
 
                             {/* this is the overlay component */}
-                            <Stack
+                            <Button
                                 sx={{
                                     position: "absolute",
+                                    flexDirection: "column",
                                     justifyContent: "center",
                                     bgcolor: "rgba(0,0,0,0.2)",
                                     height: "100%",
                                     width: "100%",
                                     padding: "40px",
-                                    transition: "all 200ms ease",
+                                    transition: "all 200ms ease-out",
+
+                                    border: (theme) =>
+                                        `5px solid ${theme.palette.text.primary}`,
+                                    borderRadius: "15px",
                                     "&:hover": {
                                         bgcolor: "rgba(0,0,0,0.5)",
+                                        borderColor: (theme) =>
+                                            theme.palette.accent.secondary,
+                                    },
+                                    "&:focus": {
+                                        color: (theme) =>
+                                            theme.palette.text.primary,
                                     },
                                 }}
                             >
@@ -118,7 +130,7 @@ export default function Projects() {
                                 >
                                     {project.desc}
                                 </Typography>
-                            </Stack>
+                            </Button>
                         </Stack>
                     );
                 })}
@@ -140,7 +152,12 @@ export default function Projects() {
             }}
         >
             {/* title */}
-            <Typography variant={isMobile ? "h3" : "h2"}>
+            <Typography
+                variant={isMobile ? "h3" : "h2"}
+                sx={{
+                    color: (theme) => theme.palette.accent.primary,
+                }}
+            >
                 <strong>My Projects</strong>
             </Typography>
 
@@ -171,7 +188,10 @@ export default function Projects() {
             {/* upcoming title */}
             <Typography
                 variant={isMobile ? "h3" : "h2"}
-                sx={{ paddingTop: "50px" }}
+                sx={{
+                    paddingTop: "50px",
+                    color: (theme) => theme.palette.accent.primary,
+                }}
             >
                 <strong>Upcoming...</strong>
             </Typography>

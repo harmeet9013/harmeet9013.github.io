@@ -15,7 +15,7 @@ export default function Hobbies() {
     const CustomButton = styled(Button)(({ theme }) => ({
         transition: "all 500ms ease",
         backgroundColor: theme.palette.action.selected,
-        color: theme.palette.text.primary,
+        color: theme.palette.accent.secondary,
         fontSize: "16px",
         borderRadius: "15px",
         padding: "15px 20px",
@@ -62,7 +62,13 @@ export default function Hobbies() {
                     }}
                 >
                     <Stack direction="column" spacing={2}>
-                        <Typography variant={isMobile ? "h5" : "h3"}>
+                        <Typography
+                            variant={isMobile ? "h5" : "h3"}
+                            sx={{
+                                color: (theme) =>
+                                    theme.palette.accent.secondary,
+                            }}
+                        >
                             <strong>{project.label}</strong>
                         </Typography>
                         <Divider variant="middle" flexItem />
@@ -72,23 +78,22 @@ export default function Hobbies() {
                         >
                             {project.desc}
                         </Typography>
-                        <Paper
-                            elevation={2}
+
+                        <CustomButton
+                            href={project.link}
+                            target="_blank"
+                            startIcon={project.icon}
+                            endIcon={<OpenInNew />}
                             sx={{
-                                borderRadius: "15px",
                                 width: isMobile ? "100%" : "40%",
-                                transition: "all 200ms ease",
+                                transition: "all 0.1s ease",
+                                "&:hover": {
+                                    transform: "scale(1.04)",
+                                },
                             }}
                         >
-                            <CustomButton
-                                href={project.link}
-                                target="_blank"
-                                startIcon={project.icon}
-                                endIcon={<OpenInNew />}
-                            >
-                                {key}
-                            </CustomButton>
-                        </Paper>
+                            {key}
+                        </CustomButton>
                     </Stack>
                 </Paper>
             );
@@ -106,6 +111,7 @@ export default function Hobbies() {
                 padding: isMobile ? "10%" : "5% 20% 5% 20%",
                 width: "100%",
                 cursor: "default",
+                color: (theme) => theme.palette.accent.primary,
             }}
         >
             <Typography
