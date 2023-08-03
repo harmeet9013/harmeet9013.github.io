@@ -72,7 +72,7 @@ export default function Heading({ darkMode, setDarkMode }) {
     const handleActionClick = (action) => {
         const actionsMap = {
             blog: () =>
-                window.open("https://harmeet9013.github.io/blogger", "_blank"),
+                window.open("https://harmeet9013.github.io/blogs", "_blank"),
             projects: () => (window.location.href = "#projects"),
             resume: () => {
                 setShowPrompt(true);
