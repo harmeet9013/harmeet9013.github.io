@@ -1,123 +1,161 @@
-import { useState } from "react";
 import {
     Box,
-    Button,
+    Container,
     Divider,
-    Paper,
     Stack,
     Typography,
+    styled,
     useMediaQuery,
 } from "@mui/material";
+
 import simonBackground from "./assets/projects-pics/simon.png";
 import keeperBackground from "./assets/projects-pics/keeper.png";
 import weatherBackground from "./assets/projects-pics/weather.png";
-import blogs from "./assets/projects-pics/blogs.png";
+import blogsBackground from "./assets/projects-pics/blogs.png";
 
 export default function Projects() {
-    const [imageError, setImageError] = useState(false);
     const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
     const myProjects = {
         simon: {
             label: "SIMON GAME",
             desc: "The infamous Simon Game. Built from the ground up in ReactJS.",
-            link: "/simon-game",
+            link: "https://harmeet9013.github.io/simon-game",
             bg: simonBackground,
         },
         keeper: {
             label: "KEEPER",
             desc: "A simple and elegant note keeping web app. Built in ReactJS.",
-            link: "/keeper",
+            link: "https://harmeet9013.github.io/keeper",
             bg: keeperBackground,
         },
         weather: {
             label: "WEATHER",
             desc: "Current forecast using the OpenWeatherMap API. Built in ReactJS.",
-            link: "/weather-app",
+            link: "https://harmeet9013.github.io/weather-app",
             bg: weatherBackground,
         },
     };
 
+    const ProjectStack = styled(Stack)(({ theme }) => ({
+        position: "relative",
+        borderRadius: "15px",
+        overflow: "hidden",
+        height: "200px",
+        cursor: "pointer",
+        border: `5px solid ${theme.palette.text.primary}`,
+        transition: "transform 0.2s ease-out",
+        "&:hover": {
+            transform: "scale(1.05)",
+        },
+    }));
+
+    const ProjectImage = styled(Box)(({ theme }) => ({
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "inherit",
+        height: "inherit",
+        objectFit: "cover",
+        filter: "blur(5px)",
+        zIndex: "0",
+        transition: "all 0.2s ease-out",
+        transform: "scale(1.1)",
+    }));
+
+    const ProjectOverlay = styled(Box)(({ theme }) => ({
+        position: "absolute",
+        top: -50,
+        left: 0,
+        width: "100%",
+        height: "150%",
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
+        transition: "all 0.3s ease-out",
+    }));
+
     const renderProjects = () => {
         return (
             <Stack
-                direction={isMobile ? "column" : "row"}
+                direction="column"
                 spacing={isMobile ? 4 : 8}
+                justifyContent="center"
+                alignItems="center"
+                component={Container}
             >
-                {Object.keys(myProjects).map((key) => {
-                    const project = myProjects[key];
-                    return (
-                        // individual component of the project
-                        <Stack
-                            sx={{
-                                cursor: "pointer",
-                                borderRadius: "15px",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                padding: "100px",
-                                width: "100%",
-                                transition: "all 100ms ease",
-                                position: "relative",
-                                overflow: "hidden",
-                                "&:hover": {
-                                    transform: "scale(1.05)",
-                                },
-                            }}
-                            onClick={() => {
-                                window.open(project.link, "_blank");
-                            }}
-                        >
-                            {/* this is the background component */}
-                            <Paper
-                                elevation={10}
-                                component="div"
-                                sx={{
-                                    position: "absolute",
-                                    backgroundImage: `url(${project.bg})`,
-                                    border: (theme) =>
-                                        `5px solid ${theme.palette.text.primary}`,
-                                    borderRadius: "15px",
-                                    backgroundSize: "cover",
-                                    backgroundPosition: "center",
-                                    transition: "all 200ms ease",
-                                    top: 0,
-                                    left: 0,
-                                    right: 0,
-                                    bottom: 0,
-                                }}
-                            />
+                <ProjectStack
+                    onClick={() => {
+                        window.open(
+                            "https://harmeet9013.github.io/blogs",
+                            "_blank"
+                        );
+                    }}
+                    component={Container}
+                    direction="column"
+                    spacing={2}
+                    justifyContent="center"
+                    alignItems="center"
+                    sx={{
+                        height: "300px",
+                    }}
+                >
+                    <ProjectImage component="img" src={blogsBackground} />
 
-                            {/* this is the overlay component */}
-                            <Button
-                                sx={{
-                                    position: "absolute",
-                                    flexDirection: "column",
-                                    justifyContent: "center",
-                                    bgcolor: "rgba(0,0,0,0.2)",
-                                    height: "100%",
-                                    width: "100%",
-                                    padding: "40px",
-                                    transition: "all 200ms ease-out",
+                    <ProjectOverlay />
 
-                                    border: (theme) =>
-                                        `5px solid ${theme.palette.text.primary}`,
-                                    borderRadius: "15px",
-                                    "&:hover": {
-                                        bgcolor: "rgba(0,0,0,0.5)",
-                                        borderColor: (theme) =>
-                                            theme.palette.accent.secondary,
-                                    },
-                                    "&:focus": {
-                                        color: (theme) =>
-                                            theme.palette.text.primary,
-                                    },
+                    <Typography
+                        variant="h3"
+                        sx={{
+                            color: "white",
+                            zIndex: "5",
+                            letterSpacing: "2px",
+                        }}
+                    >
+                        <strong>BLOGS</strong>
+                    </Typography>
+                    <Typography
+                        variant="h6"
+                        sx={{
+                            color: "white",
+                            zIndex: "5",
+                        }}
+                    >
+                        Blog website built using MERN Stack with User
+                        Authentication and more.
+                    </Typography>
+                </ProjectStack>
+
+                <Stack
+                    direction={isMobile ? "column" : "row"}
+                    spacing={4}
+                    justifyContent="center"
+                    alignItems="center"
+                >
+                    {Object.keys(myProjects).map((key) => {
+                        const project = myProjects[key];
+                        return (
+                            // individual component of the project
+                            <ProjectStack
+                                onClick={() => {
+                                    window.open(project.link, "_blank");
                                 }}
+                                component={Container}
+                                direction="column"
+                                spacing={2}
+                                justifyContent="center"
+                                alignItems="center"
                             >
-                                {/* the text of the project */}
+                                <ProjectImage
+                                    component="img"
+                                    src={project.bg}
+                                />
+
+                                <ProjectOverlay />
+
                                 <Typography
                                     variant="h5"
                                     sx={{
                                         color: "white",
-                                        zIndex: "1",
+                                        zIndex: "5",
+                                        letterSpacing: "2px",
                                     }}
                                 >
                                     <strong>{project.label}</strong>
@@ -126,14 +164,15 @@ export default function Projects() {
                                     variant="body1"
                                     sx={{
                                         color: "white",
+                                        zIndex: "5",
                                     }}
                                 >
                                     {project.desc}
                                 </Typography>
-                            </Button>
-                        </Stack>
-                    );
-                })}
+                            </ProjectStack>
+                        );
+                    })}
+                </Stack>
             </Stack>
         );
     };
@@ -142,6 +181,8 @@ export default function Projects() {
             direction="column"
             spacing={4}
             id="projects"
+            justifyContent="center"
+            alignItems="center"
             sx={{
                 bgcolor: (theme) => theme.palette.action.hover,
                 textAlign: "center",
@@ -149,6 +190,7 @@ export default function Projects() {
                 padding: isMobile ? "10%" : "5% 20% 5% 20%",
                 width: "100%",
                 cursor: "default",
+                zIndex: "-1",
             }}
         >
             {/* title */}
@@ -182,62 +224,6 @@ export default function Projects() {
 
             {/* projects */}
             {renderProjects()}
-
-            <Divider variant="middle" flexItem />
-
-            {/* upcoming title */}
-            <Typography
-                variant={isMobile ? "h3" : "h2"}
-                sx={{
-                    paddingTop: "50px",
-                    color: (theme) => theme.palette.accent.primary,
-                }}
-            >
-                <strong>Upcoming...</strong>
-            </Typography>
-
-            {/* upcoming component */}
-            <Paper
-                elevation={10}
-                sx={{
-                    borderRadius: "15px",
-                    padding: "5%",
-                    transition: "all 500ms ease",
-                }}
-            >
-                {imageError ? (
-                    <Typography variant="h6">
-                        There was problem loading this image.
-                    </Typography>
-                ) : (
-                    <Box
-                        component="img"
-                        src={blogs}
-                        onError={() => {
-                            setTimeout(() => {
-                                setImageError(true);
-                            }, 500);
-                        }}
-                        alt="blogs-upcoming"
-                        sx={{
-                            borderRadius: "15px",
-                            width: "100%",
-                            transition: "all 500ms ease",
-                        }}
-                    />
-                )}
-
-                <Typography
-                    variant={isMobile ? "body1" : "h5"}
-                    sx={{ textAlign: "center" }}
-                >
-                    Full Stack blog website complete with database management,
-                    back-end and front-end. <br />
-                    <strong>
-                        Built using ReactJS, NodeJS, ExpressJS, MongoDB.
-                    </strong>
-                </Typography>
-            </Paper>
         </Stack>
     );
 }

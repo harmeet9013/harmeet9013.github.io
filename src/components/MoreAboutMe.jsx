@@ -29,9 +29,11 @@ export default function MoreAboutMe() {
                 sx={{ textAlign: "justify" }}
             >
                 Highly motivated and dedicated web developer seeking an
-                opportunity to kickstart my career in the industry. Proficient
-                in utilizing the React.js framework and JSX language to create
-                dynamic and user-friendly websites. Just like this one.
+                opportunity to kickstart my career in the industry. As a fresher
+                MERN stack developer, I am enthusiastic about leveraging my
+                skills in web development and version control to contribute to
+                innovative projects and enhance my knowledge in a dynamic work
+                environment.
             </Typography>
         </Stack>
     );

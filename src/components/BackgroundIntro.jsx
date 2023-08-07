@@ -6,14 +6,15 @@ import {
     Typography,
     useMediaQuery,
     styled,
+    Container,
 } from "@mui/material";
 import avatar from "./assets/projects-pics/avatar.jpg";
 import bgLight from "./assets/projects-pics/bg-light.jpg";
 import bgDark from "./assets/projects-pics/bg-dark.jpg";
 import { Fragment } from "react";
-import { ContactPage } from "@mui/icons-material";
+import { ContactPage, Folder } from "@mui/icons-material";
 
-export default function BackgroundIntro({ darkMode }) {
+export default function BackgroundIntro({ darkMode, setShowPrompt }) {
     const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
 
     const CustomButton = styled(Button)(({ theme }) => ({
@@ -95,15 +96,28 @@ export default function BackgroundIntro({ darkMode }) {
                         <br />
                         Just like this one!
                     </Typography>
-                    <CustomButton
-                        sx={{
-                            color: (theme) => theme.palette.accent.primary,
-                        }}
-                        href="#contact"
-                        startIcon={<ContactPage />}
-                    >
-                        Contact Me!
-                    </CustomButton>
+                    <Stack spacing={2} direction="row">
+                        <CustomButton
+                            sx={{
+                                color: (theme) => theme.palette.accent.primary,
+                            }}
+                            href="#contact"
+                            startIcon={<ContactPage />}
+                        >
+                            Contact Me!
+                        </CustomButton>
+                        <CustomButton
+                            sx={{
+                                color: (theme) => theme.palette.accent.primary,
+                            }}
+                            onClick={() => {
+                                setShowPrompt(true);
+                            }}
+                            startIcon={<Folder />}
+                        >
+                            Download Resume
+                        </CustomButton>
+                    </Stack>
                 </Stack>
             </Stack>
         </Fragment>
