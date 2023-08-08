@@ -138,7 +138,9 @@ export default function Heading({ darkMode, setDarkMode, setShowPrompt }) {
             >
                 {/* Header name */}
                 <NavbarButton
-                    href="#home"
+                    onClick={() => {
+                        scrollToSection("home");
+                    }}
                     sx={{
                         fontSize: isMobile ? "25px" : "40px",
                         letterSpacing: isMobile ? "2px" : "8px",

@@ -21,6 +21,7 @@ export default function BackgroundIntro({ darkMode, setShowPrompt }) {
         transition: "all 500ms ease",
         backgroundColor: theme.palette.action.selected,
         color: theme.palette.text.primary,
+        backdropFilter: "blur(5px)",
         fontSize: "16px",
         borderRadius: "15px",
         padding: "15px 20px",
@@ -106,7 +107,7 @@ export default function BackgroundIntro({ darkMode, setShowPrompt }) {
                         <br />
                         Just like this one!
                     </Typography>
-                    <Stack spacing={2} direction="row">
+                    <Stack spacing={2} direction={isMobile ? "column" : "row"}>
                         <CustomButton
                             sx={{
                                 color: (theme) => theme.palette.accent.primary,

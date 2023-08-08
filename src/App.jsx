@@ -41,7 +41,7 @@ export default function App() {
             },
             backdrop: "rgba(0, 0, 0, 0.6)",
             background: {
-                drawer: "rgba(0, 0, 0, 0.7)",
+                drawer: "rgba(0, 0, 0, 0.85)",
             },
         },
         ...CustomCssBaseline,
@@ -59,7 +59,7 @@ export default function App() {
             },
             backdrop: "rgba(0, 0, 0, 0.6)",
             background: {
-                drawer: "rgba(255, 255, 255, 0.8)",
+                drawer: "rgba(255, 255, 255, 0.85)",
             },
         },
         ...CustomCssBaseline,

@@ -134,6 +134,7 @@ export default function Projects() {
                         return (
                             // individual component of the project
                             <ProjectStack
+                                key={project.label}
                                 onClick={() => {
                                     window.open(project.link, "_blank");
                                 }}
