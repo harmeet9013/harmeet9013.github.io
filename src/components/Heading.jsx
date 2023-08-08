@@ -72,18 +72,28 @@ export default function Heading({ darkMode, setDarkMode, setShowPrompt }) {
         },
     }));
 
+    const scrollToSection = (sectionId) => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+            const yOffset = -80; // Offset to adjust the final position if needed
+            const y =
+                section.getBoundingClientRect().top + window.scrollY + yOffset;
+            window.scrollTo({ top: y, behavior: "smooth" });
+        }
+    };
+
     // this function handles the click event
     const handleActionClick = (action) => {
         const actionsMap = {
             blog: () =>
                 window.open("https://harmeet9013.github.io/blogs", "_blank"),
-            projects: () => (window.location.href = "#projects"),
+            projects: () => scrollToSection("projects"),
             resume: () => {
                 setShowPrompt(true);
                 setIsMobileMenuOpen(false);
             },
-            contact: () => (window.location.href = "#contact"),
-            hobbies: () => (window.location.href = "#hobbies"),
+            contact: () => scrollToSection("contact"),
+            hobbies: () => scrollToSection("hobbies"),
         };
         actionsMap[action]();
         setMenuOpen(false);

@@ -24,6 +24,9 @@ export default function App() {
                 },
             },
         },
+        typography: {
+            fontFamily: "work sans",
+        },
     };
 
     const darkTheme = createTheme({

@@ -29,6 +29,16 @@ export default function BackgroundIntro({ darkMode, setShowPrompt }) {
         },
     }));
 
+    const scrollToSection = (sectionId) => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+            const yOffset = -80; // Offset to adjust the final position if needed
+            const y =
+                section.getBoundingClientRect().top + window.scrollY + yOffset;
+            window.scrollTo({ top: y, behavior: "smooth" });
+        }
+    };
+
     return (
         <Fragment>
             <Stack
@@ -101,7 +111,9 @@ export default function BackgroundIntro({ darkMode, setShowPrompt }) {
                             sx={{
                                 color: (theme) => theme.palette.accent.primary,
                             }}
-                            href="#contact"
+                            onClick={() => {
+                                scrollToSection("contact");
+                            }}
                             startIcon={<ContactPage />}
                         >
                             Contact Me!
