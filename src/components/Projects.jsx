@@ -1,35 +1,57 @@
-import {
-    Box,
-    Container,
-    Divider,
-    Stack,
-    Typography,
-    styled,
-    useMediaQuery,
-} from "@mui/material";
+import { Box, Container, Stack, Typography, styled } from "@mui/material";
 
+import blogsBackground from "./assets/projects-pics/blogs.png";
 import simonBackground from "./assets/projects-pics/simon.png";
 import keeperBackground from "./assets/projects-pics/keeper.png";
 import weatherBackground from "./assets/projects-pics/weather.png";
-import blogsBackground from "./assets/projects-pics/blogs.png";
+import {
+    ArticleRounded,
+    CloudRounded,
+    GamesRounded,
+    HomeRounded,
+    NotesRounded,
+} from "@mui/icons-material";
 
-export default function Projects() {
-    const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
+export default function Projects(props) {
     const myProjects = {
         simon: {
-            label: "SIMON GAME",
+            icon: (
+                <GamesRounded
+                    fontSize="large"
+                    sx={{
+                        my: -0.8,
+                    }}
+                />
+            ),
+            label: "Simon Game",
             desc: "The infamous Simon Game. Built from the ground up in ReactJS.",
             link: "https://harmeet9013.github.io/simon-game",
             bg: simonBackground,
         },
         keeper: {
-            label: "KEEPER",
+            icon: (
+                <NotesRounded
+                    fontSize="large"
+                    sx={{
+                        my: -0.8,
+                    }}
+                />
+            ),
+            label: "Keeper",
             desc: "A simple and elegant note keeping web app. Built in ReactJS.",
             link: "https://harmeet9013.github.io/keeper",
             bg: keeperBackground,
         },
         weather: {
-            label: "WEATHER",
+            icon: (
+                <CloudRounded
+                    fontSize="large"
+                    sx={{
+                        my: -0.8,
+                    }}
+                />
+            ),
+            label: "Weather",
             desc: "Current forecast using the OpenWeatherMap API. Built in ReactJS.",
             link: "https://harmeet9013.github.io/weather-app",
             bg: weatherBackground,
@@ -37,15 +59,18 @@ export default function Projects() {
     };
 
     const ProjectStack = styled(Stack)(({ theme }) => ({
+        transition: theme.transitions.create(),
         position: "relative",
-        borderRadius: "15px",
+        textAlign: "center",
+        borderRadius: 50,
         overflow: "hidden",
-        height: "200px",
+        height: "300px",
         cursor: "pointer",
-        border: `5px solid ${theme.palette.text.primary}`,
-        transition: "transform 0.2s ease-out",
+        border: `5px solid ${theme.palette.containers.tertiary.container}`,
+        boxShadow: theme.shadows[4],
         "&:hover": {
-            transform: "scale(1.05)",
+            transform: "translateY(-0.2rem)",
+            boxShadow: theme.shadows[10],
         },
     }));
 
@@ -58,7 +83,7 @@ export default function Projects() {
         objectFit: "cover",
         filter: "blur(5px)",
         zIndex: "0",
-        transition: "all 0.2s ease-out",
+        transition: theme.transitions.create(),
         transform: "scale(1.1)",
     }));
 
@@ -68,15 +93,15 @@ export default function Projects() {
         left: 0,
         width: "100%",
         height: "150%",
-        backgroundColor: "rgba(0, 0, 0, 0.5)",
-        transition: "all 0.3s ease-out",
+        backgroundColor: theme.palette.hover,
+        transition: theme.transitions.create(),
     }));
 
     const renderProjects = () => {
         return (
             <Stack
                 direction="column"
-                spacing={isMobile ? 4 : 8}
+                spacing={props.isMobile ? 4 : 8}
                 justifyContent="center"
                 alignItems="center"
                 component={Container}
@@ -93,38 +118,34 @@ export default function Projects() {
                     spacing={2}
                     justifyContent="center"
                     alignItems="center"
-                    sx={{
-                        height: "300px",
-                    }}
                 >
                     <ProjectImage component="img" src={blogsBackground} />
 
                     <ProjectOverlay />
 
                     <Typography
-                        variant="h3"
-                        sx={{
-                            color: "white",
-                            zIndex: "5",
-                            letterSpacing: "2px",
-                        }}
+                        variant={props.isMobile ? "h4" : "h3"}
+                        zIndex={5}
+                        letterSpacing={2}
+                        color="primary"
+                        fontWeight={600}
                     >
-                        <strong>BLOGS</strong>
+                        <ArticleRounded
+                            fontSize="large"
+                            sx={{
+                                my: props.isMobile ? -0.8 : -0.5,
+                            }}
+                        />{" "}
+                        Blogs
                     </Typography>
-                    <Typography
-                        variant="h6"
-                        sx={{
-                            color: "white",
-                            zIndex: "5",
-                        }}
-                    >
+                    <Typography variant="h6" zIndex={5}>
                         Blog website built using MERN Stack with User
                         Authentication and more.
                     </Typography>
                 </ProjectStack>
 
                 <Stack
-                    direction={isMobile ? "column" : "row"}
+                    direction={props.isMobile ? "column" : "row"}
                     spacing={4}
                     justifyContent="center"
                     alignItems="center"
@@ -152,22 +173,15 @@ export default function Projects() {
                                 <ProjectOverlay />
 
                                 <Typography
-                                    variant="h5"
-                                    sx={{
-                                        color: "white",
-                                        zIndex: "5",
-                                        letterSpacing: "2px",
-                                    }}
+                                    variant="h4"
+                                    fontWeight={600}
+                                    zIndex={5}
+                                    letterSpacing={2}
+                                    color="primary"
                                 >
-                                    <strong>{project.label}</strong>
+                                    {project.icon} {project.label}
                                 </Typography>
-                                <Typography
-                                    variant="body1"
-                                    sx={{
-                                        color: "white",
-                                        zIndex: "5",
-                                    }}
-                                >
+                                <Typography variant="h6" zIndex={5}>
                                     {project.desc}
                                 </Typography>
                             </ProjectStack>
@@ -177,50 +191,53 @@ export default function Projects() {
             </Stack>
         );
     };
+
     return (
         <Stack
             direction="column"
             spacing={4}
+            component={Container}
             id="projects"
-            justifyContent="center"
-            alignItems="center"
-            sx={{
-                bgcolor: (theme) => theme.palette.action.hover,
-                textAlign: "center",
-                transition: "all 500ms ease",
-                padding: isMobile ? "10%" : "5% 20% 5% 20%",
+            sx={(theme) => ({
+                transition: theme.transitions.create(),
+                padding: props.isMobile
+                    ? "5rem 1rem 5rem 1rem "
+                    : "5rem 0 5rem 0",
                 width: "100%",
                 cursor: "default",
                 zIndex: "-1",
-            }}
+            })}
         >
             {/* title */}
             <Typography
-                variant={isMobile ? "h3" : "h2"}
-                sx={{
-                    color: (theme) => theme.palette.accent.primary,
-                }}
+                variant={props.isMobile ? "h3" : "h2"}
+                color="primary"
+                textAlign="left"
+                fontWeight={500}
             >
-                <strong>My Projects</strong>
+                Projects
             </Typography>
+
+            <props.MyDivider />
 
             {/* desc */}
-            <Typography
-                variant={isMobile ? "body1" : "h5"}
-                sx={{ textAlign: "center" }}
-            >
-                These are the projects that are{" "}
-                <strong>built from the ground up by me.</strong>
-                <br />
-                All of their source codes are available on my{" "}
-                <strong>GitHub profile.</strong>
-            </Typography>
+            <Stack direction="row" spacing={4} component={Container}>
+                <HomeRounded fontSize="large" color="primary" />
 
-            <Divider variant="middle" flexItem sx={{ paddingTop: "50px" }} />
+                <Typography
+                    variant={props.isMobile ? "body1" : "h5"}
+                    textAlign="left"
+                    paddingRight={!props.isMobile && 20}
+                >
+                    These are the projects that I have built throughout this
+                    year. Most (if not all) of my work is hosted live through
+                    Github Pages.
+                </Typography>
+            </Stack>
 
             {/* second dec */}
-            <Typography variant="h6">
-                <i>Click on any project to visit it.</i>
+            <Typography variant="h6" textAlign="center">
+                Click on any project to visit it.
             </Typography>
 
             {/* projects */}

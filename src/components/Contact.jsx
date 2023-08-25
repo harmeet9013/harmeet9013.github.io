@@ -1,27 +1,27 @@
-import { GitHub, LinkedIn, Instagram } from "@mui/icons-material";
 import {
-    Paper,
-    Stack,
-    Typography,
-    Button,
-    styled,
-    useMediaQuery,
-    Divider,
-} from "@mui/material";
+    GitHub,
+    LinkedIn,
+    EmailRounded,
+    ContactMailRounded,
+    FavoriteRounded,
+} from "@mui/icons-material";
+import { Stack, Typography, Button, styled, Container } from "@mui/material";
+import { Fragment } from "react";
 
-export default function Contact() {
-    const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
-
+export default function Contact(props) {
     const CustomButton = styled(Button)(({ theme }) => ({
-        transition: "all 500ms ease",
-        backgroundColor: theme.palette.action.selected,
-        color: theme.palette.text.primary,
+        textTransform: "none",
+        transition: theme.transitions.create(),
+        backgroundColor: theme.palette.containers.secondary.main,
+        color: theme.palette.primary.main,
         fontSize: "16px",
-        borderRadius: "15px",
-        padding: "15px 20px",
-        width: "100%",
+        fontWeight: 600,
+        borderRadius: 50,
+        padding: "15px 30px",
+        width: props.isMobile ? "100%" : "12rem",
         "&:hover": {
-            backgroundColor: theme.palette.action.hover,
+            backgroundColor: theme.palette.containers.tertiary.main,
+            boxShadow: theme.shadows[2],
         },
     }));
 
@@ -30,7 +30,10 @@ export default function Contact() {
             label: "GitHub",
             link: "https://github.com/harmeet9013",
             icon: (
-                <GitHub color="icon" sx={{ marginY: "-4px", marginX: "4px" }} />
+                <GitHub
+                    color="primary"
+                    sx={{ marginY: "-4px", marginX: "4px" }}
+                />
             ),
         },
         2: {
@@ -38,17 +41,17 @@ export default function Contact() {
             link: "https://linkedin.com/in/harmeet9013/",
             icon: (
                 <LinkedIn
-                    color="icon"
+                    color="primary"
                     sx={{ marginY: "-4px", marginX: "4px" }}
                 />
             ),
         },
         3: {
-            label: "Instagram",
-            link: "https://instagram.com/elipsantaro",
+            label: "Email",
+            link: "mailto:hssaggu1313@gmail.com",
             icon: (
-                <Instagram
-                    color="icon"
+                <EmailRounded
+                    color="primary"
                     sx={{ marginY: "-4px", marginX: "4px" }}
                 />
             ),
@@ -64,12 +67,6 @@ export default function Contact() {
                     href={object.link}
                     target="_blank"
                     endIcon={object.icon}
-                    sx={{
-                        transition: "all 0.1s ease",
-                        "&:hover": {
-                            transform: "scale(1.04)",
-                        },
-                    }}
                 >
                     {object.label}
                 </CustomButton>
@@ -78,47 +75,61 @@ export default function Contact() {
     };
 
     return (
-        <Paper
-            elevation={1}
+        <Stack
             id="contact"
-            sx={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "50px",
-                textAlign: "center",
-                justifyContent: "center",
-                alignItems: "center",
-                transition: "all 500ms ease",
-                padding: isMobile ? "10%" : "5% 25% 1% 25%",
+            component={Container}
+            spacing={4}
+            sx={(theme) => ({
+                transition: theme.transitions.create(),
+                padding: props.isMobile
+                    ? "5rem 1rem 5rem 1rem "
+                    : "5rem 0 5rem 0",
                 width: "100%",
                 cursor: "default",
-            }}
+            })}
         >
             <Typography
-                variant={isMobile ? "h3" : "h2"}
-                sx={{
-                    color: (theme) => theme.palette.accent.primary,
-                }}
+                variant={props.isMobile ? "h3" : "h2"}
+                color="primary"
+                fontWeight={500}
             >
-                <strong>Contact Me</strong>
+                Contact
             </Typography>
-            <Divider variant="middle" flexItem />
+
+            <props.MyDivider />
+
             <Stack
-                direction={isMobile ? "column" : "row"}
-                spacing={isMobile ? 4 : 8}
+                direction="row"
+                spacing={4}
+                justifyContent="space-between"
+                alignItems="space-between"
             >
-                <Typography variant={isMobile ? "body1" : "h5"}>
-                    Clicking on any buttons from the following
-                    <br />
-                    will take you to their respective pages.
-                </Typography>
-                <Stack direction="column" spacing={4}>
-                    {renderLinks()}
+                <Stack direction="row" spacing={4}>
+                    <ContactMailRounded color="primary" />
+
+                    <Typography
+                        variant={props.isMobile ? "body1" : "h5"}
+                        paddingRight={!props.isMobile && 20}
+                    >
+                        You can get in touch with me through various mediums.
+                        <br />I promise I will get back to you at my earliest!
+                    </Typography>
                 </Stack>
             </Stack>
+
+            <Stack
+                direction="column"
+                spacing={4}
+                justifyContent={props.isMobile ? "center" : "flex-end"}
+                alignItems={props.isMobile ? "center" : "flex-end"}
+            >
+                {renderLinks()}
+            </Stack>
+
             <Typography variant="overline">
-                Created with love. &#128158;
+                Created with love.{" "}
+                <FavoriteRounded fontSize="20" color="primary" />
             </Typography>
-        </Paper>
+        </Stack>
     );
 }

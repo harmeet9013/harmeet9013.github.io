@@ -1,32 +1,27 @@
-import {
-    Avatar,
-    Box,
-    Button,
-    Stack,
-    Typography,
-    useMediaQuery,
-    styled,
-    Container,
-} from "@mui/material";
-import avatar from "./assets/projects-pics/avatar.jpg";
-import bgLight from "./assets/projects-pics/bg-light.jpg";
-import bgDark from "./assets/projects-pics/bg-dark.jpg";
 import { Fragment } from "react";
+import { useConfirm } from "material-ui-confirm";
 import { ContactPage, Folder } from "@mui/icons-material";
+import { Box, Button, Stack, Typography, styled } from "@mui/material";
 
-export default function BackgroundIntro({ darkMode, setShowPrompt }) {
-    const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
+import avatar from "./assets/projects-pics/avatar.jpg";
+import bgDark from "./assets/projects-pics/bg-dark.jpg";
+import bgLight from "./assets/projects-pics/bg-light.jpg";
+
+export default function BackgroundIntro(props) {
+    const confirmDialog = useConfirm();
 
     const CustomButton = styled(Button)(({ theme }) => ({
-        transition: "all 500ms ease",
-        backgroundColor: theme.palette.action.selected,
-        color: theme.palette.text.primary,
-        backdropFilter: "blur(5px)",
+        textTransform: "none",
+        transition: theme.transitions.create(),
+        backgroundColor: theme.palette.containers.secondary.main,
+        color: theme.palette.primary.main,
         fontSize: "16px",
-        borderRadius: "15px",
-        padding: "15px 20px",
+        fontWeight: 600,
+        borderRadius: 50,
+        padding: "15px 30px",
         "&:hover": {
-            backgroundColor: theme.palette.action.hover,
+            backgroundColor: theme.palette.containers.tertiary.main,
+            boxShadow: theme.shadows[2],
         },
     }));
 
@@ -44,74 +39,78 @@ export default function BackgroundIntro({ darkMode, setShowPrompt }) {
         <Fragment>
             <Stack
                 id="home"
-                spacing={6}
-                direction={isMobile ? "column" : "row"}
-                style={{
+                spacing={props.isMobile ? 4 : 6}
+                direction={props.isMobile ? "column" : "row"}
+                sx={(theme) => ({
                     textAlign: "center",
                     justifyContent: "center",
                     alignItems: "center",
                     height: "100vh",
-                    padding: isMobile ? "0 5% 0 5%" : "0 20% 0 20%",
+                    padding: props.isMobile ? "0 5% 0 5%" : "0 20% 0 20%",
                     cursor: "default",
-                    transition: "all 500ms ease",
-                }}
+                    transition: theme.transitions.create(),
+                })}
             >
                 <Box
-                    component="div"
-                    sx={{
+                    component="img"
+                    src={props.darkMode ? bgDark : bgLight}
+                    sx={(theme) => ({
                         position: "absolute",
                         top: 0,
                         left: 0,
                         width: "100%",
                         height: "100%",
-                        backgroundImage: `url(${darkMode ? bgDark : bgLight})`,
-                        backgroundSize: "cover",
+                        objectFit: "cover",
                         backgroundPosition: "center",
-                        opacity: isMobile ? "0.2" : "0.7",
+                        opacity: props.isMobile ? "0.2" : "0.5",
                         zIndex: "-1",
-                        transition: "all 0.2s ease",
-                    }}
+                        transition: theme.transitions.create(),
+                    })}
                 />
-                <Avatar
+
+                <Box
+                    component="img"
                     src={avatar}
                     alt="avatar-img"
-                    sx={{
-                        width: isMobile ? "30vh" : "400px",
-                        height: isMobile ? "30vh" : "400px",
-                        transition: "all 500ms ease",
-                        border: (theme) =>
-                            `10px solid ${theme.palette.accent.secondary}`,
-                    }}
+                    sx={(theme) => ({
+                        width: props.isMobile ? "30vh" : "400px",
+                        height: props.isMobile ? "30vh" : "400px",
+                        borderRadius: 30,
+                        transition: theme.transitions.create(),
+                        border: `10px solid ${theme.palette.tertiary.main}`,
+                    })}
                 />
+
                 <Stack
                     direction="column"
                     spacing={2}
-                    sx={{
+                    sx={(theme) => ({
                         alignItems: "center",
                         justifyContent: "center",
-                        transition: "all 50ms ease",
-                    }}
+                        transition: theme.transitions.create(),
+                    })}
                 >
                     <Typography variant="h6">hello there </Typography>
                     <Typography
-                        variant={isMobile ? "h4" : "h2"}
-                        sx={{
-                            color: (theme) => theme.palette.accent.secondary,
-                        }}
+                        variant={props.isMobile ? "h4" : "h2"}
+                        sx={(theme) => ({
+                            color: theme.palette.tertiary.main,
+                        })}
                     >
                         I'm <strong>Harmeet Singh</strong>
                     </Typography>
-                    <Typography variant={isMobile ? "body1" : "h6"}>
+                    <Typography variant={props.isMobile ? "body1" : "h6"}>
                         A <strong>MERN Stack Developer.</strong>
                         <br />I create websites, professionally and for fun.{" "}
                         <br />
                         Just like this one!
                     </Typography>
-                    <Stack spacing={2} direction={isMobile ? "column" : "row"}>
+                    <Stack
+                        spacing={2}
+                        direction={props.isMobile ? "column" : "row"}
+                    >
                         <CustomButton
-                            sx={{
-                                color: (theme) => theme.palette.accent.primary,
-                            }}
+                            color="secondary"
                             onClick={() => {
                                 scrollToSection("contact");
                             }}
@@ -120,11 +119,20 @@ export default function BackgroundIntro({ darkMode, setShowPrompt }) {
                             Contact Me!
                         </CustomButton>
                         <CustomButton
-                            sx={{
-                                color: (theme) => theme.palette.accent.primary,
-                            }}
+                            color="secondary"
                             onClick={() => {
-                                setShowPrompt(true);
+                                confirmDialog({
+                                    title: "Resume Download",
+                                    content: "This will open Google Drive",
+                                })
+                                    .then(() =>
+                                        window.open(
+                                            "https://bit.ly/harmeet9013-resume"
+                                        )
+                                    )
+                                    .catch(() => {
+                                        /* */
+                                    });
                             }}
                             startIcon={<Folder />}
                         >

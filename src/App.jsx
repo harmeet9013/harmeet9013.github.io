@@ -1,19 +1,138 @@
 import { useState } from "react";
-import { createTheme, CssBaseline, Dialog, ThemeProvider } from "@mui/material";
-import { cyan, deepPurple, lime, orange } from "@mui/material/colors";
+import {
+    Box,
+    createTheme,
+    CssBaseline,
+    Divider,
+    styled,
+    ThemeProvider,
+    useMediaQuery,
+} from "@mui/material";
 import BackgroundIntro from "./components/BackgroundIntro";
 import Contact from "./components/Contact";
 import Heading from "./components/Heading";
 import Hobbies from "./components/Hobbies";
 import MoreAboutMe from "./components/MoreAboutMe";
 import Projects from "./components/Projects";
-import DownloadResume from "./components/DownloadResume";
+import { ConfirmProvider } from "material-ui-confirm";
+import { CancelRounded, CheckCircleRounded } from "@mui/icons-material";
 
 export default function App() {
-    const [darkMode, setDarkMode] = useState(false);
-    const [showPrompt, setShowPrompt] = useState(false);
+    const [darkMode, setDarkMode] = useState(true);
 
-    const CustomCssBaseline = {
+    const isMobile = useMediaQuery("(max-width: 900px)");
+    const systemTheme = useMediaQuery("(prefers-color-scheme: dark)")
+        ? true
+        : false;
+
+    const MyDivider = styled(Box)(({ theme }) => ({
+        backgroundColor: theme.palette.divider,
+        height: 10,
+        borderRadius: 40,
+        borderBottomWidth: 10,
+        width: 100,
+    }));
+
+    const myTheme = createTheme({
+        palette: darkMode
+            ? {
+                  // darkmode
+                  mode: "dark",
+
+                  primary: {
+                      main: "#5bdbbe",
+                      container: "#00382d",
+                  },
+                  secondary: {
+                      main: "#b1ccc3",
+                      container: "#1d352e",
+                  },
+                  tertiary: {
+                      main: "#5bdbbe",
+                      container: "#00382d",
+                  },
+
+                  background: {
+                      main: "#e1e3e0",
+                      default: "#000000",
+                  },
+                  surface: {
+                      main: "#e1e3e0",
+                      default: "#191c1b",
+                      variant: "#3f4945",
+                  },
+
+                  outline: "#89938f",
+                  header: "#191c1bea",
+                  hover: "#191c1bda",
+                  divider: "#89938f",
+
+                  containers: {
+                      primary: {
+                          main: "#7af8d9",
+                          container: "#005143",
+                      },
+                      secondary: {
+                          main: "#334b44",
+                          container: "#cde8df",
+                      },
+                      tertiary: {
+                          main: "#005143",
+                          container: "#7af8da",
+                      },
+                  },
+
+                  backdrop: "#000000bf",
+              }
+            : {
+                  // light mode
+                  mode: "light",
+
+                  primary: {
+                      main: "#006b59",
+                      container: "#ffffff",
+                  },
+                  secondary: {
+                      main: "#4b635c",
+                      container: "#ffffff",
+                  },
+                  tertiary: {
+                      main: "#006b59",
+                      container: "#ffffff",
+                  },
+
+                  background: {
+                      main: "#191c1b",
+                      default: "#fafdfa",
+                  },
+                  surface: {
+                      main: "#191c1b",
+                      default: "#fafdfa",
+                      variant: "#dbe5e0",
+                  },
+
+                  outline: "#6f7975",
+                  header: "#fafdfaea",
+                  divider: "#6f7975",
+                  hover: "#fafdfada",
+
+                  containers: {
+                      primary: {
+                          main: "#002019",
+                          container: "#7af8d9",
+                      },
+                      secondary: {
+                          main: "#cde8df",
+                          container: "#07201a",
+                      },
+                      tertiary: {
+                          main: "#7af8da",
+                          container: "#00201a",
+                      },
+                  },
+
+                  backdrop: "#000000bf",
+              },
         components: {
             MuiCssBaseline: {
                 styleOverrides: {
@@ -27,69 +146,99 @@ export default function App() {
         typography: {
             fontFamily: "work sans",
         },
-    };
-
-    const darkTheme = createTheme({
-        palette: {
-            mode: "dark",
-            accent: {
-                primary: "#FFE4A7",
-                secondary: lime[200],
-            },
-            icon: {
-                main: orange[300],
-            },
-            backdrop: "rgba(0, 0, 0, 0.6)",
-            background: {
-                drawer: "rgba(0, 0, 0, 0.85)",
-            },
-        },
-        ...CustomCssBaseline,
     });
-
-    const lightTheme = createTheme({
-        palette: {
-            mode: "light",
-            accent: {
-                primary: "#0D1282",
-                secondary: cyan[900],
-            },
-            icon: {
-                main: deepPurple[800],
-            },
-            backdrop: "rgba(0, 0, 0, 0.6)",
-            background: {
-                drawer: "rgba(255, 255, 255, 0.85)",
-            },
-        },
-        ...CustomCssBaseline,
-    });
-
-    const customTheme = darkMode ? darkTheme : lightTheme;
 
     return (
-        <ThemeProvider theme={customTheme}>
-            <CssBaseline />
-            {/* dialog component */}
-            <Dialog open={showPrompt}>
-                <DownloadResume
-                    showPrompt={showPrompt}
-                    setShowPrompt={setShowPrompt}
+        <ThemeProvider theme={myTheme}>
+            <ConfirmProvider
+                defaultOptions={{
+                    confirmationButtonProps: {
+                        startIcon: <CheckCircleRounded color="primary" />,
+                    },
+                    cancellationButtonProps: {
+                        startIcon: <CancelRounded color="primary" />,
+                    },
+                    cancellationText: "No",
+                    confirmationText: "Yes",
+                    dialogProps: {
+                        maxWidth: "xs",
+                        slotProps: {
+                            backdrop: {
+                                sx: (theme) => ({
+                                    backgroundColor: theme.palette.backdrop,
+                                }),
+                            },
+                        },
+                        disableScrollLock: true,
+                        PaperProps: {
+                            elevation: 0,
+                            sx: (theme) => ({
+                                cursor: "default",
+                                borderRadius: 10,
+                                backgroundColor:
+                                    theme.palette.background.default,
+                                padding: "20px 0px",
+                            }),
+                        },
+                    },
+                    titleProps: {
+                        textAlign: "center",
+                        fontSize: "2rem",
+                        color: "secondary",
+                        fontWeight: 500,
+                    },
+                    contentProps: {
+                        sx: {
+                            textAlign: "center",
+                            fontSize: "1rem",
+                        },
+                    },
+                    dialogActionsProps: {
+                        sx: {
+                            justifyContent: "center",
+                            alignItems: "center",
+                            ".MuiButton-root": (theme) => ({
+                                textTransform: "none",
+                                fontSize: "1rem",
+                                borderRadius: 50,
+                                backgroundColor:
+                                    theme.palette.containers.tertiary.main,
+                                padding: "8px 20px",
+                                "&:hover": {
+                                    backgroundColor:
+                                        theme.palette.primary.container,
+                                },
+                            }),
+                        },
+                    },
+                }}
+            >
+                <CssBaseline enableColorScheme />
+
+                <Heading
+                    darkMode={darkMode}
+                    isMobile={isMobile}
+                    setDarkMode={setDarkMode}
                 />
-            </Dialog>
-            <Heading
-                darkMode={darkMode}
-                setDarkMode={setDarkMode}
-                setShowPrompt={setShowPrompt}
-            />
-            <BackgroundIntro
-                darkMode={darkMode}
-                setShowPrompt={setShowPrompt}
-            />
-            <MoreAboutMe />
-            <Projects />
-            <Hobbies />
-            <Contact />
+
+                <BackgroundIntro darkMode={darkMode} isMobile={isMobile} />
+
+                <Divider />
+
+                <MoreAboutMe isMobile={isMobile} MyDivider={MyDivider} />
+
+                <Divider />
+
+                <Projects isMobile={isMobile} MyDivider={MyDivider} />
+
+                <Divider />
+
+                <Hobbies isMobile={isMobile} MyDivider={MyDivider} />
+
+                <Divider />
+
+                <Contact isMobile={isMobile} MyDivider={MyDivider} />
+            </ConfirmProvider>
         </ThemeProvider>
     );
 }
