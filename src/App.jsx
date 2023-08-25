@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
     Box,
     createTheme,
@@ -8,22 +8,36 @@ import {
     ThemeProvider,
     useMediaQuery,
 } from "@mui/material";
-import BackgroundIntro from "./components/BackgroundIntro";
-import Contact from "./components/Contact";
-import Heading from "./components/Heading";
-import Hobbies from "./components/Hobbies";
-import MoreAboutMe from "./components/MoreAboutMe";
-import Projects from "./components/Projects";
+import Cookies from "js-cookie";
 import { ConfirmProvider } from "material-ui-confirm";
 import { CancelRounded, CheckCircleRounded } from "@mui/icons-material";
 
-export default function App() {
-    const [darkMode, setDarkMode] = useState(true);
+import Contact from "./components/Contact";
+import Heading from "./components/Heading";
+import Hobbies from "./components/Hobbies";
+import Projects from "./components/Projects";
+import MoreAboutMe from "./components/MoreAboutMe";
+import BackgroundIntro from "./components/BackgroundIntro";
 
+export default function App() {
     const isMobile = useMediaQuery("(max-width: 900px)");
     const systemTheme = useMediaQuery("(prefers-color-scheme: dark)")
         ? true
         : false;
+
+    const [darkMode, setDarkMode] = useState(systemTheme);
+
+    useEffect(() => {
+        const theme = Cookies.get("theme");
+
+        if (theme === "dark") {
+            setDarkMode(true);
+        } else if (theme === "light") {
+            setDarkMode(false);
+        } else {
+            setDarkMode(systemTheme);
+        }
+    }, [systemTheme]);
 
     const MyDivider = styled(Box)(({ theme }) => ({
         backgroundColor: theme.palette.divider,

@@ -21,6 +21,7 @@ import {
 } from "@mui/icons-material";
 import ScrollToTop from "./ScrollToTop";
 import { useConfirm } from "material-ui-confirm";
+import Cookies from "js-cookie";
 
 export default function Heading(props) {
     const confirmDialog = useConfirm();
@@ -116,6 +117,13 @@ export default function Heading(props) {
         setMenuOpen(false);
     };
 
+    const handleThemeChange = () => {
+        const theme = !props.darkMode;
+
+        theme ? Cookies.set("theme", "dark") : Cookies.set("theme", "light");
+        props.setDarkMode(theme);
+    };
+
     useEffect(() => {
         const handleScroll = () => {
             // for the header
@@ -185,11 +193,7 @@ export default function Heading(props) {
                         <Fragment>
                             {/* color mode and menu button */}
                             <Stack direction="row" spacing={0}>
-                                <NavbarButton
-                                    onClick={() => {
-                                        props.setDarkMode(!props.darkMode);
-                                    }}
-                                >
+                                <NavbarButton onClick={handleThemeChange}>
                                     {props.darkMode ? (
                                         <DarkModeRounded
                                             fontSize="medium"
@@ -366,9 +370,7 @@ export default function Heading(props) {
                                 {/* color mode button */}
 
                                 <NavbarButton
-                                    onClick={() => {
-                                        props.setDarkMode(!props.darkMode);
-                                    }}
+                                    onClick={handleThemeChange}
                                     size="large"
                                 >
                                     {props.darkMode ? (
