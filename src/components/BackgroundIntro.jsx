@@ -1,7 +1,14 @@
-import { Fragment } from "react";
 import { useConfirm } from "material-ui-confirm";
-import { ContactPage, Folder } from "@mui/icons-material";
-import { Box, Button, Stack, Typography, styled } from "@mui/material";
+import { ContactPage, Folder, OpenInNewRounded } from "@mui/icons-material";
+import {
+    Box,
+    Button,
+    Grow,
+    Link,
+    Stack,
+    Typography,
+    styled,
+} from "@mui/material";
 
 import avatar from "./assets/projects-pics/avatar.jpg";
 import bgDark from "./assets/projects-pics/bg-dark.jpg";
@@ -13,15 +20,14 @@ export default function BackgroundIntro(props) {
     const CustomButton = styled(Button)(({ theme }) => ({
         textTransform: "none",
         transition: theme.transitions.create(),
-        backgroundColor: theme.palette.containers.secondary.main,
-        color: theme.palette.primary.main,
-        fontSize: "16px",
+        backgroundColor: theme.palette.background.high,
+        color: theme.palette.secondary.main,
+        fontSize: theme.typography.subtitle1.fontSize,
         fontWeight: 600,
         borderRadius: 50,
         padding: "15px 30px",
         "&:hover": {
-            backgroundColor: theme.palette.containers.tertiary.main,
-            boxShadow: theme.shadows[2],
+            backgroundColor: theme.palette.primary.container.main,
         },
     }));
 
@@ -36,38 +42,38 @@ export default function BackgroundIntro(props) {
     };
 
     return (
-        <Fragment>
-            <Stack
-                id="home"
-                spacing={props.isMobile ? 4 : 6}
-                direction={props.isMobile ? "column" : "row"}
+        <Stack
+            id="home"
+            spacing={props.isMobile ? 4 : 6}
+            direction={props.isMobile ? "column" : "row"}
+            sx={(theme) => ({
+                textAlign: "center",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "100vh",
+                padding: props.isMobile ? "0 2rem 0 2rem" : "0 5rem 0 5rem",
+                cursor: "default",
+                transition: theme.transitions.create(),
+            })}
+        >
+            <Box
+                component="img"
+                src={props.darkMode ? bgDark : bgLight}
                 sx={(theme) => ({
-                    textAlign: "center",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    height: "100vh",
-                    padding: props.isMobile ? "0 5% 0 5%" : "0 20% 0 20%",
-                    cursor: "default",
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    backgroundPosition: "center",
+                    opacity: props.isMobile ? "0.2" : "0.5",
+                    zIndex: "-1",
                     transition: theme.transitions.create(),
                 })}
-            >
-                <Box
-                    component="img"
-                    src={props.darkMode ? bgDark : bgLight}
-                    sx={(theme) => ({
-                        position: "absolute",
-                        top: 0,
-                        left: 0,
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                        backgroundPosition: "center",
-                        opacity: props.isMobile ? "0.2" : "0.5",
-                        zIndex: "-1",
-                        transition: theme.transitions.create(),
-                    })}
-                />
+            />
 
+            <Grow in={true}>
                 <Box
                     component="img"
                     src={avatar}
@@ -75,12 +81,14 @@ export default function BackgroundIntro(props) {
                     sx={(theme) => ({
                         width: props.isMobile ? "30vh" : "400px",
                         height: props.isMobile ? "30vh" : "400px",
-                        borderRadius: 30,
+                        borderRadius: props.isMobile ? 20 : 30,
                         transition: theme.transitions.create(),
-                        border: `10px solid ${theme.palette.tertiary.main}`,
+                        border: `10px solid ${theme.palette.primary.main}`,
                     })}
                 />
+            </Grow>
 
+            <Grow in={true}>
                 <Stack
                     direction="column"
                     spacing={2}
@@ -94,16 +102,35 @@ export default function BackgroundIntro(props) {
                     <Typography
                         variant={props.isMobile ? "h4" : "h2"}
                         sx={(theme) => ({
-                            color: theme.palette.tertiary.main,
+                            color: theme.palette.primary.main,
                         })}
                     >
                         I'm <strong>Harmeet Singh</strong>
                     </Typography>
                     <Typography variant={props.isMobile ? "body1" : "h6"}>
                         A <strong>MERN Stack Developer.</strong>
-                        <br />I create websites, professionally and for fun.{" "}
+                        <br />I create websites, both frontend and backend.{" "}
                         <br />
-                        Just like this one!
+                        <Link
+                            underline="hover"
+                            onClick={() =>
+                                window.open(
+                                    "https://harmeet9013-blogs.vercel.app"
+                                )
+                            }
+                            sx={{
+                                cursor: "pointer",
+                            }}
+                        >
+                            Just like this one{" "}
+                            <OpenInNewRounded
+                                fontSize="10"
+                                color="secondary"
+                                sx={{
+                                    my: -0.4,
+                                }}
+                            />
+                        </Link>
                     </Typography>
                     <Stack
                         spacing={2}
@@ -114,7 +141,7 @@ export default function BackgroundIntro(props) {
                             onClick={() => {
                                 scrollToSection("contact");
                             }}
-                            startIcon={<ContactPage />}
+                            startIcon={<ContactPage color="primary" />}
                         >
                             Contact Me!
                         </CustomButton>
@@ -134,13 +161,13 @@ export default function BackgroundIntro(props) {
                                         /* */
                                     });
                             }}
-                            startIcon={<Folder />}
+                            startIcon={<Folder color="primary" />}
                         >
                             Download Resume
                         </CustomButton>
                     </Stack>
                 </Stack>
-            </Stack>
-        </Fragment>
+            </Grow>
+        </Stack>
     );
 }

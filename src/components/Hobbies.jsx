@@ -1,10 +1,4 @@
 import {
-    OpenInNewRounded,
-    MusicNoteRounded,
-    CelebrationRounded,
-    AndroidRounded,
-} from "@mui/icons-material";
-import {
     Button,
     Container,
     Divider,
@@ -12,22 +6,25 @@ import {
     Typography,
     styled,
 } from "@mui/material";
+import {
+    OpenInNewRounded,
+    MusicNoteRounded,
+    CelebrationRounded,
+    AndroidRounded,
+} from "@mui/icons-material";
 
 export default function Hobbies(props) {
     const CustomButton = styled(Button)(({ theme }) => ({
         textTransform: "none",
         transition: theme.transitions.create(),
-        backgroundColor: theme.palette.containers.tertiary.main,
-        color: theme.palette.primary.main,
-        fontSize: "16px",
+        backgroundColor: theme.palette.background.high,
+        color: theme.palette.secondary.main,
+        fontSize: theme.typography.subtitle1.fontSize,
         fontWeight: 600,
         borderRadius: 50,
         padding: "15px 30px",
-        boxShadow: theme.shadows[2],
         "&:hover": {
-            backgroundColor: theme.palette.containers.tertiary.main,
-            boxShadow: theme.shadows[4],
-            transform: "translateY(-0.2rem)",
+            backgroundColor: theme.palette.primary.container.main,
         },
     }));
 
@@ -59,18 +56,21 @@ export default function Hobbies(props) {
                 <Stack
                     key={key}
                     sx={(theme) => ({
-                        backgroundColor: theme.palette.surface.variant,
+                        backgroundColor: theme.palette.background.low,
                         transition: theme.transitions.create(),
                         borderRadius: props.isMobile ? 15 : 20,
                         padding: props.isMobile ? "40px 20px" : "50px",
                         textAlign: props.isMobile ? "center" : "left",
-                        width: props.isMobile ? "100%" : "45rem",
+                        maxWidth: props.isMobile ? "100%" : "45rem",
+                        minWidth: props.isMobile ? "100%" : "90%",
                     })}
                 >
                     <Stack direction="column" spacing={2}>
                         <Typography
                             variant="h4"
-                            color="secondary"
+                            color={(theme) =>
+                                theme.palette.tertiary.container.on
+                            }
                             fontWeight={500}
                         >
                             {project.label}
@@ -81,6 +81,9 @@ export default function Hobbies(props) {
                             <Typography
                                 variant={props.isMobile ? "body1" : "h6"}
                                 textAlign="justify"
+                                color={(theme) =>
+                                    theme.palette.secondary.container.on
+                                }
                             >
                                 {project.desc}
                             </Typography>
@@ -89,7 +92,7 @@ export default function Hobbies(props) {
                         <CustomButton
                             href={project.link}
                             target="_blank"
-                            endIcon={<OpenInNewRounded />}
+                            endIcon={<OpenInNewRounded color="primary" />}
                         >
                             {key}
                         </CustomButton>

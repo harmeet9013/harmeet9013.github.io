@@ -1,5 +1,5 @@
-import { Fab, Slide } from "@mui/material";
 import { ArrowUpwardRounded } from "@mui/icons-material";
+import { Fab, Slide } from "@mui/material";
 
 export default function ScrollToTop(props) {
     return (
@@ -8,12 +8,12 @@ export default function ScrollToTop(props) {
                 sx={(theme) => ({
                     position: "fixed",
                     bottom: 25,
-                    right: 25,
-                    backgroundColor: theme.palette.secondary.container,
+                    right: props.isMobile ? 25 : 120,
+                    backgroundColor: theme.palette.background.default,
                     transition: `${theme.transitions.create()} !important`,
+                    border: `2px solid ${theme.palette.tertiary.container.on}`,
                     "&:hover": {
-                        backgroundColor:
-                            theme.palette.containers.secondary.main,
+                        backgroundColor: theme.palette.tertiary.container.main,
                     },
                 })}
                 onClick={() => {
@@ -23,11 +23,7 @@ export default function ScrollToTop(props) {
                     });
                 }}
             >
-                <ArrowUpwardRounded
-                    sx={(theme) => ({
-                        color: theme.palette.primary.main,
-                    })}
-                />
+                <ArrowUpwardRounded color="tertiary" />
             </Fab>
         </Slide>
     );

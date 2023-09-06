@@ -6,22 +6,20 @@ import {
     FavoriteRounded,
 } from "@mui/icons-material";
 import { Stack, Typography, Button, styled, Container } from "@mui/material";
-import { Fragment } from "react";
 
 export default function Contact(props) {
     const CustomButton = styled(Button)(({ theme }) => ({
+        width: props.isMobile ? "100%" : "12rem",
         textTransform: "none",
         transition: theme.transitions.create(),
-        backgroundColor: theme.palette.containers.secondary.main,
-        color: theme.palette.primary.main,
-        fontSize: "16px",
+        backgroundColor: theme.palette.background.high,
+        color: theme.palette.secondary.main,
+        fontSize: theme.typography.subtitle1.fontSize,
         fontWeight: 600,
         borderRadius: 50,
         padding: "15px 30px",
-        width: props.isMobile ? "100%" : "12rem",
         "&:hover": {
-            backgroundColor: theme.palette.containers.tertiary.main,
-            boxShadow: theme.shadows[2],
+            backgroundColor: theme.palette.primary.container.main,
         },
     }));
 
@@ -66,7 +64,7 @@ export default function Contact(props) {
                     key={object.label}
                     href={object.link}
                     target="_blank"
-                    endIcon={object.icon}
+                    startIcon={object.icon}
                 >
                     {object.label}
                 </CustomButton>

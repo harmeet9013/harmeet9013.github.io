@@ -47,106 +47,125 @@ export default function App() {
         width: 100,
     }));
 
-    const myTheme = createTheme({
-        palette: darkMode
-            ? {
-                  // darkmode
-                  mode: "dark",
-
-                  primary: {
-                      main: "#5bdbbe",
-                      container: "#00382d",
-                  },
-                  secondary: {
-                      main: "#b1ccc3",
-                      container: "#1d352e",
-                  },
-                  tertiary: {
-                      main: "#5bdbbe",
-                      container: "#00382d",
-                  },
-
-                  background: {
-                      main: "#e1e3e0",
-                      default: "#000000",
-                  },
-                  surface: {
-                      main: "#e1e3e0",
-                      default: "#191c1b",
-                      variant: "#3f4945",
-                  },
-
-                  outline: "#89938f",
-                  header: "#191c1bea",
-                  hover: "#191c1bda",
-                  divider: "#89938f",
-
-                  containers: {
+    const material3Theme = createTheme({
+        palette: {
+            mode: darkMode ? "dark" : "light",
+            ...(darkMode
+                ? {
                       primary: {
-                          main: "#7af8d9",
-                          container: "#005143",
+                          main: "#7ad0ff",
+                          on: "#003549",
+                          container: {
+                              main: "#004c68",
+                              on: "#c3e8ff",
+                          },
+                          fixed: {
+                              main: "#c3e8ff",
+                              dim: "#7ad0ff",
+                              on: "#001e2c",
+                              onvar: "#004c68",
+                          },
                       },
                       secondary: {
-                          main: "#334b44",
-                          container: "#cde8df",
+                          main: "#b5c9d7",
+                          on: "#003549",
+                          container: {
+                              main: "#364955",
+                              on: "#d1e5f4",
+                          },
+                          fixed: {
+                              main: "#d1e5f4",
+                              dim: "#b5c9d7",
+                              on: "#0a1e28",
+                              onvar: "#364955",
+                          },
                       },
                       tertiary: {
-                          main: "#005143",
-                          container: "#7af8da",
+                          main: "#cac1ea",
+                          on: "#322c4c",
+                          container: {
+                              main: "#484264",
+                              on: "#e6deff",
+                          },
+                          fixed: {
+                              main: "#e6deff",
+                              dim: "#1c1736",
+                              on: "#1c1736",
+                              onvar: "#633b48",
+                          },
                       },
-                  },
 
-                  backdrop: "#000000bf",
-              }
-            : {
-                  // light mode
-                  mode: "light",
+                      background: {
+                          default: "#0c0f10",
+                          low: "#191c1e",
+                          med: "#1d2022",
+                          high: "#282a2c",
+                          highest: "#333537",
+                          header: "#0c0f10df",
+                      },
 
-                  primary: {
-                      main: "#006b59",
-                      container: "#ffffff",
-                  },
-                  secondary: {
-                      main: "#4b635c",
-                      container: "#ffffff",
-                  },
-                  tertiary: {
-                      main: "#006b59",
-                      container: "#ffffff",
-                  },
-
-                  background: {
-                      main: "#191c1b",
-                      default: "#fafdfa",
-                  },
-                  surface: {
-                      main: "#191c1b",
-                      default: "#fafdfa",
-                      variant: "#dbe5e0",
-                  },
-
-                  outline: "#6f7975",
-                  header: "#fafdfaea",
-                  divider: "#6f7975",
-                  hover: "#fafdfada",
-
-                  containers: {
+                      divider: "#41484d",
+                      dividervar: "#8a9297",
+                      backdrop: "#000000da",
+                  }
+                : {
                       primary: {
-                          main: "#002019",
-                          container: "#7af8d9",
+                          main: "#00668a",
+                          on: "#ffffff",
+                          container: {
+                              main: "#c3e8ff",
+                              on: "#001e2c",
+                          },
+                          fixed: {
+                              main: "#c3e8ff",
+                              dim: "#7ad0ff",
+                              on: "#001e2c",
+                              onvar: "#004c68",
+                          },
                       },
                       secondary: {
-                          main: "#cde8df",
-                          container: "#07201a",
+                          main: "#4e616d",
+                          on: "#ffffff",
+                          container: {
+                              main: "#d1e5f4",
+                              on: "#0a1e28",
+                          },
+                          fixed: {
+                              main: "#d1e5f4",
+                              dim: "#b5c9d7",
+                              on: "#0a1e28",
+                              onvar: "#364955",
+                          },
                       },
                       tertiary: {
-                          main: "#7af8da",
-                          container: "#00201a",
+                          main: "#605a7d",
+                          on: "#ffffff",
+                          container: {
+                              main: "#e6deff",
+                              on: "#1c1736",
+                          },
+                          fixed: {
+                              main: "#e6deff",
+                              dim: "#1c1736",
+                              on: "#1c1736",
+                              onvar: "#633b48",
+                          },
                       },
-                  },
 
-                  backdrop: "#000000bf",
-              },
+                      background: {
+                          default: "#ffffff",
+                          low: "#f3f3f6",
+                          med: "#edeef0",
+                          high: "#e7e8ea",
+                          highest: "#e1e2e5",
+                          header: "#ffffffdf",
+                      },
+
+                      divider: "#c0c7cd",
+                      dividervar: "#71787d",
+                      backdrop: "#000000da",
+                  }),
+        },
         components: {
             MuiCssBaseline: {
                 styleOverrides: {
@@ -163,7 +182,7 @@ export default function App() {
     });
 
     return (
-        <ThemeProvider theme={myTheme}>
+        <ThemeProvider theme={material3Theme}>
             <ConfirmProvider
                 defaultOptions={{
                     confirmationButtonProps: {
@@ -189,23 +208,22 @@ export default function App() {
                             sx: (theme) => ({
                                 cursor: "default",
                                 borderRadius: 10,
-                                backgroundColor:
-                                    theme.palette.background.default,
-                                padding: "20px 0px",
+                                backgroundColor: theme.palette.background.low,
+                                padding: "20px 0px 20px 0",
                             }),
                         },
                     },
                     titleProps: {
-                        textAlign: "center",
-                        fontSize: "2rem",
-                        color: "secondary",
+                        fontSize: (theme) => theme.typography.h4.fontSize,
                         fontWeight: 500,
+                        textAlign: "center",
+                        color: (theme) => theme.palette.primary.main,
                     },
                     contentProps: {
-                        sx: {
+                        sx: (theme) => ({
+                            ...theme.typography.body1,
                             textAlign: "center",
-                            fontSize: "1rem",
-                        },
+                        }),
                     },
                     dialogActionsProps: {
                         sx: {
@@ -216,11 +234,11 @@ export default function App() {
                                 fontSize: "1rem",
                                 borderRadius: 50,
                                 backgroundColor:
-                                    theme.palette.containers.tertiary.main,
+                                    theme.palette.background.highest,
                                 padding: "8px 20px",
                                 "&:hover": {
                                     backgroundColor:
-                                        theme.palette.primary.container,
+                                        theme.palette.secondary.container.main,
                                 },
                             }),
                         },

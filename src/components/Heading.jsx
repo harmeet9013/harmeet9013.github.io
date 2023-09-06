@@ -1,12 +1,13 @@
-import { Fragment, useState, useEffect } from "react";
 import {
     Button,
     styled,
     Stack,
     Divider,
-    Drawer,
     Slide,
     Typography,
+    Container,
+    IconButton,
+    Menu,
 } from "@mui/material";
 import {
     DownloadRounded,
@@ -18,103 +19,94 @@ import {
     HomeRounded,
     FavoriteRounded,
     ContactMailRounded,
+    CloseRounded,
 } from "@mui/icons-material";
-import ScrollToTop from "./ScrollToTop";
-import { useConfirm } from "material-ui-confirm";
 import Cookies from "js-cookie";
+import { useConfirm } from "material-ui-confirm";
+import { Fragment, useState, useEffect } from "react";
+
+import ScrollToTop from "./ScrollToTop";
 
 export default function Heading(props) {
     const confirmDialog = useConfirm();
-    // state hooks
 
-    const [menuOpen, setMenuOpen] = useState(false);
+    // state hooks
     const [showHeader, setShowHeader] = useState(true);
     const [showScrollTop, setShowScrollTop] = useState(true);
     const [prevScrollPos, setPrevScrollPos] = useState(0);
+    const [menuOpen, setMenuOpen] = useState(null);
 
-    // this constant holds the various navbar actions for user
-    // unified in a single array of objects for small code
-    const actions = [
+    const navigateActions = [
         {
-            icon: <ArticleRounded sx={{ marginY: "-6px" }} />,
-            name: "Blog",
-            action: "blog",
-        },
-        {
-            icon: <HomeRounded sx={{ marginY: "-6px" }} />,
+            icon: <HomeRounded color="primary" />,
             name: "Projects",
             action: "projects",
         },
         {
-            icon: <FavoriteRounded sx={{ marginY: "-6px" }} />,
+            icon: <FavoriteRounded color="primary" />,
             name: "Hobbies",
             action: "hobbies",
         },
         {
-            icon: <ContactMailRounded sx={{ marginY: "-6px" }} />,
+            icon: <ContactMailRounded color="primary" />,
             name: "Contact",
             action: "contact",
+        },
+    ];
+
+    const otherActions = [
+        {
+            icon: <DownloadRounded color="primary" />,
+            name: "Resume download",
+            action: "resume",
+        },
+        {
+            icon: <GitHub color="primary" />,
+            name: "Source code",
+            action: "code",
         },
     ];
 
     // customized navbar button of MUI
     const NavbarButton = styled(Button)(({ theme }) => ({
         textTransform: "none",
-        fontWeight: "500",
-        color: theme.palette.primary.main,
+        fontSize: theme.typography.body1.fontSize,
+        fontWeight: 500,
+        color: theme.palette.secondary.main,
         borderRadius: 50,
         padding: props.isMobile ? "10px 5px" : "8px 20px",
         transition: theme.transitions.create(),
         letterSpacing: 2,
         backgroundColor: "transparent",
         "&:hover": {
-            backgroundColor: theme.palette.containers.secondary.main,
-            boxShadow: theme.shadows[2],
+            backgroundColor: theme.palette.primary.container.main,
         },
     }));
 
-    const MobileDrawerItem = styled(NavbarButton)(({ theme }) => ({
-        backgroundColor: theme.palette.containers.tertiary.main,
-        borderRadius: "30px 0px 0px 30px",
-        paddingRight: 20,
-        width: "20vh",
-        justifyContent: "flex-end",
+    const MyMenuItem = styled(Button)(({ theme }) => ({
+        textTransform: "none",
+        transition: theme.transitions.create(),
+        fontSize: theme.typography.subtitle1.fontSize,
+        padding: "1.2rem 1.5rem",
+        fontWeight: 500,
+        borderRadius: 50,
+        width: "14rem",
+        justifyContent: "flex-start",
+        color: theme.palette.secondary.main,
+        backgroundColor: theme.palette.background.low,
+        "&:hover": {
+            backgroundColor: theme.palette.primary.container.main,
+        },
     }));
 
     const scrollToSection = (sectionId) => {
         const section = document.getElementById(sectionId);
         if (section) {
-            const yOffset = -80; // Offset to adjust the final position if needed
+            const yOffset = -30; // Offset to adjust the final position if needed
             const y =
                 section.getBoundingClientRect().top + window.scrollY + yOffset;
             window.scrollTo({ top: y, behavior: "smooth" });
         }
-    };
-
-    // this function handles the click event
-    const handleActionClick = (action) => {
-        const actionsMap = {
-            blog: () =>
-                window.open("https://harmeet9013.github.io/blogs", "_blank"),
-            projects: () => scrollToSection("projects"),
-            resume: () => {
-                confirmDialog({
-                    title: "Resume Download",
-                    content: "This will open Google Drive",
-                })
-                    .then(() =>
-                        window.open("https://bit.ly/harmeet9013-resume")
-                    )
-                    .catch(() => {
-                        /* */
-                    });
-                setIsMobileMenuOpen(false);
-            },
-            contact: () => scrollToSection("contact"),
-            hobbies: () => scrollToSection("hobbies"),
-        };
-        actionsMap[action]();
-        setMenuOpen(false);
     };
 
     const handleThemeChange = () => {
@@ -122,6 +114,169 @@ export default function Heading(props) {
 
         theme ? Cookies.set("theme", "dark") : Cookies.set("theme", "light");
         props.setDarkMode(theme);
+    };
+
+    const renderMenu = () => {
+        // this function handles the click event
+        const handleActionClick = (action) => {
+            const actionsMap = {
+                projects: () => scrollToSection("projects"),
+                contact: () => scrollToSection("contact"),
+                hobbies: () => scrollToSection("hobbies"),
+                resume: () => {
+                    confirmDialog({
+                        title: "Resume Download",
+                        content:
+                            "Resume is hosted on google drive. Take you there now?",
+                    })
+                        .then(() =>
+                            window.open("https://bit.ly/harmeet9013-resume")
+                        )
+                        .catch(() => {
+                            //
+                        });
+                },
+                code: () =>
+                    window.open(
+                        "https://github.com/harmeet9013/harmeet9013.github.io"
+                    ),
+            };
+            setMenuOpen(false);
+            actionsMap[action]();
+        };
+
+        return (
+            <Fragment>
+                <IconButton
+                    onClick={(e) => setMenuOpen(e.currentTarget)}
+                    sx={(theme) => ({
+                        transition: theme.transitions.create(),
+                        transform: Boolean(menuOpen)
+                            ? "rotate(90deg)"
+                            : "rotate(0deg)",
+                        "&:hover": {
+                            backgroundColor:
+                                theme.palette.primary.container.main,
+                        },
+                    })}
+                >
+                    {Boolean(menuOpen) ? (
+                        <CloseRounded color="primary" fontSize="large" />
+                    ) : (
+                        <MenuRounded color="primary" fontSize="large" />
+                    )}
+                </IconButton>
+
+                <Menu
+                    open={Boolean(menuOpen)}
+                    anchorEl={menuOpen}
+                    onClose={() => setMenuOpen(null)}
+                    disableScrollLock
+                    anchorOrigin={{
+                        vertical: "bottom",
+                        horizontal: "right",
+                    }}
+                    transformOrigin={{
+                        vertical: "top",
+                        horizontal: "right",
+                    }}
+                    slotProps={{
+                        paper: {
+                            elevation: 0,
+                            sx: (theme) => ({
+                                backgroundColor:
+                                    theme.palette.background.header,
+                                backdropFilter: "blur(10px)",
+                                border: `2px solid ${theme.palette.divider}`,
+                                borderRadius: 10,
+                                marginTop: 3,
+                                display: "flex",
+                                flexDirection: "column",
+                                padding: "0.8rem 1rem",
+                                zIndex: 50,
+                            }),
+                        },
+                    }}
+                >
+                    <Stack
+                        direction={props.isMobile ? "column" : "row"}
+                        spacing={2}
+                    >
+                        <Stack direction="column" spacing={2}>
+                            <Typography
+                                variant="h5"
+                                textAlign="center"
+                                fontWeight={500}
+                                color="primary"
+                                sx={{
+                                    cursor: "default",
+                                }}
+                            >
+                                Navigation
+                            </Typography>
+
+                            <Divider flexItem />
+
+                            {navigateActions.map((action) => (
+                                <MyMenuItem
+                                    key={action.name}
+                                    onClick={() =>
+                                        handleActionClick(action.action)
+                                    }
+                                    startIcon={action.icon}
+                                    size="large"
+                                >
+                                    {action.name}
+                                </MyMenuItem>
+                            ))}
+                        </Stack>
+
+                        <Stack direction="column" spacing={2}>
+                            <Typography
+                                variant="h5"
+                                textAlign="center"
+                                fontWeight={500}
+                                color="primary"
+                                sx={{
+                                    cursor: "default",
+                                }}
+                            >
+                                Miscellaneous
+                            </Typography>
+
+                            <Divider flexItem />
+
+                            {otherActions.map((action) => (
+                                <MyMenuItem
+                                    key={action.name}
+                                    onClick={() =>
+                                        handleActionClick(action.action)
+                                    }
+                                    startIcon={action.icon}
+                                    size="large"
+                                >
+                                    {action.name}
+                                </MyMenuItem>
+                            ))}
+
+                            <MyMenuItem
+                                onClick={handleThemeChange}
+                                startIcon={
+                                    props.darkMode ? (
+                                        <DarkModeRounded color="primary" />
+                                    ) : (
+                                        <LightModeRounded color="primary" />
+                                    )
+                                }
+                                color="primary"
+                            >
+                                {props.darkMode ? "Dark mode" : "Light mode"}
+                            </MyMenuItem>
+                        </Stack>
+                    </Stack>
+                </Menu>
+            </Fragment>
+        );
     };
 
     useEffect(() => {
@@ -135,6 +290,8 @@ export default function Heading(props) {
 
             // for the fab
             setShowScrollTop(currentScrollPos > 400);
+
+            setMenuOpen(false);
         };
 
         // listen and remove scroll events
@@ -146,18 +303,30 @@ export default function Heading(props) {
 
     // rendering of the component
     return (
-        <Fragment>
+        <Stack
+            component={Container}
+            justifyContent="flex-start"
+            alignItems="center"
+        >
             <Slide direction="down" in={showHeader}>
                 <Stack
                     direction="row"
-                    justifyContent="space-around"
+                    justifyContent="space-between"
                     alignItems="center"
                     sx={(theme) => ({
                         transition: `${theme.transitions.create()} !important`,
-                        borderBottom: `1px solid ${theme.palette.divider}`,
-                        backgroundColor: theme.palette.header,
+                        borderLeft:
+                            !props.isMobile &&
+                            `2px solid ${theme.palette.divider}`,
+                        borderRight:
+                            !props.isMobile &&
+                            `2px solid ${theme.palette.divider}`,
+                        borderBottom: `2px solid ${theme.palette.divider}`,
+                        backgroundColor: theme.palette.background.header,
                         backdropFilter: "blur(10px)",
-                        width: "100%",
+                        padding: props.isMobile ? "0.4rem" : "0.4rem 1rem",
+                        width: props.isMobile ? "100%" : "40rem",
+                        borderRadius: props.isMobile ? "0" : "0 0 30px 30px",
                         position: "fixed",
                         overflow: "hidden",
                         zIndex: 50,
@@ -169,227 +338,52 @@ export default function Heading(props) {
                             scrollToSection("home");
                         }}
                         sx={(theme) => ({
-                            fontSize: props.isMobile ? "30px" : "40px",
+                            fontSize: props.isMobile
+                                ? theme.typography.h5.fontSize
+                                : theme.typography.h4.fontSize,
+                            textTransform: "uppercase",
                             fontWeight: 600,
-                            letterSpacing: props.isMobile ? "3px" : "8px",
-                            padding: props.isMobile ? "10px" : "2px 20px",
-                            color: theme.palette.background.main,
+                            letterSpacing: props.isMobile ? 2 : 5,
+                            padding: "0px 20px",
                             backgroundColor: "transparent",
-                            "&:hover": {
-                                backgroundColor: "transparent",
-                                boxShadow: "none",
-                            },
-                            background: (theme) =>
-                                `linear-gradient(to left, ${theme.palette.background.main}, ${theme.palette.primary.main})`,
+                            background: `linear-gradient(to right, ${theme.palette.tertiary.container.on}, ${theme.palette.primary.main})`,
                             WebkitBackgroundClip: "text",
                             WebkitTextFillColor: "transparent",
+                            "&:hover": {
+                                backgroundColor: "transparent",
+                            },
                         })}
                     >
                         Portfolio
                     </NavbarButton>
 
-                    {props.isMobile ? (
-                        // this is rendered for smaller screens
-                        <Fragment>
-                            {/* color mode and menu button */}
-                            <Stack direction="row" spacing={0}>
-                                <NavbarButton onClick={handleThemeChange}>
-                                    {props.darkMode ? (
-                                        <DarkModeRounded
-                                            fontSize="medium"
-                                            color="primary"
-                                        />
-                                    ) : (
-                                        <LightModeRounded
-                                            fontSize="medium"
-                                            color="primary"
-                                        />
-                                    )}
-                                </NavbarButton>
-                                <NavbarButton
-                                    onClick={() => {
-                                        setMenuOpen(true);
-                                    }}
-                                >
-                                    <MenuRounded
-                                        fontSize="medium"
-                                        color="primary"
-                                    />
-                                </NavbarButton>
-                            </Stack>
+                    <Stack direction="row" spacing={1}>
+                        <NavbarButton
+                            onClick={() =>
+                                window.open(
+                                    "https://harmeet9013-blogs.vercel.app"
+                                )
+                            }
+                            startIcon={<ArticleRounded color="primary" />}
+                        >
+                            Blog
+                        </NavbarButton>
 
-                            {/* Drawer component */}
-                            <Drawer
-                                anchor="right"
-                                open={menuOpen}
-                                onClose={() => {
-                                    setMenuOpen(false);
-                                }}
-                                elevation={0}
-                                PaperProps={{
-                                    sx: {
-                                        backgroundColor: (theme) =>
-                                            theme.palette.surface.variant,
-                                    },
-                                }}
-                                ModalProps={{
-                                    slotProps: {
-                                        backdrop: {
-                                            sx: (theme) => ({
-                                                backgroundColor:
-                                                    theme.palette.backdrop,
-                                            }),
-                                        },
-                                    },
-                                }}
-                            >
-                                <Stack
-                                    spacing={2}
-                                    marginLeft={2}
-                                    marginTop="24vh"
-                                >
-                                    <Typography
-                                        variant="h4"
-                                        textAlign="center"
-                                        fontWeight={500}
-                                        letterSpacing={5}
-                                        color={(theme) =>
-                                            theme.palette.secondary.main
-                                        }
-                                    >
-                                        Menu
-                                    </Typography>
+                        <Divider
+                            orientation="vertical"
+                            variant="middle"
+                            flexItem
+                        />
 
-                                    {actions.map((action) => (
-                                        <Fragment key={action.name}>
-                                            <MobileDrawerItem
-                                                onClick={() =>
-                                                    handleActionClick(
-                                                        action.action
-                                                    )
-                                                }
-                                                startIcon={action.icon}
-                                            >
-                                                {action.name}
-                                            </MobileDrawerItem>
-                                        </Fragment>
-                                    ))}
-                                    {/* Resume download button */}
-                                    <MobileDrawerItem
-                                        onClick={() => {
-                                            confirmDialog({
-                                                title: "Resume Download",
-                                                content:
-                                                    "This will open Google Drive",
-                                            })
-                                                .then(() =>
-                                                    window.open(
-                                                        "https://bit.ly/harmeet9013-resume"
-                                                    )
-                                                )
-                                                .catch(() => {
-                                                    /* */
-                                                });
-                                            setMenuOpen(false);
-                                        }}
-                                        startIcon={
-                                            <DownloadRounded
-                                                sx={{ marginY: "-6px" }}
-                                            />
-                                        }
-                                    >
-                                        Resume
-                                    </MobileDrawerItem>
-                                </Stack>
-                            </Drawer>
-                        </Fragment>
-                    ) : (
-                        // for desktop
-                        <Stack direction="row" spacing={1}>
-                            <Stack direction="row" spacing={2}>
-                                {actions.map((action) => (
-                                    <NavbarButton
-                                        key={action.name}
-                                        onClick={() =>
-                                            handleActionClick(action.action)
-                                        }
-                                        startIcon={action.icon}
-                                        size="large"
-                                    >
-                                        {action.name}
-                                    </NavbarButton>
-                                ))}
-                            </Stack>
-
-                            <Divider
-                                variant="middle"
-                                orientation="vertical"
-                                flexItem
-                                sx={{
-                                    bgcolor: (theme) => theme.palette.divider,
-                                }}
-                            />
-
-                            {/* mini buttons (dark mode, github etc) */}
-                            <Stack direction="row" spacing={1}>
-                                {/* download resume button */}
-                                <NavbarButton
-                                    onClick={() => {
-                                        confirmDialog({
-                                            title: "Resume Download",
-                                            content:
-                                                "This will open Google Drive",
-                                        })
-                                            .then(() =>
-                                                window.open(
-                                                    "https://bit.ly/harmeet9013-resume"
-                                                )
-                                            )
-                                            .catch(() => {
-                                                /* */
-                                            });
-                                    }}
-                                    size="large"
-                                >
-                                    <DownloadRounded sx={{ marginY: "-6px" }} />
-                                </NavbarButton>
-
-                                {/* source code button */}
-                                <NavbarButton
-                                    onClick={() =>
-                                        window.open(
-                                            "https://github.com/harmeet9013/harmeet9013.github.io",
-                                            "_blank"
-                                        )
-                                    }
-                                    size="large"
-                                >
-                                    <GitHub sx={{ marginY: "-6px" }} />
-                                </NavbarButton>
-
-                                {/* color mode button */}
-
-                                <NavbarButton
-                                    onClick={handleThemeChange}
-                                    size="large"
-                                >
-                                    {props.darkMode ? (
-                                        <DarkModeRounded
-                                            sx={{ marginY: "-6px" }}
-                                        />
-                                    ) : (
-                                        <LightModeRounded
-                                            sx={{ marginY: "-6px" }}
-                                        />
-                                    )}
-                                </NavbarButton>
-                            </Stack>
-                        </Stack>
-                    )}
+                        {renderMenu()}
+                    </Stack>
                 </Stack>
             </Slide>
-            {/* scroll to top button */}
-            <ScrollToTop showScrollTop={showScrollTop} />
-        </Fragment>
+
+            <ScrollToTop
+                showScrollTop={showScrollTop}
+                isMobile={props.isMobile}
+            />
+        </Stack>
     );
 }

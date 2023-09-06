@@ -1,22 +1,32 @@
-import { Box, Container, Stack, Typography, styled } from "@mui/material";
-
-import blogsBackground from "./assets/projects-pics/blogs.png";
-import simonBackground from "./assets/projects-pics/simon.png";
-import keeperBackground from "./assets/projects-pics/keeper.png";
-import weatherBackground from "./assets/projects-pics/weather.png";
 import {
+    ArrowBackIosNewRounded,
+    ArrowForwardIosRounded,
     ArticleRounded,
     CloudRounded,
     GamesRounded,
     HomeRounded,
     NotesRounded,
+    Twitter,
 } from "@mui/icons-material";
+import Carousel from "react-material-ui-carousel";
+import { Box, Container, Stack, Typography, styled } from "@mui/material";
+
+import blogsBackground from "./assets/projects-pics/blogs.png";
+import simonBackground from "./assets/projects-pics/simon.png";
+import keeperBackground from "./assets/projects-pics/keeper.png";
+import twitter1 from "./assets/projects-pics/twitter-clone-1.png";
+import twitter2 from "./assets/projects-pics/twitter-clone-2.png";
+import twitter3 from "./assets/projects-pics/twitter-clone-3.png";
+import twitter4 from "./assets/projects-pics/twitter-clone-4.png";
+import twitter5 from "./assets/projects-pics/twitter-clone-5.png";
+import weatherBackground from "./assets/projects-pics/weather.png";
 
 export default function Projects(props) {
     const myProjects = {
         simon: {
             icon: (
                 <GamesRounded
+                    color="primary"
                     fontSize="large"
                     sx={{
                         my: -0.8,
@@ -31,6 +41,7 @@ export default function Projects(props) {
         keeper: {
             icon: (
                 <NotesRounded
+                    color="primary"
                     fontSize="large"
                     sx={{
                         my: -0.8,
@@ -45,6 +56,7 @@ export default function Projects(props) {
         weather: {
             icon: (
                 <CloudRounded
+                    color="primary"
                     fontSize="large"
                     sx={{
                         my: -0.8,
@@ -66,11 +78,11 @@ export default function Projects(props) {
         overflow: "hidden",
         height: "300px",
         cursor: "pointer",
-        border: `5px solid ${theme.palette.containers.tertiary.container}`,
-        boxShadow: theme.shadows[4],
+        border: `5px solid ${theme.palette.secondary.container.main}`,
+        boxShadow: theme.shadows[0],
         "&:hover": {
             transform: "translateY(-0.2rem)",
-            boxShadow: theme.shadows[10],
+            boxShadow: theme.shadows[2],
         },
     }));
 
@@ -93,7 +105,7 @@ export default function Projects(props) {
         left: 0,
         width: "100%",
         height: "150%",
-        backgroundColor: theme.palette.hover,
+        backgroundColor: theme.palette.background.header,
         transition: theme.transitions.create(),
     }));
 
@@ -108,10 +120,7 @@ export default function Projects(props) {
             >
                 <ProjectStack
                     onClick={() => {
-                        window.open(
-                            "https://harmeet9013.github.io/blogs",
-                            "_blank"
-                        );
+                        window.open("https://harmeet9013-blogs.vercel.app");
                     }}
                     component={Container}
                     direction="column"
@@ -127,18 +136,23 @@ export default function Projects(props) {
                         variant={props.isMobile ? "h4" : "h3"}
                         zIndex={5}
                         letterSpacing={2}
-                        color="primary"
+                        color={(theme) => theme.palette.tertiary.container.on}
                         fontWeight={600}
                     >
                         <ArticleRounded
                             fontSize="large"
+                            color="primary"
                             sx={{
                                 my: props.isMobile ? -0.8 : -0.5,
                             }}
                         />{" "}
                         Blogs
                     </Typography>
-                    <Typography variant="h6" zIndex={5}>
+                    <Typography
+                        variant="h6"
+                        zIndex={5}
+                        color={(theme) => theme.palette.secondary.container.on}
+                    >
                         Blog website built using MERN Stack with User
                         Authentication and more.
                     </Typography>
@@ -177,11 +191,19 @@ export default function Projects(props) {
                                     fontWeight={600}
                                     zIndex={5}
                                     letterSpacing={2}
-                                    color="primary"
+                                    color={(theme) =>
+                                        theme.palette.tertiary.container.on
+                                    }
                                 >
                                     {project.icon} {project.label}
                                 </Typography>
-                                <Typography variant="h6" zIndex={5}>
+                                <Typography
+                                    variant="h6"
+                                    zIndex={5}
+                                    color={(theme) =>
+                                        theme.palette.secondary.container.on
+                                    }
+                                >
                                     {project.desc}
                                 </Typography>
                             </ProjectStack>
@@ -189,6 +211,72 @@ export default function Projects(props) {
                     })}
                 </Stack>
             </Stack>
+        );
+    };
+
+    const renderCarousel = () => {
+        const images = [twitter1, twitter2, twitter3, twitter4, twitter5];
+
+        return (
+            <Carousel
+                NextIcon={
+                    <ArrowForwardIosRounded
+                        fontSize="large"
+                        color="tertiary"
+                        sx={{
+                            padding: 0.8,
+                        }}
+                    />
+                }
+                PrevIcon={
+                    <ArrowBackIosNewRounded
+                        fontSize="large"
+                        color="tertiary"
+                        sx={{
+                            padding: 0.8,
+                        }}
+                    />
+                }
+                animation="fade"
+                interval={8000}
+                navButtonsAlwaysVisible
+                sx={(theme) => ({
+                    width: props.isMobile ? "100%" : "90%",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius: props.isMobile ? 10 : 20,
+                })}
+                navButtonsProps={{
+                    sx: (theme) => ({
+                        backgroundColor: theme.palette.secondary.container.main,
+                    }),
+                }}
+                indicatorIconButtonProps={{
+                    sx: (theme) => ({
+                        color: theme.palette.background.highest,
+                    }),
+                }}
+                activeIndicatorIconButtonProps={{
+                    sx: (theme) => ({
+                        color: theme.palette.primary.main,
+                    }),
+                }}
+            >
+                {images.map((Image) => {
+                    return (
+                        <Box
+                            component="img"
+                            src={Image}
+                            sx={(theme) => ({
+                                width: "100%",
+                                height: props.isMobile ? "20rem" : "100%",
+                                objectFit: "cover",
+                                borderRadius: props.isMobile ? 10 : 20,
+                            })}
+                        />
+                    );
+                })}
+            </Carousel>
         );
     };
 
@@ -242,6 +330,31 @@ export default function Projects(props) {
 
             {/* projects */}
             {renderProjects()}
+
+            <props.MyDivider
+                sx={(theme) => ({
+                    width: "100%",
+                    background: `linear-gradient(90deg, ${theme.palette.tertiary.container.main}, ${theme.palette.primary.container.main})`,
+                })}
+            />
+
+            <Typography
+                variant={props.isMobile ? "h3" : "h2"}
+                color="primary"
+                textAlign="left"
+                fontWeight={500}
+            >
+                Upcoming
+            </Typography>
+
+            <props.MyDivider />
+
+            <Stack justifyContent="center" alignItems="center" spacing={4}>
+                <Typography color="secondary" variant="h4" fontWeight={500}>
+                    <Twitter color="primary" /> Twitter-Clone
+                </Typography>
+                {renderCarousel()}
+            </Stack>
         </Stack>
     );
 }
