@@ -186,7 +186,7 @@ export default function Heading(props) {
                             sx: (theme) => ({
                                 backgroundColor:
                                     theme.palette.background.header,
-                                backdropFilter: "blur(10px)",
+
                                 border: `2px solid ${theme.palette.divider}`,
                                 borderRadius: 10,
                                 marginTop: 3,
@@ -194,6 +194,15 @@ export default function Heading(props) {
                                 flexDirection: "column",
                                 padding: "0.8rem 1rem",
                                 zIndex: 50,
+                                WebkitBackfaceVisibility: "hidden",
+                                WebkitPerspective: "1000",
+                                WebkitTransform: "translate3d(0,0,0)",
+                                WebkitTransform: "translateZ(0)",
+                                backfaceVisibility: "hidden",
+                                perspective: "1000",
+                                transform: "translate3d(0,0,0)",
+                                transform: "translateZ(0)",
+                                backdropFilter: "blur(10px)",
                             }),
                         },
                     }}
@@ -323,13 +332,21 @@ export default function Heading(props) {
                             `2px solid ${theme.palette.divider}`,
                         borderBottom: `2px solid ${theme.palette.divider}`,
                         backgroundColor: theme.palette.background.header,
-                        backdropFilter: "blur(10px)",
                         padding: props.isMobile ? "0.4rem" : "0.4rem 1rem",
                         width: props.isMobile ? "100%" : "40rem",
                         borderRadius: props.isMobile ? "0" : "0 0 30px 30px",
                         position: "fixed",
                         overflow: "hidden",
                         zIndex: 50,
+                        WebkitBackfaceVisibility: "hidden",
+                        WebkitPerspective: "1000",
+                        WebkitTransform: "translate3d(0,0,0)",
+                        WebkitTransform: "translateZ(0)",
+                        backfaceVisibility: "hidden",
+                        perspective: "1000",
+                        transform: "translate3d(0,0,0)",
+                        transform: "translateZ(0)",
+                        backdropFilter: "blur(10px)",
                     })}
                 >
                     {/* Header name */}
