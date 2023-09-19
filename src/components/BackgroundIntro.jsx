@@ -50,7 +50,7 @@ export default function BackgroundIntro(props) {
                 textAlign: "center",
                 justifyContent: "center",
                 alignItems: "center",
-                height: "100vh",
+                height: "100svh",
                 padding: props.isMobile ? "0 2rem 0 2rem" : "0 5rem 0 5rem",
                 cursor: "default",
                 transition: theme.transitions.create(),
