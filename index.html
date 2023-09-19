@@ -2,7 +2,31 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <link rel="icon" href="data:," />
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAAAAAAYplnuAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfnCRMIMx6IXhJxAAAD8ElEQVR42u3cTU8TQRgH8FlqCxSlRV7EJiJRI2JqokEEJSbgBT0YP4Dx5sWDEdCDJt4MITExUQ/ET6BfAL0ao0ZeFCQSSSEQgiCSUqVApbSl67302Xmm7sKU/P/HmX12f+zOzm7Y7hrzIv9SsNMAoHUO0EADrUGABhpoDQI00EBrEKCBBlqDAA000BoEaKCB1iBAA73b0HuYy6ViadZyhteT0ZKOpXiVe7kWNnq6Z4lzUMzirqaMpt89E6zKfQ/r7UbHvi2wlvMuZ7ZsjI+yKv1rXPM2jGnD/lXm5YnoPNq0f5Wuu8xNx9biSelS7kBbe3lGm7EaXZXPH0U17ZdKuWiD+0B/Izrc93bZchFPw+W2QNGWMZyIDr55H7Gs9LW0N1d62KOfjRZCrH96PmTRHbh1tZKqHHrWb1EZvNPq5TPU0EKE7g+SfQceXbE4Qabu0ZUnnpxWQaieiHWdfrLvupVZHO0sp7qKbiqaVWePhvOk6pr1qs62UD3H2hTNquiSBhfRc6bWutJ7juoJVjmMFseLifXUyW4IDlMzWr3ytUK1oMKdvd1TLassKyEENapm+9CVskofMasZfsfRLuIKUFAkqywkxo9b/U7CrnsPQ4qm4lO6ruSEdhGb8FRIt0QcI5fze9pVRnRIbxz86nvULrSR83hyu3Kt/G+0FgEaaKA1CNBAA61BgAYaaA0CNNBAaxCggbYI+yG6JInROckDw3RMO/Ryh/SYrWqHNldsI8mTl2MaaKCB1iB5ibZrni5skj3eMoeWdUP7uqsll/HUjS+6oQ2v7OFVyr6RmJdjGmiggdYgQAMNtAYBGmigNQjQQAOtQYAGGmgNAjTQNqLNjVy3FOe9ie0EOrGUvT2dkFWurO8YWhDvvKciskKT+Kd7TP3Y2TWmzc1cK9ecR68QI3NT+huDFPVnqY91VXSYeKU5uSirjP7N3p4OO46eiWdvj8/KKv8QaPOn4+gQNUuEZJPDXJToGON9zyJ39Dz5DvbIpHXl+gD1yO7rhLPodN8Y1bXw0npXj7yjemZeqc7g3M8KCCGESPY9pX/TM+U+5aZLJ7pDZF/IG1R7nKmAjn9/0Wtxpic/T1f4PVm7Uj9e9wxbVA4vVpVa/MFbwn1DPzXb/2Hgl2Sh/Y2tjUcKMxrT8yMD/ZOSa0+g+UJjLXt3c9HjHSH5RyeEcB98fDGjKdz1kXPN8xzqDXLR3BMxHuGYRXJpy2yciLCu04kI/3TE51+2K1x07h9xceDzL9wztuZBjHOcTffJzKay22FWZWEtG632URJNsqvHtFYBGmigNQjQQAOtQYAGGmgNAjTQQGsQoIEGWoMADTTQGgRooC3yD7Qb3DIxYnvlAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIzLTA5LTE5VDA4OjUxOjMwKzAwOjAw+2OAAAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMy0wOS0xOVQwODo1MTozMCswMDowMIo+OLwAAABXelRYdFJhdyBwcm9maWxlIHR5cGUgaXB0YwAAeJzj8gwIcVYoKMpPy8xJ5VIAAyMLLmMLEyMTS5MUAxMgRIA0w2QDI7NUIMvY1MjEzMQcxAfLgEigSi4A6hcRdPJCNZUAAAAASUVORK5CYII="
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfnCRMIMyPQNl5gAAAB6klEQVRIx73UzUtUYRTH8c9zHaUXSKggUomEWuQiK+ofiDIIWrRpFdWukqAIWluLaNcisDZZ7QJBCKxF/QMSLaSVhZGLnCCKKO9YJuM8be7ovGjjzKJzN889z/P73nPOc84N5GG3807bY7PGtmDGc4+8F7uFPMGA2w5K1iEuW/TOTWOWcjhhRFcTYgj2eaDN05DvNepwk/KyTTuTOOdQi3L2uhzykw60DOBzyBdWKh+FqkpGJUEQKjxRrHgnV3lxwR/TisuHu+wQffQzk0Sdeqvk5KpLm7prQkS01ZCTip55YhF0uOBaDaDq7qPthvRIpX4bdFxJ4qJjUqnUgEt1zVIDoMcusEm/DlHUqS/b77NFrAHUpABt2Tpk5YrLh5KaAtZF0MjiKr7cWoeDRCI2/MaagJIvZi0h50crgILr2rP1fCuAdkdsy1KY8qZ5wAZX9SuhzcNWAOW+X732K9bUNf4vQH3IpfUCoqBoDiyaW26kNNufy1p7TUBQMGwSLLjnrUQ0bizbHzVeNw01w7QocTajLkkFUeqoAVBUqAOE/C8bK1No9peWmKmMgFLFUx7nSo/qCL4mXjTolH/bq8RjUy3LP7mfmHLL95bk8+6YSDDmig9Ny2fdMCIG8gT7DTpl5zrF37w07LVSt7/+6J6SHhs6qAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0wOS0xOVQwODo1MTozNSswMDowMKlbr6cAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjMtMDktMTlUMDg6NTE6MzUrMDA6MDDYBhcbAAAAV3pUWHRSYXcgcHJvZmlsZSB0eXBlIGlwdGMAAHic4/IMCHFWKCjKT8vMSeVSAAMjCy5jCxMjE0uTFAMTIESANMNkAyOzVCDL2NTIxMzEHMQHy4BIoEouAOoXEXTyQjWVAAAAAElFTkSuQmCC"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfnCRMIMyKnMW72AAABDklEQVQoz23RMWuTURjF8d993zd0aCGgiFALJUMqSKWTez+CJVP7JRzaobt0KaZzx/oh/BhuFZUiUjRtBWkJKA7m3uuQmzQhnvlwzv85Txi07Dr0VGVeyRdvvG3s6XtoUZWuY3UYfPAsCyUgoUKWZYHLMBip+eubkeCJkRssWVOXoBqiMy+99ttPB3reCdMmZCs2DXU8tu6RoS0tGTQQZBVqtaQSBEpGM4HOeK8vuZi7uJm9rK0jWi7hMwwTdfXsWF005NKaRJHSn+8NwR+f8NWdH65lH42mkFFNtO2FRlJ5JXkgFrww+GwjC2W3WEbP0njq75W+YUAs/VkUpTHHLyf1/rlbz7X/888rR07/AbCSU6jqq9R9AAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIzLTA5LTE5VDA4OjUxOjM0KzAwOjAwDyykEwAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMy0wOS0xOVQwODo1MTozNCswMDowMH5xHK8AAABXelRYdFJhdyBwcm9maWxlIHR5cGUgaXB0YwAAeJzj8gwIcVYoKMpPy8xJ5VIAAyMLLmMLEyMTS5MUAxMgRIA0w2QDI7NUIMvY1MjEzMQcxAfLgEigSi4A6hcRdPJCNZUAAAAASUVORK5CYII="
+        />
+        <link rel="manifest" href="data:application/manifest+json;base64,ewogICAgIm5hbWUiOiAiIiwKICAgICJzaG9ydF9uYW1lIjogIiIsCiAgICAiaWNvbnMiOiBbCiAgICAgICAgewogICAgICAgICAgICAic3JjIjogIi9hbmRyb2lkLWNocm9tZS0xOTJ4MTkyLnBuZyIsCiAgICAgICAgICAgICJzaXplcyI6ICIxOTJ4MTkyIiwKICAgICAgICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgICAgIH0sCiAgICAgICAgewogICAgICAgICAgICAic3JjIjogIi9hbmRyb2lkLWNocm9tZS0yNTZ4MjU2LnBuZyIsCiAgICAgICAgICAgICJzaXplcyI6ICIyNTZ4MjU2IiwKICAgICAgICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgICAgIH0KICAgIF0sCiAgICAidGhlbWVfY29sb3IiOiAiI2ZmZmZmZiIsCiAgICAiYmFja2dyb3VuZF9jb2xvciI6ICIjZmZmZmZmIiwKICAgICJkaXNwbGF5IjogInN0YW5kYWxvbmUiCn0K" />
+        <link
+            rel="mask-icon"
+            href="./assets/safari-pinned-tab-582938e0.svg"
+            color="#ff0000"
+        />
+        <meta name="msapplication-TileColor" content="#e5e5e5" />
+        <meta name="theme-color" content="#ffffff" />
         <link rel="preconnect" href="https://fonts.googleapis.com" async />
         <link
             rel="preconnect"
@@ -16,8 +40,8 @@
             async
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Harmeet Singh</title>
-      <script async type="module" crossorigin src="./assets/index-9889eeff.js"></script>
+        <title>Harmeet's Portfolio</title>
+      <script async type="module" crossorigin src="./assets/index-1cc01fde.js"></script>
     </head>
     <body>
         <div id="root"></div>
