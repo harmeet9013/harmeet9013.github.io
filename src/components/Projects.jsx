@@ -6,8 +6,12 @@ import {
     GamesRounded,
     HomeRounded,
     NotesRounded,
+    TaskRounded,
     Twitter,
+    ViewQuiltRounded,
+    WebRounded,
 } from "@mui/icons-material";
+import { Fragment } from "react";
 import Carousel from "react-material-ui-carousel";
 import { Box, Container, Stack, Typography, styled } from "@mui/material";
 
@@ -20,55 +24,84 @@ import twitter3 from "./assets/projects-pics/twitter-clone-3.png";
 import twitter4 from "./assets/projects-pics/twitter-clone-4.png";
 import twitter5 from "./assets/projects-pics/twitter-clone-5.png";
 import weatherBackground from "./assets/projects-pics/weather.png";
+import taskboxBackground from "./assets/projects-pics/taskbox.png";
 
 export default function Projects(props) {
-    const myProjects = {
-        simon: {
+    const mernProjects = [
+        {
+            title: "Blogs",
+            desc: "My personal blog built from the ground up uitlizing the MERN stack with beautiful interface and many features!",
+            link: "https://harmeet9013-blogs.vercel.app",
+            background: blogsBackground,
             icon: (
-                <GamesRounded
-                    color="primary"
+                <ArticleRounded
                     fontSize="large"
                     sx={{
-                        my: -0.8,
+                        my: props.isMobile ? -0.8 : -0.5,
                     }}
                 />
             ),
-            label: "Simon Game",
-            desc: "The infamous Simon Game. Built from the ground up in ReactJS.",
-            link: "https://harmeet9013.github.io/simon-game",
-            bg: simonBackground,
         },
-        keeper: {
+        {
+            title: "TaskBox",
+            desc: "Personalized full stack to-do task manager with runtime database, beautiful design and more!",
+            link: "https://harmeet9013-taskbox.vercel.app",
+            background: taskboxBackground,
             icon: (
-                <NotesRounded
-                    color="primary"
+                <TaskRounded
                     fontSize="large"
                     sx={{
-                        my: -0.8,
+                        my: props.isMobile ? -0.8 : -0.5,
                     }}
                 />
             ),
-            label: "Keeper",
+        },
+    ];
+
+    const frontendProjects = [
+        {
+            title: "Keeper",
             desc: "A simple and elegant note keeping web app. Built in ReactJS.",
             link: "https://harmeet9013.github.io/keeper",
-            bg: keeperBackground,
-        },
-        weather: {
+            background: keeperBackground,
             icon: (
-                <CloudRounded
-                    color="primary"
+                <NotesRounded
                     fontSize="large"
                     sx={{
                         my: -0.8,
                     }}
                 />
             ),
-            label: "Weather",
+        },
+        {
+            title: "Weather",
             desc: "Current forecast using the OpenWeatherMap API. Built in ReactJS.",
             link: "https://harmeet9013.github.io/weather-app",
-            bg: weatherBackground,
+            background: weatherBackground,
+            icon: (
+                <CloudRounded
+                    fontSize="large"
+                    sx={{
+                        my: -0.8,
+                    }}
+                />
+            ),
         },
-    };
+        {
+            title: "Simon Game",
+            desc: "The infamous Simon Game. Built from the ground up in ReactJS.",
+            link: "https://harmeet9013.github.io/simon-game",
+            background: simonBackground,
+            icon: (
+                <GamesRounded
+                    fontSize="large"
+                    sx={{
+                        my: -0.8,
+                    }}
+                />
+            ),
+        },
+    ];
 
     const ProjectStack = styled(Stack)(({ theme }) => ({
         transition: theme.transitions.create(),
@@ -76,10 +109,10 @@ export default function Projects(props) {
         textAlign: "center",
         borderRadius: 50,
         overflow: "hidden",
-        height: "300px",
+        width: props.isMobile ? "100%" : 500,
+        padding: "2rem",
         cursor: "pointer",
-        border: `5px solid ${theme.palette.secondary.container.main}`,
-        boxShadow: theme.shadows[0],
+        border: `5px solid ${theme.palette.dividervar}`,
         "&:hover": {
             transform: "translateY(-0.2rem)",
             boxShadow: theme.shadows[2],
@@ -93,123 +126,119 @@ export default function Projects(props) {
         width: "inherit",
         height: "inherit",
         objectFit: "cover",
-        filter: "blur(5px)",
-        zIndex: "0",
-        transition: theme.transitions.create(),
-        transform: "scale(1.1)",
+        opacity: 0.1,
     }));
 
-    const ProjectOverlay = styled(Box)(({ theme }) => ({
-        position: "absolute",
-        top: -50,
-        left: 0,
-        width: "100%",
-        height: "150%",
-        backgroundColor: theme.palette.background.header,
-        transition: theme.transitions.create(),
-    }));
-
-    const renderProjects = () => {
+    const renderProject = (projects) => {
         return (
             <Stack
-                direction="column"
-                spacing={props.isMobile ? 4 : 8}
-                justifyContent="center"
-                alignItems="center"
-                component={Container}
+                direction={props.isMobile ? "column" : "row"}
+                flexWrap="wrap"
+                columnGap={5}
+                rowGap={5}
             >
-                <ProjectStack
-                    onClick={() => {
-                        window.open("https://harmeet9013-blogs.vercel.app");
-                    }}
-                    component={Container}
-                    direction="column"
-                    spacing={2}
-                    justifyContent="center"
-                    alignItems="center"
-                >
-                    <ProjectImage component="img" src={blogsBackground} />
-
-                    <ProjectOverlay />
-
-                    <Typography
-                        variant={props.isMobile ? "h4" : "h3"}
-                        zIndex={5}
-                        letterSpacing={2}
-                        color={(theme) => theme.palette.tertiary.container.on}
-                        fontWeight={600}
+                {projects.map((project, index) => (
+                    <ProjectStack
+                        key={index}
+                        onClick={() => window.open(project.link)}
+                        component={Container}
+                        direction="column"
+                        spacing={2}
+                        justifyContent="center"
+                        alignItems="center"
                     >
-                        <ArticleRounded
-                            fontSize="large"
-                            color="primary"
-                            sx={{
-                                my: props.isMobile ? -0.8 : -0.5,
-                            }}
-                        />{" "}
-                        Blogs
-                    </Typography>
-                    <Typography
-                        variant="h6"
-                        zIndex={5}
-                        color={(theme) => theme.palette.secondary.container.on}
-                    >
-                        Blog website built using MERN Stack with User
-                        Authentication and more.
-                    </Typography>
-                </ProjectStack>
+                        <ProjectImage
+                            component="img"
+                            src={project.background}
+                        />
 
-                <Stack
-                    direction={props.isMobile ? "column" : "row"}
-                    spacing={4}
-                    justifyContent="center"
-                    alignItems="center"
-                >
-                    {Object.keys(myProjects).map((key) => {
-                        const project = myProjects[key];
-                        return (
-                            // individual component of the project
-                            <ProjectStack
-                                key={project.label}
-                                onClick={() => {
-                                    window.open(project.link, "_blank");
+                        <Typography
+                            variant={props.isMobile ? "h4" : "h3"}
+                            zIndex={5}
+                            letterSpacing={2}
+                            color={(theme) => theme.palette.secondary.main}
+                            fontWeight={600}
+                        >
+                            {project.icon} {project.title}
+                        </Typography>
+
+                        <Typography variant="h6">{project.desc}</Typography>
+                    </ProjectStack>
+                ))}
+            </Stack>
+        );
+    };
+
+    const renderAllProjects = (projectsName) => {
+        return (
+            <Stack
+                spacing={4}
+                sx={(theme) => ({
+                    border: `1px solid ${theme.palette.divider}`,
+                    borderRadius: 10,
+                    padding: props.isMobile ? "2rem 1.5rem" : 5,
+                    backgroundColor: theme.palette.background.low,
+                    justifyContent: props.isMobile && "center",
+                    alignItems: props.isMobile && "center",
+                })}
+            >
+                {projectsName === "mern" ? (
+                    <Fragment>
+                        <Typography
+                            variant="h4"
+                            color={(theme) =>
+                                theme.palette.secondary.container.on
+                            }
+                            align="center"
+                            fontWeight={600}
+                            sx={(theme) => ({
+                                backgroundColor:
+                                    theme.palette.secondary.container.main,
+                                borderRadius: 10,
+                                padding: 2,
+                                width: props.isMobile ? "100%" : 300,
+                            })}
+                        >
+                            <ViewQuiltRounded
+                                fontSize="large"
+                                sx={{
+                                    my: -0.8,
                                 }}
-                                component={Container}
-                                direction="column"
-                                spacing={2}
-                                justifyContent="center"
-                                alignItems="center"
-                            >
-                                <ProjectImage
-                                    component="img"
-                                    src={project.bg}
-                                />
+                            />{" "}
+                            MERN Stack
+                        </Typography>
 
-                                <ProjectOverlay />
+                        {renderProject(mernProjects)}
+                    </Fragment>
+                ) : (
+                    <Fragment>
+                        <Typography
+                            variant="h4"
+                            color={(theme) =>
+                                theme.palette.secondary.container.on
+                            }
+                            align="center"
+                            fontWeight={600}
+                            sx={(theme) => ({
+                                backgroundColor:
+                                    theme.palette.secondary.container.main,
+                                borderRadius: 10,
+                                padding: 2,
+                                width: props.isMobile ? "100%" : 300,
+                            })}
+                        >
+                            <WebRounded
+                                fontSize="large"
+                                sx={{
+                                    my: -0.8,
+                                }}
+                            />{" "}
+                            Front End
+                        </Typography>
 
-                                <Typography
-                                    variant="h4"
-                                    fontWeight={600}
-                                    zIndex={5}
-                                    letterSpacing={2}
-                                    color={(theme) =>
-                                        theme.palette.tertiary.container.on
-                                    }
-                                >
-                                    {project.icon} {project.label}
-                                </Typography>
-                                <Typography
-                                    variant="h6"
-                                    zIndex={5}
-                                    color={(theme) =>
-                                        theme.palette.secondary.container.on
-                                    }
-                                >
-                                    {project.desc}
-                                </Typography>
-                            </ProjectStack>
-                        );
-                    })}
-                </Stack>
+                        {renderProject(frontendProjects)}
+                    </Fragment>
+                )}
             </Stack>
         );
     };
@@ -318,18 +347,15 @@ export default function Projects(props) {
                     paddingRight={!props.isMobile && 20}
                 >
                     These are the projects that I have built throughout this
-                    year. Most (if not all) of my work is hosted live through
-                    Github Pages.
+                    year. <br /> All of the projects are hosted through Vercel
+                    or GitHub pages.
                 </Typography>
             </Stack>
 
-            {/* second dec */}
-            <Typography variant="h6" textAlign="center">
-                Click on any project to visit it.
-            </Typography>
-
             {/* projects */}
-            {renderProjects()}
+            {renderAllProjects("mern")}
+
+            {renderAllProjects("frontend")}
 
             <props.MyDivider
                 sx={(theme) => ({
@@ -350,7 +376,11 @@ export default function Projects(props) {
             <props.MyDivider />
 
             <Stack justifyContent="center" alignItems="center" spacing={4}>
-                <Typography color="secondary" variant="h4" fontWeight={500}>
+                <Typography
+                    color={(theme) => theme.palette.primary.container.on}
+                    variant="h4"
+                    fontWeight={500}
+                >
                     <Twitter color="primary" /> Twitter-Clone
                 </Typography>
                 {renderCarousel()}

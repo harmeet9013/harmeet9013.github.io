@@ -8,6 +8,7 @@ import {
     Container,
     IconButton,
     Menu,
+    Collapse,
 } from "@mui/material";
 import {
     DownloadRounded,
@@ -32,7 +33,7 @@ export default function Heading(props) {
 
     // state hooks
     const [showHeader, setShowHeader] = useState(true);
-    const [showScrollTop, setShowScrollTop] = useState(true);
+    const [showScrollTop, setShowScrollTop] = useState(false);
     const [prevScrollPos, setPrevScrollPos] = useState(0);
     const [menuOpen, setMenuOpen] = useState(null);
 
@@ -185,8 +186,7 @@ export default function Heading(props) {
                             elevation: 0,
                             sx: (theme) => ({
                                 backgroundColor:
-                                    theme.palette.background.header,
-
+                                    theme.palette.background.default,
                                 border: `2px solid ${theme.palette.divider}`,
                                 borderRadius: 10,
                                 marginTop: 3,
@@ -194,15 +194,6 @@ export default function Heading(props) {
                                 flexDirection: "column",
                                 padding: "0.8rem 1rem",
                                 zIndex: 50,
-                                WebkitBackfaceVisibility: "hidden",
-                                WebkitPerspective: "1000",
-                                WebkitTransform: "translate3d(0,0,0)",
-                                WebkitTransform: "translateZ(0)",
-                                backfaceVisibility: "hidden",
-                                perspective: "1000",
-                                transform: "translate3d(0,0,0)",
-                                transform: "translateZ(0)",
-                                backdropFilter: "blur(10px)",
                             }),
                         },
                     }}
@@ -317,36 +308,32 @@ export default function Heading(props) {
             justifyContent="flex-start"
             alignItems="center"
         >
-            <Slide direction="down" in={showHeader}>
+            <Slide direction="down" in={!showScrollTop || showHeader}>
                 <Stack
                     direction="row"
                     justifyContent="space-between"
                     alignItems="center"
                     sx={(theme) => ({
                         transition: `${theme.transitions.create()} !important`,
-                        borderLeft:
-                            !props.isMobile &&
-                            `2px solid ${theme.palette.divider}`,
-                        borderRight:
-                            !props.isMobile &&
-                            `2px solid ${theme.palette.divider}`,
-                        borderBottom: `2px solid ${theme.palette.divider}`,
-                        backgroundColor: theme.palette.background.header,
+                        ...(props.isMobile
+                            ? {
+                                  borderBottom: `2px solid ${theme.palette.divider}`,
+                              }
+                            : {
+                                  border: `2px solid ${theme.palette.divider}`,
+                              }),
+                        backgroundColor: theme.palette.background.default,
                         padding: props.isMobile ? "0.4rem" : "0.4rem 1rem",
-                        width: props.isMobile ? "100%" : "40rem",
-                        borderRadius: props.isMobile ? "0" : "0 0 30px 30px",
+                        marginTop: !props.isMobile && 1,
+                        width: props.isMobile
+                            ? "100%"
+                            : showScrollTop
+                            ? "50rem"
+                            : "40rem",
+                        borderRadius: props.isMobile ? "0" : 7,
                         position: "fixed",
                         overflow: "hidden",
                         zIndex: 50,
-                        WebkitBackfaceVisibility: "hidden",
-                        WebkitPerspective: "1000",
-                        WebkitTransform: "translate3d(0,0,0)",
-                        WebkitTransform: "translateZ(0)",
-                        backfaceVisibility: "hidden",
-                        perspective: "1000",
-                        transform: "translate3d(0,0,0)",
-                        transform: "translateZ(0)",
-                        backdropFilter: "blur(10px)",
                     })}
                 >
                     {/* Header name */}

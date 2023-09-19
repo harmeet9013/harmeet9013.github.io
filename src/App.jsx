@@ -96,12 +96,12 @@ export default function App() {
                       },
 
                       background: {
-                          default: "#0c0f10",
+                          default: "#090c0c",
                           low: "#191c1e",
                           med: "#1d2022",
                           high: "#282a2c",
                           highest: "#333537",
-                          header: "#0c0f10df",
+                          header: "#090c0cf5",
                       },
 
                       divider: "#41484d",
@@ -158,7 +158,7 @@ export default function App() {
                           med: "#edeef0",
                           high: "#e7e8ea",
                           highest: "#e1e2e5",
-                          header: "#ffffffdf",
+                          header: "#fffffff5",
                       },
 
                       divider: "#c0c7cd",
