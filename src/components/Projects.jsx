@@ -116,6 +116,7 @@ export default function Projects(props) {
         "&:hover": {
             transform: "translateY(-0.2rem)",
             boxShadow: theme.shadows[2],
+            border: `5px solid ${theme.palette.primary.container.on}`,
         },
     }));
 
@@ -160,7 +161,9 @@ export default function Projects(props) {
                             {project.icon} {project.title}
                         </Typography>
 
-                        <Typography variant="h6">{project.desc}</Typography>
+                        <Typography variant="h6" fontWeight={400}>
+                            {project.desc}
+                        </Typography>
                     </ProjectStack>
                 ))}
             </Stack>
@@ -185,13 +188,12 @@ export default function Projects(props) {
                         <Typography
                             variant="h4"
                             color={(theme) =>
-                                theme.palette.secondary.container.on
+                                theme.palette.tertiary.container.on
                             }
                             align="center"
                             fontWeight={600}
                             sx={(theme) => ({
-                                backgroundColor:
-                                    theme.palette.secondary.container.main,
+                                backgroundColor: theme.palette.background.high,
                                 borderRadius: 10,
                                 padding: 2,
                                 width: props.isMobile ? "100%" : 300,
@@ -213,13 +215,12 @@ export default function Projects(props) {
                         <Typography
                             variant="h4"
                             color={(theme) =>
-                                theme.palette.secondary.container.on
+                                theme.palette.tertiary.container.on
                             }
                             align="center"
                             fontWeight={600}
                             sx={(theme) => ({
-                                backgroundColor:
-                                    theme.palette.secondary.container.main,
+                                backgroundColor: theme.palette.background.high,
                                 borderRadius: 10,
                                 padding: 2,
                                 width: props.isMobile ? "100%" : 300,

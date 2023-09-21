@@ -3,6 +3,7 @@ import { ContactPage, Folder, OpenInNewRounded } from "@mui/icons-material";
 import {
     Box,
     Button,
+    Fade,
     Grow,
     Link,
     Stack,
@@ -44,43 +45,57 @@ export default function BackgroundIntro(props) {
     return (
         <Stack
             id="home"
-            spacing={props.isMobile ? 4 : 6}
             direction={props.isMobile ? "column" : "row"}
             sx={(theme) => ({
-                textAlign: "center",
                 justifyContent: "center",
                 alignItems: "center",
                 height: "100svh",
-                padding: props.isMobile ? "0 2rem 0 2rem" : "0 5rem 0 5rem",
+                padding: props.isMobile ? "8svh 2rem 0 2rem" : "0 5rem 0 5rem",
                 cursor: "default",
+                rowGap: "1rem",
+                columnGap: "2rem",
                 transition: theme.transitions.create(),
             })}
         >
-            <Box
-                component="img"
-                src={props.darkMode ? bgDark : bgLight}
-                sx={(theme) => ({
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    backgroundPosition: "center",
-                    opacity: props.isMobile ? "0.2" : "0.5",
-                    zIndex: "-1",
-                    transition: theme.transitions.create(),
-                })}
-            />
+            <Fade
+                in={true}
+                timeout={{ enter: 500 }}
+                style={{
+                    transitionDelay: 200,
+                    opacity: props.isMobile ? "0.2" : "0.3",
+                }}
+            >
+                <Box
+                    component="img"
+                    src={props.darkMode ? bgDark : bgLight}
+                    sx={(theme) => ({
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        backgroundPosition: "center",
+                        zIndex: "-1",
+                        transition: theme.transitions.create(),
+                    })}
+                />
+            </Fade>
 
-            <Grow in={true}>
+            <Grow
+                in={true}
+                timeout={{ enter: 500 }}
+                style={{ transitionDelay: 200 }}
+            >
                 <Box
                     component="img"
                     src={avatar}
                     alt="avatar-img"
                     sx={(theme) => ({
-                        width: props.isMobile ? "30vh" : "400px",
-                        height: props.isMobile ? "30vh" : "400px",
+                        width: props.isMobile ? "30svh" : "50svh",
+                        maxWidth: "400px",
+                        height: props.isMobile ? "30svh" : "50svh",
+                        maxHeight: "400px",
                         borderRadius: props.isMobile ? 20 : 30,
                         transition: theme.transitions.create(),
                         border: `10px solid ${theme.palette.primary.main}`,
@@ -88,11 +103,15 @@ export default function BackgroundIntro(props) {
                 />
             </Grow>
 
-            <Grow in={true}>
+            <Grow
+                in={true}
+                timeout={{ enter: 500 }}
+                style={{ transitionDelay: 200 }}
+            >
                 <Stack
-                    direction="column"
-                    spacing={2}
+                    spacing={1}
                     sx={(theme) => ({
+                        textAlign: "center",
                         alignItems: "center",
                         justifyContent: "center",
                         transition: theme.transitions.create(),

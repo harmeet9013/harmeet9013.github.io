@@ -4,6 +4,7 @@ import {
     createTheme,
     CssBaseline,
     Divider,
+    responsiveFontSizes,
     styled,
     ThemeProvider,
     useMediaQuery,
@@ -40,129 +41,127 @@ export default function App() {
     }, [systemTheme]);
 
     const MyDivider = styled(Box)(({ theme }) => ({
-        backgroundColor: theme.palette.divider,
+        backgroundColor: theme.palette.tertiary.main,
         height: 10,
         borderRadius: 40,
         borderBottomWidth: 10,
         width: 100,
     }));
 
-    const material3Theme = createTheme({
+    let material3Theme = createTheme({
         palette: {
             mode: darkMode ? "dark" : "light",
             ...(darkMode
                 ? {
                       primary: {
-                          main: "#7ad0ff",
-                          on: "#003549",
+                          main: "#ffb690",
+                          on: "#542100",
                           container: {
-                              main: "#004c68",
-                              on: "#c3e8ff",
+                              main: "#783200",
+                              on: "#ffdbca",
                           },
                           fixed: {
-                              main: "#c3e8ff",
-                              dim: "#7ad0ff",
-                              on: "#001e2c",
-                              onvar: "#004c68",
+                              main: "#ffdbca",
+                              dim: "#ffb690",
+                              on: "#331100",
+                              onvar: "#783200",
                           },
                       },
                       secondary: {
-                          main: "#b5c9d7",
-                          on: "#003549",
+                          main: "#e6beab",
+                          on: "#542100",
                           container: {
-                              main: "#364955",
-                              on: "#d1e5f4",
+                              main: "#5c4132",
+                              on: "#ffdbca",
                           },
                           fixed: {
-                              main: "#d1e5f4",
-                              dim: "#b5c9d7",
-                              on: "#0a1e28",
-                              onvar: "#364955",
+                              main: "#ffdbca",
+                              dim: "#e6beab",
+                              on: "#2b160a",
+                              onvar: "#5c4132",
                           },
                       },
                       tertiary: {
-                          main: "#cac1ea",
-                          on: "#322c4c",
+                          main: "#cec891",
+                          on: "#343108",
                           container: {
-                              main: "#484264",
-                              on: "#e6deff",
+                              main: "#4b481d",
+                              on: "#ebe4aa",
                           },
                           fixed: {
-                              main: "#e6deff",
-                              dim: "#1c1736",
-                              on: "#1c1736",
+                              main: "#ebe4aa",
+                              dim: "#cec891",
+                              on: "#1e1c00",
                               onvar: "#633b48",
                           },
                       },
 
                       background: {
-                          default: "#090c0c",
-                          low: "#191c1e",
-                          med: "#1d2022",
-                          high: "#282a2c",
-                          highest: "#333537",
-                          header: "#090c0cf5",
+                          default: "#080604",
+                          low: "#171310",
+                          med: "#241e1b",
+                          high: "#2f2926",
+                          highest: "#3a3330",
                       },
 
-                      divider: "#41484d",
-                      dividervar: "#8a9297",
+                      divider: "#52443d",
+                      dividervar: "#a08d84",
                       backdrop: "#000000da",
                   }
                 : {
                       primary: {
-                          main: "#00668a",
+                          main: "#9b4505",
                           on: "#ffffff",
                           container: {
-                              main: "#c3e8ff",
-                              on: "#001e2c",
+                              main: "#ffdbca",
+                              on: "#331100",
                           },
                           fixed: {
-                              main: "#c3e8ff",
-                              dim: "#7ad0ff",
-                              on: "#001e2c",
-                              onvar: "#004c68",
+                              main: "#ffdbca",
+                              dim: "#ffb690",
+                              on: "#331100",
+                              onvar: "#783200",
                           },
                       },
                       secondary: {
-                          main: "#4e616d",
+                          main: "#765848",
                           on: "#ffffff",
                           container: {
-                              main: "#d1e5f4",
-                              on: "#0a1e28",
+                              main: "#ffdbca",
+                              on: "#2b160a",
                           },
                           fixed: {
-                              main: "#d1e5f4",
-                              dim: "#b5c9d7",
-                              on: "#0a1e28",
-                              onvar: "#364955",
+                              main: "#ffdbca",
+                              dim: "#e6beab",
+                              on: "#2b160a",
+                              onvar: "#5c4132",
                           },
                       },
                       tertiary: {
-                          main: "#605a7d",
+                          main: "#646032",
                           on: "#ffffff",
                           container: {
-                              main: "#e6deff",
-                              on: "#1c1736",
+                              main: "#ebe4aa",
+                              on: "#1e1c00",
                           },
                           fixed: {
-                              main: "#e6deff",
-                              dim: "#1c1736",
-                              on: "#1c1736",
-                              onvar: "#633b48",
+                              main: "#ebe4aa",
+                              dim: "#cec891",
+                              on: "#1e1c00",
+                              onvar: "#4b481d",
                           },
                       },
 
                       background: {
                           default: "#ffffff",
-                          low: "#f3f3f6",
-                          med: "#edeef0",
-                          high: "#e7e8ea",
-                          highest: "#e1e2e5",
-                          header: "#fffffff5",
+                          low: "#fef1ec",
+                          med: "#f8ebe6",
+                          high: "#f2e6e1",
+                          highest: "#ece0db",
                       },
 
-                      divider: "#c0c7cd",
-                      dividervar: "#71787d",
+                      divider: "#d7c2b9",
+                      dividervar: "#85746b",
                       backdrop: "#000000da",
                   }),
         },
@@ -180,6 +179,8 @@ export default function App() {
             fontFamily: "work sans",
         },
     });
+
+    material3Theme = responsiveFontSizes(material3Theme);
 
     return (
         <ThemeProvider theme={material3Theme}>
