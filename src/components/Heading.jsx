@@ -90,12 +90,13 @@ export default function Heading(props) {
         fontSize: theme.typography.subtitle1.fontSize,
         padding: "1.2rem 1.5rem",
         fontWeight: 500,
-        borderRadius: 50,
         width: "14rem",
         justifyContent: "flex-start",
         color: theme.palette.secondary.main,
         backgroundColor: theme.palette.background.low,
+        borderRadius: theme.spacing(2),
         "&:hover": {
+            borderRadius: theme.spacing(4),
             backgroundColor: theme.palette.primary.container.main,
         },
     }));
@@ -155,6 +156,7 @@ export default function Heading(props) {
                         transform: Boolean(menuOpen)
                             ? "rotate(90deg)"
                             : "rotate(0deg)",
+                        borderRadius: 4,
                         "&:hover": {
                             backgroundColor:
                                 theme.palette.primary.container.main,
@@ -342,13 +344,7 @@ export default function Heading(props) {
                             scrollToSection("home");
                         }}
                         sx={(theme) => ({
-                            fontSize: props.isMobile
-                                ? theme.typography.h5.fontSize
-                                : theme.typography.h4.fontSize,
-                            textTransform: "uppercase",
-                            fontWeight: 600,
-                            letterSpacing: props.isMobile ? 2 : 5,
-                            padding: "0px 20px",
+                            padding: props?.isMobile ? "0px 10px" : "0px 20px",
                             backgroundColor: "transparent",
                             background: `linear-gradient(to right, ${theme.palette.tertiary.container.on}, ${theme.palette.primary.main})`,
                             WebkitBackgroundClip: "text",
@@ -358,7 +354,19 @@ export default function Heading(props) {
                             },
                         })}
                     >
-                        Portfolio
+                        <Typography
+                            sx={(theme) => ({
+                                fontFamily: "Creattion",
+                                fontSize: props.isMobile
+                                    ? theme.typography.h4.fontSize
+                                    : theme.typography.h2.fontSize,
+                                // textTransform: "uppercase",
+                                fontWeight: 600,
+                                letterSpacing: props.isMobile ? 5 : 5,
+                            })}
+                        >
+                            Harmeet Singh
+                        </Typography>
                     </NavbarButton>
 
                     <Stack direction="row" spacing={1}>

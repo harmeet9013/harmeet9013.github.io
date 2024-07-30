@@ -124,9 +124,28 @@ export default function Contact(props) {
                 {renderLinks()}
             </Stack>
 
-            <Typography variant="overline">
-                Created with love.{" "}
-                <FavoriteRounded fontSize="20" color="primary" />
+            <Typography variant="body1">
+                Created with love{" "}
+                <FavoriteRounded
+                    fontSize="20"
+                    color="primary"
+                    sx={{
+                        mb: -0.3,
+                    }}
+                />{" "}
+                by
+                <Typography
+                    variant="inline"
+                    sx={(theme) => ({
+                        ...theme.typography.h2,
+                        textTransform: "none",
+                        fontFamily: "Creattion",
+                        fontWeight: 600,
+                        ml: 2,
+                    })}
+                >
+                    Harmeet Singh
+                </Typography>
             </Typography>
         </Stack>
     );

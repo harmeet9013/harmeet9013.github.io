@@ -14,9 +14,16 @@ import {
 import avatar from "./assets/projects-pics/avatar.jpg";
 import bgDark from "./assets/projects-pics/bg-dark.jpg";
 import bgLight from "./assets/projects-pics/bg-light.jpg";
+import { useState } from "react";
+import { useTheme } from "@emotion/react";
 
 export default function BackgroundIntro(props) {
+    const theme = useTheme();
     const confirmDialog = useConfirm();
+
+    const [imageLoaded, setImageLoaded] = useState(false);
+
+    const isLightMode = theme.palette.mode === "light";
 
     const CustomButton = styled(Button)(({ theme }) => ({
         textTransform: "none",
@@ -25,9 +32,10 @@ export default function BackgroundIntro(props) {
         color: theme.palette.secondary.main,
         fontSize: theme.typography.subtitle1.fontSize,
         fontWeight: 600,
-        borderRadius: 50,
+        borderRadius: theme.spacing(2),
         padding: "15px 30px",
         "&:hover": {
+            borderRadius: theme.spacing(4),
             backgroundColor: theme.palette.primary.container.main,
         },
     }));
@@ -35,7 +43,7 @@ export default function BackgroundIntro(props) {
     const scrollToSection = (sectionId) => {
         const section = document.getElementById(sectionId);
         if (section) {
-            const yOffset = -80; // Offset to adjust the final position if needed
+            const yOffset = -80;
             const y =
                 section.getBoundingClientRect().top + window.scrollY + yOffset;
             window.scrollTo({ top: y, behavior: "smooth" });
@@ -47,57 +55,61 @@ export default function BackgroundIntro(props) {
             id="home"
             direction={props.isMobile ? "column" : "row"}
             sx={(theme) => ({
-                justifyContent: "center",
-                alignItems: "center",
-                height: "100svh",
-                padding: props.isMobile ? "8svh 2rem 0 2rem" : "0 5rem 0 5rem",
-                cursor: "default",
+                position: "relative",
+                zIndex: 0,
                 rowGap: "1rem",
+                height: "100svh",
+                cursor: "default",
                 columnGap: "2rem",
+                overflow: "hidden",
+                alignItems: "center",
+                justifyContent: "center",
                 transition: theme.transitions.create(),
+                padding: props.isMobile ? "8svh 2rem 0 2rem" : "0 5rem 0 5rem",
             })}
         >
             <Fade
-                in={true}
+                in={imageLoaded}
                 timeout={{ enter: 500 }}
                 style={{
-                    transitionDelay: 200,
-                    opacity: props.isMobile ? "0.2" : "0.3",
+                    opacity: props.isMobile ? "0.5" : isLightMode ? "1" : "0.5",
                 }}
             >
                 <Box
                     component="img"
                     src={props.darkMode ? bgDark : bgLight}
+                    onLoad={() => setImageLoaded(true)}
                     sx={(theme) => ({
-                        position: "absolute",
                         top: 0,
                         left: 0,
-                        width: "100%",
-                        height: "100%",
+                        zoom: 20,
+                        width: 1,
+                        height: 1,
+                        zIndex: 0,
+                        filter: "blur(0.8px)",
+                        overflow: "hidden",
                         objectFit: "cover",
+                        position: "absolute",
                         backgroundPosition: "center",
-                        zIndex: "-1",
                         transition: theme.transitions.create(),
+                        animation: `rotate_image ${40000}ms linear infinite`,
                     })}
                 />
             </Fade>
 
-            <Grow
-                in={true}
-                timeout={{ enter: 500 }}
-                style={{ transitionDelay: 200 }}
-            >
+            <Grow in={true} timeout={{ enter: 300 }}>
                 <Box
                     component="img"
                     src={avatar}
                     alt="avatar-img"
                     sx={(theme) => ({
-                        width: props.isMobile ? "30svh" : "50svh",
+                        zIndex: 1,
                         maxWidth: "400px",
-                        height: props.isMobile ? "30svh" : "50svh",
                         maxHeight: "400px",
-                        borderRadius: props.isMobile ? 20 : 30,
                         transition: theme.transitions.create(),
+                        borderRadius: props.isMobile ? 20 : 30,
+                        width: props.isMobile ? "30svh" : "50svh",
+                        height: props.isMobile ? "30svh" : "50svh",
                         border: `10px solid ${theme.palette.primary.main}`,
                     })}
                 />
@@ -111,13 +123,14 @@ export default function BackgroundIntro(props) {
                 <Stack
                     spacing={1}
                     sx={(theme) => ({
+                        zIndex: 1,
                         textAlign: "center",
                         alignItems: "center",
                         justifyContent: "center",
                         transition: theme.transitions.create(),
                     })}
                 >
-                    <Typography variant="h6">hello there </Typography>
+                    {/* <Typography variant="h6">hello there </Typography> */}
                     <Typography
                         variant={props.isMobile ? "h4" : "h2"}
                         sx={(theme) => ({

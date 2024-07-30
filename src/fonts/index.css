@@ -1,0 +1,13 @@
+@font-face {
+    font-family: "Creattion";
+    src: url("./Creattion.otf");
+}
+
+@keyframes rotate_image {
+    from {
+        transform: rotate(0deg) scale(3);
+    }
+    to {
+        transform: rotate(360deg) scale(3);
+    }
+}
