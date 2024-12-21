@@ -327,11 +327,6 @@ export const Header = () => {
                                                 transform: !!menuOpen
                                                     ? "rotate(90deg)"
                                                     : "rotate(0deg)",
-                                                "&:hover": {
-                                                    backgroundColor:
-                                                        theme.palette.primary
-                                                            .container.main,
-                                                },
                                             })}
                                         >
                                             {!!menuOpen ? (
