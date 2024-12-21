@@ -4,15 +4,15 @@ import {
     Chip,
     Grid2,
     Stack,
+    useTheme,
     Container,
     Typography,
-    useTheme,
 } from "@mui/material";
-import { HomeRounded, ViewQuiltRounded, WebRounded } from "@mui/icons-material";
 //
 import { SectionDivider } from "../../components";
 import { useSettingsContext } from "../../settings";
-import { PROJECTS, SECTIONS_IDS } from "../../config";
+import { PROJECTS_SECTION_DATA, SECTIONS_IDS } from "../../config";
+import { Fragment } from "react";
 
 export const Projects = () => {
     const muiTheme = useTheme();
@@ -106,9 +106,7 @@ export const Projects = () => {
         );
     };
 
-    const renderAllProjects = (projectsName) => {
-        const isMernStack = projectsName === "mern";
-
+    const renderAllProjects = (project) => {
         return (
             <Card variant="outlined">
                 <Stack width={1} p={4} spacing={4}>
@@ -126,18 +124,10 @@ export const Projects = () => {
                         bgcolor="background.default"
                         border={`2px solid ${muiTheme.palette.divider}`}
                     >
-                        {isMernStack ? (
-                            <>
-                                <ViewQuiltRounded fontSize="large" /> MERN Stack
-                            </>
-                        ) : (
-                            <>
-                                <WebRounded fontSize="large" /> Front End
-                            </>
-                        )}
+                        {project["title"]}
                     </Typography>
 
-                    {renderProject(PROJECTS[isMernStack ? "mern" : "frontend"])}
+                    {renderProject(project["data"])}
                 </Stack>
             </Card>
         );
@@ -162,13 +152,13 @@ export const Projects = () => {
                 letterSpacing={2}
                 fontWeight={600}
             >
-                projects
+                {PROJECTS_SECTION_DATA["title"]}
             </Typography>
 
             <SectionDivider />
 
             <Stack direction="row" spacing={4} component={Container}>
-                <HomeRounded fontSize="large" color="primary" />
+                {PROJECTS_SECTION_DATA["icon"]}
 
                 <Typography
                     variant="h5"
@@ -177,16 +167,13 @@ export const Projects = () => {
                     align="justify"
                     pr={!isMobile && 20}
                 >
-                    projects that i have created over the course of my
-                    professional experience. <br />
-                    projects are hosted on vercel and github pages and their
-                    source code is also publicly available.
+                    {PROJECTS_SECTION_DATA["description"]}
                 </Typography>
             </Stack>
 
-            {renderAllProjects("mern")}
-
-            {renderAllProjects("frontend")}
+            {PROJECTS_SECTION_DATA["projects"]?.map((item) => (
+                <Fragment key={item?.key}>{renderAllProjects(item)}</Fragment>
+            ))}
         </Stack>
     );
 };

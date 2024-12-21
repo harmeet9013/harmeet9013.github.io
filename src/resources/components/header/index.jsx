@@ -12,7 +12,7 @@ import {
 import {
     MenuRounded,
     CloseRounded,
-    ArticleRounded,
+    HistoryEduRounded,
     DarkModeRounded,
     LightModeRounded,
 } from "@mui/icons-material";
@@ -46,7 +46,7 @@ export const Header = () => {
         const actionsMap = {
             projects: () => scrollToSection(SECTIONS_IDS["projects"]),
             contact: () => scrollToSection(SECTIONS_IDS["contact"]),
-            hobbies: () => scrollToSection(SECTIONS_IDS["hobbies"]),
+            experience: () => scrollToSection(SECTIONS_IDS["experience"]),
             resume: () => setOpenResumeDialog(true),
             code: () => window.open(STATIC_URLS["code"]),
         };
@@ -293,7 +293,7 @@ export const Header = () => {
 
                                 <Button
                                     size="large"
-                                    startIcon={<ArticleRounded />}
+                                    startIcon={<HistoryEduRounded />}
                                     onClick={() =>
                                         window.open(STATIC_URLS["blogs"])
                                     }

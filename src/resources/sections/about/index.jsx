@@ -1,9 +1,8 @@
-import { PersonRounded } from "@mui/icons-material";
 import { Stack, Typography, Container } from "@mui/material";
 //
-import { SECTIONS_IDS } from "../../config";
 import { SectionDivider } from "../../components";
 import { useSettingsContext } from "../../settings";
+import { ABOUT_SECTION_DATA, SECTIONS_IDS } from "../../config";
 
 export const About = () => {
     const { isMobile } = useSettingsContext();
@@ -28,13 +27,13 @@ export const About = () => {
                 letterSpacing={2}
                 fontWeight={600}
             >
-                about
+                {ABOUT_SECTION_DATA["title"]}
             </Typography>
 
             <SectionDivider />
 
             <Stack direction="row" spacing={4} component={Container}>
-                <PersonRounded fontSize="large" color="primary" />
+                {ABOUT_SECTION_DATA["icon"]}
                 <Typography
                     variant="h5"
                     textAlign="left"
@@ -42,22 +41,7 @@ export const About = () => {
                     align="justify"
                     pr={!isMobile && 20}
                 >
-                    as an{" "}
-                    <ul>
-                        <Typography
-                            variant="inline"
-                            component="li"
-                            color="tertiary"
-                            fontWeight={600}
-                        >
-                            intermediate MERN stack developer with over an year
-                            of experience
-                        </Typography>
-                    </ul>
-                    across multiple frameworks and libraries, i am enthusiastic
-                    about leveraging my skills in web development to contribute
-                    to innovative projects and enhance my knowledge in a dynamic
-                    work environment.
+                    {ABOUT_SECTION_DATA["description"]}
                 </Typography>
             </Stack>
         </Stack>

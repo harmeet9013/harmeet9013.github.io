@@ -1,39 +1,14 @@
-import {
-    GitHub,
-    LinkedIn,
-    EmailRounded,
-    FavoriteRounded,
-    ContactMailRounded,
-} from "@mui/icons-material";
-import { Stack, Typography, Button, styled, Container } from "@mui/material";
+import { FavoriteRounded } from "@mui/icons-material";
+import { Stack, Typography, Button, Container } from "@mui/material";
 import { SectionDivider } from "../../components";
 import { useSettingsContext } from "../../settings";
-import { SECTIONS_IDS } from "../../config";
+import { CONTACT_SECTION_DATA, SECTIONS_IDS } from "../../config";
 
 export const Contact = () => {
     const { isMobile } = useSettingsContext();
 
-    const links = {
-        1: {
-            label: "github",
-            link: "https://github.com/harmeet9013",
-            icon: <GitHub />,
-        },
-        2: {
-            label: "linkedin",
-            link: "https://linkedin.com/in/harmeet9013/",
-            icon: <LinkedIn />,
-        },
-        3: {
-            label: "email",
-            link: "mailto:hssaggu1313@gmail.com",
-            icon: <EmailRounded />,
-        },
-    };
-
     const renderLinks = () => {
-        return Object.keys(links).map((key) => {
-            const object = links[key];
+        return CONTACT_SECTION_DATA["links"]?.map((object) => {
             return (
                 <Button
                     variant="contained"
@@ -65,7 +40,7 @@ export const Contact = () => {
                 color="primary"
                 fontWeight={500}
             >
-                contact
+                {CONTACT_SECTION_DATA["title"]}
             </Typography>
 
             <SectionDivider />
@@ -77,14 +52,13 @@ export const Contact = () => {
                 alignItems="space-between"
             >
                 <Stack direction="row" spacing={4}>
-                    <ContactMailRounded color="primary" />
+                    {CONTACT_SECTION_DATA["icon"]}
 
                     <Typography
                         variant={isMobile ? "body1" : "h5"}
                         paddingRight={!isMobile && 20}
                     >
-                        you can get in touch with me through various mediums.
-                        <br />i promise i will get back to you at my earliest.
+                        {CONTACT_SECTION_DATA["description"]}
                     </Typography>
                 </Stack>
             </Stack>

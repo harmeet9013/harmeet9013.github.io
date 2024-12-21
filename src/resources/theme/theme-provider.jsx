@@ -92,6 +92,7 @@ export const ThemeProvider = ({ children }) => {
             styleOverrides: {
                 root: {
                     ...muiTheme.typography.body1,
+                    fontWeight: 500,
                 },
             },
         },

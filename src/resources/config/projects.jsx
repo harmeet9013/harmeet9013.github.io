@@ -1,23 +1,27 @@
 import {
+    WebRounded,
+    HomeRounded,
     TaskRounded,
     NotesRounded,
     CloudRounded,
     GamesRounded,
-    ArticleRounded,
     NoteAltRounded,
     AndroidRounded,
+    ViewQuiltRounded,
     MusicNoteRounded,
+    HistoryEduRounded,
 } from "@mui/icons-material";
 //
 import { STATIC_URLS } from "./urls";
+import { PROJECT_IMAGES } from "./images";
 
-export const PROJECTS = {
+const PROJECTS = {
     mern: [
         {
             title: "things unsaid",
             desc: "dedicate words to someone, with or without telling who you are",
             link: STATIC_URLS["things_unsaid"],
-            background: "/projects/things-unsaid.png",
+            background: PROJECT_IMAGES["things_unsaid"],
             tech: ["NextJS", "ReactJS", "MongoDB"],
             icon: <NoteAltRounded fontSize="large" />,
         },
@@ -25,15 +29,15 @@ export const PROJECTS = {
             title: "blogs",
             desc: "a simple blogging website.",
             link: STATIC_URLS["blogs"],
-            background: "/projects/blogs.png",
+            background: PROJECT_IMAGES["blogs"],
             tech: ["NextJS", "ReactJS", "ExpressJS", "MongoDB"],
-            icon: <ArticleRounded fontSize="large" />,
+            icon: <HistoryEduRounded fontSize="large" />,
         },
         {
             title: "taskbox",
             desc: "you got something to do? note it down here.",
             link: STATIC_URLS["taskbox"],
-            background: "/projects/taskbox.png",
+            background: PROJECT_IMAGES["taskbox"],
             tech: ["NextJS", "ReactJS", "MongoDB"],
             icon: <TaskRounded fontSize="large" />,
         },
@@ -43,7 +47,7 @@ export const PROJECTS = {
             title: "keeper",
             desc: "taskbox but no database",
             link: STATIC_URLS["keeper"],
-            background: "/projects/keeper.png",
+            background: PROJECT_IMAGES["keeper"],
             tech: ["ReactJS"],
             icon: <NotesRounded fontSize="large" />,
         },
@@ -51,7 +55,7 @@ export const PROJECTS = {
             title: "weather",
             desc: "if only you could use your phone for this. niche idea.",
             link: STATIC_URLS["weather"],
-            background: "/projects/weather.png",
+            background: PROJECT_IMAGES["weather"],
             tech: ["ReactJS"],
             icon: <CloudRounded fontSize="large" />,
         },
@@ -59,29 +63,42 @@ export const PROJECTS = {
             title: "simon game",
             desc: "everyone loves a game.",
             link: STATIC_URLS["simon_game"],
-            background: "/projects/simon.png",
+            background: PROJECT_IMAGES["simon"],
             tech: ["ReactJS"],
             icon: <GamesRounded fontSize="large" />,
         },
     ],
-    hobbies: [
+};
+
+export const PROJECTS_SECTION_DATA = {
+    title: "projects",
+    icon: <HomeRounded fontSize="large" color="primary" />,
+    description: (
+        <>
+            projects that i have created over the course of my professional
+            experience. <br />
+            projects are hosted on vercel and github pages and their source code
+            is also publicly available.
+        </>
+    ),
+    projects: [
         {
-            label: "vancel music",
-            desc: "i am a huge nerd for EDM music. as much as i love listening to it, i love making music as a hobby. that's why i started vancelmusic in 2019 which showcases some of my own creations.",
-            link: STATIC_URLS["vancel"],
-            icon: <MusicNoteRounded color="primary" fontSize="large" />,
+            key: "mern",
+            title: (
+                <>
+                    <ViewQuiltRounded fontSize="large" /> MERN Stack
+                </>
+            ),
+            data: PROJECTS["mern"],
         },
         {
-            label: "algorithms UI designer",
-            desc: "participated in a group project that involved me creating the UI for the android app. the app is public on play store.",
-            link: STATIC_URLS["algorithms"],
-            icon: <AndroidRounded color="primary" fontSize="large" />,
-        },
-        {
-            label: "detoxassist UI designer",
-            desc: "participated, again with the same, to create UI for another app which tracks your daily, 7 days and monthly along with average phone unlocks. app is under review.",
-            link: STATIC_URLS["detox_assist"],
-            icon: <AndroidRounded color="primary" fontSize="large" />,
+            key: "frontend",
+            title: (
+                <>
+                    <WebRounded fontSize="large" /> Frontend
+                </>
+            ),
+            data: PROJECTS["frontend"],
         },
     ],
 };

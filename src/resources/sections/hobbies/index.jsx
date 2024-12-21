@@ -10,13 +10,13 @@ import { OpenInNewRounded } from "@mui/icons-material";
 //
 import { SectionDivider } from "../../components";
 import { useSettingsContext } from "../../settings";
-import { PROJECTS, SECTIONS_IDS } from "../../config";
+import { HOBBIES_SECTION_DATA, SECTIONS_IDS } from "../../config";
 
 export const Hobbies = () => {
     const { isMobile } = useSettingsContext();
 
     const renderSideProjects = () => {
-        return PROJECTS["hobbies"]?.map((project, key) => (
+        return HOBBIES_SECTION_DATA["hobbies"]?.map((project, key) => (
             <Card
                 key={key}
                 variant="outlined"
@@ -29,9 +29,6 @@ export const Hobbies = () => {
                         : {
                               maxWidth: theme.spacing(80),
                           }),
-                    // textAlign: isMobile ? "center" : "left",
-                    // maxWidth: isMobile ? "100%" : "45rem",
-                    // minWidth: isMobile ? "100%" : "90%",
                 })}
             >
                 <Stack direction="column" p={4} py={5} spacing={2}>
@@ -57,14 +54,16 @@ export const Hobbies = () => {
                         {project.desc}
                     </Typography>
 
-                    <Button
-                        variant="outlined"
-                        href={project.link}
-                        target="_blank"
-                        endIcon={<OpenInNewRounded />}
-                    >
-                        {project.label}
-                    </Button>
+                    {project?.link && (
+                        <Button
+                            variant="outlined"
+                            href={project.link}
+                            target="_blank"
+                            endIcon={<OpenInNewRounded />}
+                        >
+                            {project.label}
+                        </Button>
+                    )}
                 </Stack>
             </Card>
         ));
@@ -92,7 +91,7 @@ export const Hobbies = () => {
                 letterSpacing={2}
                 fontWeight={600}
             >
-                hobbies
+                {HOBBIES_SECTION_DATA["title"]}
                 <SectionDivider mt={4} />
             </Typography>
 

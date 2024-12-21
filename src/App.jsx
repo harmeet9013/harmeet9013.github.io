@@ -8,6 +8,7 @@ import {
     Hobbies,
     Contact,
     Projects,
+    Experience,
     BackgroundIntro,
     //
     SettingsProvider,
@@ -25,6 +26,8 @@ export default function App() {
                     <BackgroundIntro />
 
                     <About />
+
+                    <Experience />
 
                     <Projects />
 
