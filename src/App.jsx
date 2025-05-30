@@ -1,4 +1,5 @@
 import "./resources/fonts/index.css";
+import "./resources/styles/globals.css";
 
 import { Divider, Stack } from "@mui/material";
 

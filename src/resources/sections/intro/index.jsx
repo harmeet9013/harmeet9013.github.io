@@ -118,17 +118,17 @@ export const BackgroundIntro = () => {
                     </Typography>
                     <Stack spacing={2} direction={isMobile ? "column" : "row"}>
                         <Button
-                            color="secondary"
+                            color="tertiary"
                             variant="outlined"
                             onClick={() => {
                                 scrollToSection("contact");
                             }}
-                            startIcon={<ContactPageRounded color="primary" />}
+                            startIcon={<ContactPageRounded />}
                         >
                             contact
                         </Button>
                         <Button
-                            color="secondary"
+                            color="primary"
                             variant="contained"
                             onClick={() => {
                                 setOpenResumeDialog(true);

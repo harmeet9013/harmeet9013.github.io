@@ -39,7 +39,9 @@ export const Projects = () => {
                             alignItems="center"
                             position="relative"
                             justifyContent="center"
-                            onClick={() => window.open(project.link)}
+                            component="a"
+                            href={project.link}
+                            target="_blank"
                             sx={(theme) => ({
                                 transition: theme.transitions.create(),
                                 cursor: "pointer",
@@ -96,7 +98,11 @@ export const Projects = () => {
                                 ))}
                             </Stack>
 
-                            <Typography variant="h6" fontWeight={400}>
+                            <Typography
+                                variant="h6"
+                                color="text.primary"
+                                fontWeight={400}
+                            >
                                 {project.desc}
                             </Typography>
                         </Stack>

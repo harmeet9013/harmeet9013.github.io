@@ -6,7 +6,7 @@ export const EXPERIENCE_SECTION_DATA = {
     title: "experience",
     icon: <BadgeRounded fontSize="large" color="primary" />,
     description: (
-        <>companies i have worked with so far in my professional experience.</>
+        <>company(s) i have worked with so far in my professional experience.</>
     ),
     companies: [
         {
@@ -14,7 +14,7 @@ export const EXPERIENCE_SECTION_DATA = {
             logo: EXPERIENCE_IMAGES["eleva8e"],
             duration: {
                 from: "sept 2023",
-                to: "jan 2025",
+                to: "june 2025",
             },
             tech_stack: [
                 "NextJS",

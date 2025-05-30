@@ -12,9 +12,11 @@ import palette from "./palette";
 export const ThemeProvider = ({ children }) => {
     const { darkMode } = useSettingsContext();
 
+    const defaultTheme = createTheme();
+
     let muiTheme = createTheme({
         palette: {
-            ...palette(darkMode ? "dark" : "light"),
+            ...palette(darkMode ? "dark" : "light", defaultTheme),
         },
         components: {
             MuiCssBaseline: {
