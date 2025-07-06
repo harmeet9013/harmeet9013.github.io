@@ -6,7 +6,7 @@ export const ABOUT_SECTION_DATA = {
     icon: <PersonRounded fontSize="large" color="primary" />,
     description: (
         <>
-            as an{" "}
+            <b>Full Stack Developer</b> with
             <ul>
                 <Typography
                     variant="inline"
@@ -14,13 +14,32 @@ export const ABOUT_SECTION_DATA = {
                     color="tertiary"
                     fontWeight={600}
                 >
-                    intermediate MERN stack developer with over an year of
-                    experience
+                    over 2 years of experience building
                 </Typography>
             </ul>
-            across multiple frameworks and libraries, i am enthusiastic about
-            leveraging my skills in web development to contribute to innovative
-            projects and enhance my knowledge in a dynamic work environment.
+            and optimizing web applications using the{" "}
+            <b>MERN stack and Java Spring Boot.</b>
+            <br />
+            <ul>
+                <li>
+                    Skilled in{" "}
+                    <b>
+                        React, Next.js, Node.js, MongoDB, and building RESTful
+                        APIs with Spring Boot.
+                    </b>
+                </li>
+                <li>
+                    Also have working knowledge of{" "}
+                    <b>
+                        Python, Django, C++, Laravel, and PHP Blade Templating.
+                    </b>
+                </li>
+                <li>
+                    Proven ability to deliver high-quality, scalable solutions
+                    with clean architecture, strong performance, and SEO best
+                    practices.
+                </li>
+            </ul>
         </>
     ),
 };

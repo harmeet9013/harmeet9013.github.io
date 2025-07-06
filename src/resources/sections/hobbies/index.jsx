@@ -8,9 +8,9 @@ import {
 } from "@mui/material";
 import { OpenInNewRounded } from "@mui/icons-material";
 //
-import { SectionDivider } from "../../components";
 import { useSettingsContext } from "../../settings";
 import { HOBBIES_SECTION_DATA, SECTIONS_IDS } from "../../config";
+import { AnimatedContent, SectionDivider } from "../../components";
 
 export const Hobbies = () => {
     const { isMobile } = useSettingsContext();
@@ -70,34 +70,36 @@ export const Hobbies = () => {
     };
 
     return (
-        <Stack
-            spacing={4}
-            component={Container}
-            alignItems="flex-start"
-            id={SECTIONS_IDS["hobbies"]}
-            justifyContent="space-between"
-            direction={isMobile ? "column" : "row"}
-            width={1}
-            sx={(theme) => ({
-                transition: theme.transitions.create(),
-                padding: theme.spacing(10, isMobile ? 3 : 5),
-                cursor: "default",
-            })}
-        >
-            <Typography
-                variant="h2"
-                color="primary"
-                textAlign="left"
-                letterSpacing={2}
-                fontWeight={600}
+        <AnimatedContent>
+            <Stack
+                spacing={4}
+                component={Container}
+                alignItems="flex-start"
+                id={SECTIONS_IDS["hobbies"]}
+                justifyContent="space-between"
+                direction={isMobile ? "column" : "row"}
+                width={1}
+                sx={(theme) => ({
+                    transition: theme.transitions.create(),
+                    padding: theme.spacing(10, isMobile ? 3 : 5),
+                    cursor: "default",
+                })}
             >
-                {HOBBIES_SECTION_DATA["title"]}
-                <SectionDivider mt={4} />
-            </Typography>
+                <Typography
+                    variant="h2"
+                    color="primary"
+                    textAlign="left"
+                    letterSpacing={2}
+                    fontWeight={600}
+                >
+                    {HOBBIES_SECTION_DATA["title"]}
+                    <SectionDivider mt={4} />
+                </Typography>
 
-            <Stack direction="column" spacing={isMobile ? 4 : 8}>
-                {renderSideProjects()}
+                <Stack direction="column" spacing={isMobile ? 4 : 8}>
+                    {renderSideProjects()}
+                </Stack>
             </Stack>
-        </Stack>
+        </AnimatedContent>
     );
 };

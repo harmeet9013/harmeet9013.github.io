@@ -1,4 +1,7 @@
+import "swiper/css";
+import "swiper/css/bundle";
 import "./resources/fonts/index.css";
+import "./resources/styles/globals.css";
 
 import { Divider, Stack } from "@mui/material";
 

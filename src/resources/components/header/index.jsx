@@ -147,6 +147,7 @@ export const Header = () => {
 
                         <Button
                             variant="contained"
+                            aria-label="theme-button"
                             onClick={handleThemeChange}
                             startIcon={
                                 darkMode ? (
@@ -191,14 +192,16 @@ export const Header = () => {
 
     return (
         <>
-            <Slide direction="down" in={!showScrollTop || showHeader}>
+            <Slide direction="down" in={true}>
                 <Box
                     component="header"
                     sx={(theme) => ({
                         transition: `${theme.transitions.create()} !important`,
-                        backgroundColor: !showScrollTop
-                            ? "transparent"
-                            : alpha(theme.palette.background.default, 0.7),
+                        backgroundColor:
+                            // !showScrollTop
+                            //     ? "transparent"
+                            //     :
+                            alpha(theme.palette.background.default, 0.7),
 
                         backdropFilter: `blur(${
                             !showScrollTop ? 0 : theme.spacing(2)
